@@ -36,7 +36,7 @@ Page({
 		options = options || {}
 		
 		app.http.request({
-			url: 'cst/shop/all_orders',
+			url: 'shop/all_orders',
 			param: {
 				page: options.page || 1,
 				filter: this.data.tabIndex,

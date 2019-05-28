@@ -85,7 +85,7 @@ Page({
 		}
 		
 		app.http.request({
-			url:'cst/user/send_verif_code',
+			url:'user/send_verif_code',
 			data:{phone:this.data.phone},
 			success:rlt=>{
 				
@@ -116,7 +116,7 @@ Page({
 		}
 		this.setData({ user: app.data.userInfo })
 		app.http.login({
-			url: 'cst/user/login',
+			url: 'user/login',
 			param: { nick: app.data.userInfo.nick, photo: app.data.userInfo.photo,rid:this.scene.rid },
 			success: user => {
 				wx.switchTab({

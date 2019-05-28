@@ -123,7 +123,7 @@ Page({
 				text:'提交',
 				callback:()=>{
 					app.http.request({
-						url:'cst/user/complain',
+						url:'user/complain',
 						data:{
 							uid:this.data.user.id,
 							reasons:reasons,

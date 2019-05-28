@@ -35,7 +35,7 @@ Page({
 		}
 
 		app.http.request({
-			url: 'cst/shop/get_order',
+			url: 'shop/get_order',
 			param: { id: options.id },
 			done: rlt => {
 				this.setData({
@@ -89,7 +89,7 @@ Page({
 	},
 	handlePay() {
 		app.http.request({
-			url: 'cst/shop/pay_order',
+			url: 'shop/pay_order',
 			param: { id: this.data.order.id },
 			done: rlt => {
 				if (rlt.status == 1) {

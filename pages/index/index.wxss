@@ -1,21 +1,106 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+page{
+	padding-bottom:150rpx;
+}
+.pan{
+	width:300rpx;
+	height:300rpx;
+	margin:auto;
+	position: relative;
+}
+.pan .back{
+	background: -moz-linear-gradient(left top, #E0455B, #FD9273);
+	background: -webkit-linear-gradient(left top, #E0455B, #FD9273);
+	background: -o-linear-gradient(left top, #E0455B, #FD9273);
+	width:100%;
+	height:100%;
+	border-radius: 50%;
+	overflow: hidden;
+	
+}
+.pan .back:before{
+	content:"";
+	display: block;
+	width:260rpx;
+	height: 260rpx;
+	background-color:#292929;
+	position: absolute;
+	left: 20rpx;
+	top:20rpx;
+	border-radius: 50%;
+	z-index: 3;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.pan .back:after{
+	content:"";
+	display: block;
+	width:0;
+	height: 0;
+	position: absolute;
+	left: 0;
+	top:0;
+	border:150rpx solid transparent;
+	border-bottom-color:#292929;
+	z-index: 3;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.pan .back .thumb{
+	width:244rpx;
+	height:244rpx;
+	left:50%;
+	top:50%;
+	margin-left:-152rpx;
+	margin-top:-152rpx;
+	border:30rpx solid transparent;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 2;
 }
+.pan .back .thumb.thumb1{
+	
+	border-left-color:#202022;
+	border-top-color:#202022;
+	border-right-color:#202022;
+}
+.pan .back .thumb.thumb2{
+	border-left-color:#202022;
+	border-top-color:#202022;
+}
+.pan .back .thumb.thumb3{
+	border-left-color:#202022;
+}
+.pan .inner{
+	color:#fff;
+	top:0;
+	left:0;
+	height: 300rpx;
+	width:300rpx;
+	display: block;
+	position: absolute;
+	z-index: 4;
+	font-size: 24rpx;
+	line-height: 2;
+}
+.pan .inner .curr-weight{
+	font-size: 48rpx;
+}
+.pan .inner .tgray{
+	color:#C3C3C3;
+}
+.pan .inner .wlog{
+	background-color: #474747;
+	color:#fff;
+	width:200rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 28rpx;
+	display: block;
+	position: absolute;
+	bottom:-20rpx;
+	border-radius: 35rpx;
+	left:50%;
+	margin-left:-100rpx;
+	text-align: center;
+	z-index: 2;
 
-.usermotto {
-  margin-top: 200px;
 }

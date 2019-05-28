@@ -38,7 +38,7 @@ Page({
 		options = options || {}
 		
 		app.http.request({
-			url: 'cst/shop/get_banners',
+			url: 'shop/get_banners',
 			data:{type:1},
 			done: rlt => {
 				ready.banner = true
@@ -54,7 +54,7 @@ Page({
 			}
 		});
 		app.http.request({
-			url: 'cst/shop/recommend_goods',
+			url: 'shop/recommend_goods',
 			data:{rows:20,page:options.page},
 			done: rlt => {
 				ready.good = true

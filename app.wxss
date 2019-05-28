@@ -193,7 +193,7 @@
  **/
 page {
     font-size: 16px;
-	background-color: #efefef;
+	background-color: #292929;
 
 }
 .link{

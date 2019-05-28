@@ -181,7 +181,7 @@ Page({
 		}
 
 		app.http.request({
-			url:'cst/art/post',
+			url:'art/post',
 			param:art,
 			done:rlt =>{
 				if(rlt.status==1){

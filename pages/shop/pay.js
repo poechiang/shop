@@ -44,7 +44,7 @@ Page({
 		
 		if (options.t == 'open') { // 开团
 			app.http.request({
-				url: 'cst/shop/get_group',
+				url: 'shop/get_group',
 				param: { id: options.gid },
 				done: rlt => {
 					var good = rlt.data.meta.good
@@ -63,7 +63,7 @@ Page({
 		}
 		else if (options.t == 'join') { // 参团
 			app.http.request({
-				url: 'cst/shop/get_tuan',
+				url: 'shop/get_tuan',
 				param: { id: options.gid },
 				done: rlt => {
 					var good = rlt.data.meta.good
@@ -81,7 +81,7 @@ Page({
 		}
 		else if (options.id) { // 直接购买
 			app.http.request({
-				url: 'cst/good/get_detail',
+				url: 'good/get_detail',
 				param: { id: options.id },
 				done: rlt => {
 					var good = rlt.data
@@ -110,7 +110,7 @@ Page({
 
 
 			app.http.request({
-				url: 'cst/shop/all_goods',
+				url: 'shop/all_goods',
 				param: {id:ids},
 				done: rlt => {
 					for(var x in rlt.data){
@@ -349,7 +349,7 @@ Page({
 
 
 		app.http.request({
-			url:'cst/shop/add_order',
+			url:'shop/add_order',
 			param:data,
 			done:rlt=>{
 				if(rlt.status==1){
@@ -389,7 +389,7 @@ Page({
 							callback:()=>{
 
 								app.http.request({
-									url:'cst/shop/pay_order',
+									url:'shop/pay_order',
 									param:{id:rlt.data.id},
 									done:rlt=>{
 										if(rlt.status==1){

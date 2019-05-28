@@ -73,7 +73,7 @@ Page({
 		if (this.loading) return
 		this.loading = true
 		app.http.request({
-			url: 'cst/shop/get_group',
+			url: 'shop/get_group',
 			param: { id: options.id },
 			done: rlt => {
 				if (rlt.status == 1) {
@@ -192,7 +192,7 @@ Page({
 
 			app.http.request({
 				check: true,
-				url: 'cst/good/do_share',
+				url: 'good/do_share',
 				param: {
 					id: good.id,
 				},

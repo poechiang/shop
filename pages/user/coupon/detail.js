@@ -36,7 +36,7 @@ Page({
 
 		options = options || {}
 		app.http.request({
-			url: 'cst/good/get_detail',
+			url: 'good/get_detail',
 			param: { id: options.id },
 			done: rlt => {
 				if (rlt.status == 1) {
@@ -117,7 +117,7 @@ Page({
 
 			app.http.request({
 				check: true,
-				url: 'cst/good/do_share',
+				url: 'good/do_share',
 				param: {
 					id: good.id,
 				},

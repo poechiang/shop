@@ -7,8 +7,8 @@
  */
 
 const svr_list = {
-	local: 'http://shi-api.localhost.com',
-	remote: 'https://api.shibu365.com',
+	local: 'http://shi-api.localhost.com/ifthin',
+	remote: 'https://api.shibu365.com/ifthin',
 	res:'https://api.shibu365.com'
 }
 
@@ -101,7 +101,7 @@ var doCheckLogin = function (cb) {
 					console.log('本地session缓存无效，重新登录')
 					getApp().getUserInfo(info=>{
 						doLogin({
-							url: 'cst/user/login',
+							url: 'user/login',
 							param:info,
 							success: cb
 						})
@@ -116,7 +116,7 @@ var doCheckLogin = function (cb) {
 			fail: () => {
 				getApp().getUserInfo(info => {
 					doLogin({
-						url: 'cst/user/login',
+						url: 'user/login',
 						param: info,
 						success: cb
 					})
@@ -135,7 +135,7 @@ var doCheckLogin = function (cb) {
 			console.log('本地session缓存无效，重新登录')
 			getApp().getUserInfo(info => {
 				doLogin({
-					url: 'cst/user/login',
+					url: 'user/login',
 					param: info,
 					success: cb
 				})
@@ -181,6 +181,7 @@ var requestUrl = function (options) {
 				}
 			})
 		})
+		
 	}
 	else{
 		wx.request({
@@ -198,7 +199,7 @@ var requestUrl = function (options) {
 								if(res.authSetting['scope.userInfo']){
 									getApp().getUserInfo(info => {
 										doLogin({
-											url: 'cst/user/login',
+											url: 'user/login',
 											param: info,
 											success:  (user,session)=>{
 												options.header.Cookie = 'PHPSESSID=' + session.id//重新登录后要更新会话标识

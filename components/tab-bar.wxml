@@ -1,10 +1,35 @@
 <!--components/tab-bar.wxml-->
 
-<view class='tab-bar flex-row flex-line-stretch hor-center shadow' style='line-height:{{height}}px;height:{{height}}px;width:100%;left:0;bottom:0;'>
-	<button class='tab' plain open-type="share"><text class='icon icon-share fs-14'></text></button>
-	<button class='tab' plain bindtap='handleMsg'><text class='icon icon-msg fs-14'></text></button>
-	<button class='tab' plain bindtap='handleFav' disabled='{{article.stat.myfav}}'><text class='icon icon-zan{{hasFav?"ed":""}}'></text></button>
-	<view class='flex-item'></view>
-	<slot></slot>
-</view>
 
+<view class='tab-bar {{type}} flex-row flex-line-stretch {{type=="buildin"?"flex-main-around":""}} hor-center shadow' style='line-height:{{height}}px;height:{{height}}px;width:100%;left:0;bottom:0;'>
+    <block wx:if="{{type == 'good'}}">
+        <button class='tab' plain open-type="share">
+            <text class='icon icon-share fs-14'></text>
+        </button>
+        <button class='tab' plain bindtap='handleMsg'>
+            <text class='icon icon-msg fs-14'></text>
+        </button>
+        <button class='tab' plain bindtap='handleFav' disabled='{{article.stat.myfav}}'>
+            <text class='icon icon-zan{{hasFav?"ed":""}}'></text>
+        </button>
+        <view class='flex-item'></view>
+        <slot></slot>
+    </block>
+    <block wx:else>
+        <button class='tab flex-item' plain data-index="0" bindtap='handleNavTabTap'>
+            <image class='tab-img' src='{{icons[0][curr==0?"sel":"unsel"]}}'></image>首页
+        </button>
+        <button class='tab flex-item' plain data-index="1" bindtap='handleNavTabTap'>
+            <image class='tab-img' src='{{icons[1][curr==1?"sel":"unsel"]}}'></image>打卡
+        </button>
+        <button class='tab addnew flex-item' plain style='border:none' bindtap='handleAddNew'>
+            <image class='tab-img' src='{{addnew}}'></image>
+        </button>
+        <button class='tab flex-item' plain data-index="2" bindtap='handleNavTabTap'>
+            <image class='tab-img' src='{{icons[2][curr==2?"sel":"unsel"]}}'></image>社区
+        </button>
+        <button class='tab flex-item' plain data-index="3" bindtap='handleNavTabTap'>
+            <image class='tab-img' src='{{icons[3][curr==3?"sel":"unsel"]}}'></image>我的
+        </button>
+    </block>
+</view>

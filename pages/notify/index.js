@@ -50,7 +50,7 @@ Page({
 	loadData(options) {
 		options = options || {}
 		app.http.request({
-			url: 'cst/notify/official_assists',
+			url: 'notify/official_assists',
 			done: rlt => {
 				this.setData({
 					assists:rlt.data

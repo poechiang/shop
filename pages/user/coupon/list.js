@@ -34,7 +34,7 @@ Page({
 		return
 		options = options || {}
 		options.load && options.load.banner && app.http.request({
-			url: 'cst/banner/get_list',
+			url: 'banner/get_list',
 			done: rlt => {
 				if (rlt.status == 1) {
 					this.setData({
@@ -45,7 +45,7 @@ Page({
 		});
 
 		(!options.load || options.load.good !== false) && app.http.request({
-			url: 'cst/good/get_list',
+			url: 'good/get_list',
 			param: {
 				page: options.page || 1,
 				filter: this.data.tabIndex,

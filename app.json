@@ -1,5 +1,6 @@
 {
 	"pages": [
+		"pages/index/index",
 		"pages/shop/index",
 		"pages/shop/good/list",
 		"pages/shop/good/detail",
@@ -10,8 +11,6 @@
 		"pages/shop/trolley",
 		"pages/shop/pay",
 		"pages/group/index",
-		"pages/index/index",
-		"pages/index/cities",
 		"pages/common/404",
 		"pages/logs/logs",
 		"pages/notify/index",
@@ -37,10 +36,10 @@
 		}
 	},
 	"window": {
-		"backgroundColor": "#efefef",
+		"backgroundColor": "#292929",
 		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#F1A23B",
-		"navigationBarTitleText": "拾补商城",
+		"navigationBarBackgroundColor": "#000000",
+		"navigationBarTitleText": "IF PLAN",
 		"navigationBarTextStyle": "white"
 	},
 	"usingComponents": {
@@ -55,6 +54,12 @@
 	"tabBar": {
 		"selectedColor": "#F1A23B",
 		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/shop0.png",
+				"selectedIconPath": "static/images/shop1.png",
+				"text": "首页"
+			},
 			{
 				"pagePath": "pages/shop/index",
 				"iconPath": "static/images/shop0.png",

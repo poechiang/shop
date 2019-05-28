@@ -90,7 +90,7 @@ Page({
 		}
 		this.setData({user:app.data.userInfo})
 		app.http.login({
-			url:'cst/user/login',
+			url:'user/login',
 			param: { nick: app.data.userInfo.nick,photo:app.data.userInfo.photo },
 			success:user=>{
 				this.setData({ user: user })

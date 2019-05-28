@@ -29,7 +29,7 @@ Page({
 			})
 		}
 		app.http.request({
-			url:'cst/user/get_home_data',
+			url:'user/get_home_data',
 			param:{uid:options.id},
 			done:(rlt)=>{
 				this.setData({
@@ -122,7 +122,7 @@ Page({
 	 */
 	attach(e) {
 		app.http.request({
-			url: 'cst/user/attach',
+			url: 'user/attach',
 			data: { uid: this.data.user.id },
 			success: rlt => {
 				let user = this.data.user
@@ -143,7 +143,7 @@ Page({
 				text: '是',
 				callback: () => {
 					app.http.request({
-						url: 'cst/user/cancel_attach',
+						url: 'user/cancel_attach',
 						data: { uid: this.data.user.id },
 						success: rlt => {
 							let user = this.data.user

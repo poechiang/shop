@@ -19,7 +19,7 @@ Page({
 	loadData(options){
 
 		app.http.request({
-			url: 'cst/user/get_vip_code',
+			url: 'user/get_vip_code',
 			done: rlt => {
 				console.log(rlt)
 				if(rlt.status==1){

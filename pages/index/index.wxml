@@ -1,13 +1,25 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<image class='dp-block ma-20' src='https://res.shibu365.com/i/2019-05-28/cb6778a24b45446ca95ef360530464a3.png' style='width:178rpx;' mode='widthFix'></image>
+
+<view class='pan'>
+    <view class='back'>
+        <view class='thumb thumb2' style='transform:rotate(123deg);'></view>
+		
+    </view>
+	
+    <view class='inner hor-center'>
+		<view class='tgray mt-20'>已减重(KG)</view>
+		<view class='curr-weight'>18.6</view>
+		<view class='tgray'>已完成 36%</view>
+        <button class='wlog'>体重记录</button>
+    </view>
 </view>
+
+
+
+
+
+
+
+
+<tab-bar curr="0" type="buildin"></tab-bar>

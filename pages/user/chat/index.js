@@ -39,7 +39,7 @@ Page({
 		}
 		else{
 			app.http.request({
-				url: 'cst/user/get_chat_history',
+				url: 'user/get_chat_history',
 				data: { uid: options.tid },
 				success: rlt => {
 					wx.setNavigationBarTitle({
@@ -160,7 +160,7 @@ Page({
 		})
 		app.http.request({
 			check: true,
-			url: 'cst/user/msg',
+			url: 'user/msg',
 			param: {
 				uid: this.data.user.id,
 				msg: e.detail.value,

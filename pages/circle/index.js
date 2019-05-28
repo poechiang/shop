@@ -48,7 +48,7 @@ Page({
 	loadData(options){
 		options = options||{}
 		app.http.request({
-			url:'cst/art/get_list',
+			url:'art/get_list',
 			param:{
 				page:options.page||1,
 				filter: this.data.tabIndex,
@@ -155,7 +155,7 @@ Page({
 
 			app.http.request({
 				check: true,
-				url: 'cst/art/do_share',
+				url: 'art/do_share',
 				param: {
 					aid: art.id,
 				},
@@ -261,7 +261,7 @@ Page({
 			
 			app.http.request({
 				check:true,
-				url:'cst/art/do_reply',
+				url:'art/do_reply',
 				param:{
 					aid:this.data.articles[this.currArtIndex].id,
 					msg:e.detail.value,
@@ -315,7 +315,7 @@ Page({
 		})
 		app.http.request({
 			check: true,
-			url: 'cst/art/do_fav',
+			url: 'art/do_fav',
 			param: {
 				aid: list[index].id,
 			},
@@ -328,7 +328,7 @@ Page({
 		let uid = e.target.dataset.uid
 
 		app.http.request({
-			url:'cst/user/attach',
+			url:'user/attach',
 			data:{uid:uid},
 			success:rlt=>{
 				let arts = this.data.articles
@@ -357,7 +357,7 @@ Page({
 				text:'是',
 				callback:()=>{
 					app.http.request({
-						url: 'cst/user/cancel_attach',
+						url: 'user/cancel_attach',
 						data: { uid: uid },
 						success: rlt => {
 							let arts = this.data.articles

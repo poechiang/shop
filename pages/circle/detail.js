@@ -29,7 +29,7 @@ Page({
 	loadData(options) {
 		options = options || {}
 		app.http.request({
-			url: 'cst/art/get_detail',
+			url: 'art/get_detail',
 			param: {aid:options.aid||45},
 			done: rlt => {
 				this.setData({ article: rlt.data.article })
@@ -99,7 +99,7 @@ Page({
 
 			app.http.request({
 				check: true,
-				url: 'cst/art/do_share',
+				url: 'art/do_share',
 				param: {
 					aid: art.id,
 				},
@@ -133,7 +133,7 @@ Page({
 		if (e.detail.value) {
 			app.http.request({
 				check: true,
-				url: 'cst/art/do_reply',
+				url: 'art/do_reply',
 				param: {
 					aid: this.data.article.id,
 					msg: e.detail.value,
@@ -187,7 +187,7 @@ Page({
 		})
 		app.http.request({
 			check: true,
-			url: 'cst/art/do_fav',
+			url: 'art/do_fav',
 			param: {
 				aid: art.id,
 			},
@@ -201,7 +201,7 @@ Page({
 	 */
 	attach(e) {
 		app.http.request({
-			url: 'cst/user/attach',
+			url: 'user/attach',
 			data: { uid: this.data.article.user.id },
 			success: rlt => {
 				let article = this.data.article
@@ -222,7 +222,7 @@ Page({
 				text: '是',
 				callback: () => {
 					app.http.request({
-						url: 'cst/user/cancel_attach',
+						url: 'user/cancel_attach',
 						data: { uid: this.data.article.user.id },
 						success: rlt => {
 							let article = this.data.article

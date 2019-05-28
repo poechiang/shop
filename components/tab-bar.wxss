@@ -3,7 +3,7 @@
 	width:100%;
 	bottom:0;
 	text-align: center;
-	background-color:rgba(0,0,0,.8);
+	background-color:rgba(0,0,0,.21);
 	position: fixed;
 	z-index: 99999;
 	transition: top .2s ease-in-out;
@@ -12,15 +12,50 @@
 	-o-transition: top .4s ease-in-out;
 }
 
-.tab-bar .tab{
+.tab-bar.buildin .tab{
+	border: none;
+	line-height: 1;
+	position: relative;
+	color:#909090;
+	font-size: 18rpx;
+	padding:0;
+}
+.tab-bar.buildin .tab.selected{
+	border: none;
+	line-height: inherit;
+	position: relative;
+	color:#FE6E65;
+}
+.tab-bar.buildin .tab .tab-img{
+	width:54rpx;
+	height:54rpx;
+	margin:8rpx auto;
+	display: block;
+}
+.tab-bar.buildin .tab .icon-zaned{
+	color:#ff5722;
+}
+.tab-bar.buildin .tab.addnew{
+	position: relative;
+	top:-50%;
+	height:140rpx;
+}
+.tab-bar.buildin .tab.addnew .tab-img{
+	width:130rpx;
+	height:130rpx;
+}
+
+
+
+.tab-bar.good .tab{
 	border: none;
 	line-height: inherit;
 	position: relative;
 	color:#fff;
 }
-.tab-bar .tab .icon{
+.tab-bar.good .tab .icon{
 	vertical-align: 2px;
 }
-.tab-bar .tab .icon-zaned{
+.tab-bar.good .tab .icon-zaned{
 	color:#ff5722;
 }

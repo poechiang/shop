@@ -44,7 +44,7 @@ Page({
 		}
 
 		app.http.request({
-			url: 'cst/shop/all_goods',
+			url: 'shop/all_goods',
 			param: { id:ids},
 			done: rlt => {
 				var goods = rlt.data

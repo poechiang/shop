@@ -36,7 +36,7 @@ Page({
 	loadData(options) {
 		options = options || {}
 		app.http.request({
-			url: 'cst/shop/get_banners',
+			url: 'shop/get_banners',
 			data:{type:2},
 			done: rlt => {
 				if (rlt.status == 1) {
@@ -48,7 +48,7 @@ Page({
 		});
 
 		app.http.request({
-			url: 'cst/shop/all_groups',
+			url: 'shop/all_groups',
 			param: {
 				page: options.page || 1,
 				filter: this.data.tabIndex,

@@ -29,7 +29,7 @@ Page({
 	loadData(options) {
 		options = options || {}
 		app.http.request({
-			url: 'cst/order/get_list',
+			url: 'order/get_list',
 			param: {
 				page: options.page || 1,
 				filter: 4,
