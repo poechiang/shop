@@ -1,0 +1,18 @@
+<!--pages/user/welcome.wxml-->
+<view class="mv-20 mh-15 ph-15">
+	<view class='user-photo large circle of-hidden ma-10'>
+		<open-data type="userAvatarUrl"></open-data>
+	</view>
+	尊敬的 <open-data type="userNickName"></open-data>，{{greeting}}。
+	你的朋友 {{recom.nick}} 为你准备了一份礼物，请及时登录商城领取!
+
+	<input class='mv-20' placeholder='手机号码' value='{{phone}}' bindinput='handlePhoneInput'></input>
+	
+	<view class='flex-row flex-line-stretch mv-20'>
+		<input class='flex-item' placeholder='四位验证码'  value='{{code}}' bindinput='handleCodeInput'></input>
+		<button class='rect' style='margin-left:5px;width:150px;line-height:46.25px;' disabled='{{verifDisabled}}' bindtap='handleGetVerifCode'>验证码</button>
+	</view>
+
+	<button class='mv-20' disabled='{{verifDisabled || submitDisabled}}' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo='handleSubmit'>立即领取</button>
+
+</view>

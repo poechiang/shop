@@ -1,0 +1,16 @@
+<!--components/flexblock.wxml-->
+
+<movable-area style="position:fixed;width:10px;top:100px;right:0;bottom:100px;height:auto">
+	<movable-view  direction="all" out-of-bounds="{{true}}" y="200">
+	
+		<view class='blocks {{theme}}' style="top:0;right:5px" direction="all" out-of-bounds="{{true}}">
+			<view class='block' style="width:{{size}}px;height:{{size}}px;" wx:for="{{blocks}}" wx:key="*this">
+				<view class='cell icon icon-{{item}} {{item=="trolley"?"trolley":""}}' bindtap="handleBlockTap" data-key="{{item}}">
+					<text class='bullet {{trolley>9?"more":""}}'  wx:if="{{item=='trolley' && trolley>0}}"><text class='count' wx:if="{{trolley>0 && trolley<=9}}">{{trolley}}</text></text>
+				</view>
+			</view>
+			<slot></slot>
+		</view>
+
+	</movable-view>
+</movable-area>

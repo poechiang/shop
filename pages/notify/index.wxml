@@ -1,0 +1,45 @@
+<!--pages/notify/index.wxml-->
+
+<!-- 切换标签 开始 -->
+<!-- <tabs style='font-size:12px;' items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" dock="{{tabFixed?true:false}}" bindchange="handleTabChange"></tabs> -->
+<!-- 切换标签 结束  -->
+<!-- 分类 开始 -->
+<view class='grp flex-row flex-main-around'>
+	<navigator class='grp-item' wx:for="{{tabs}}" wx:key="*this" url='{{item.path}}'>
+		<view class='grp-block'>
+			<image class='grp-icon' src='{{item.img}}' style='width:100%;height:100%;'></image>
+		</view>
+		<view class='grp-tag tip hor-center'>{{item.title}}</view>
+	</navigator>
+</view>
+<!-- 分类 结束 -->
+<view class='assist-list mt-15'>
+	<navigator class='assist-item flex-row' wx:for="{{assists}}" url='/pages/notify/room?assid=item.id'>
+		<image class='user-photo mr-5 small' mode='aspectFill' src='{{item.photo}}'></image>
+		<view class=' flex-item'>
+			<view class='user'>{{item.nick}}</view>
+			<view class='tip'>{{item.greetings||item.signature}}</view>
+		</view>
+	</navigator>
+</view>
+
+
+
+<view class='session-list mt-15'>
+	<navigator class='session-item flex-row' url='/pages/notify/room?assid=7'>
+		<image class='user-photo circle mr-5 small' mode='aspectFill' src='https://res.shibu365.com/i/2019-01-04/4e4e9796a7ee4f268b8444f0e372292a.png'></image>
+		<view class=' flex-item'>
+			<view class='user'>仓鼠君</view>
+			<view class='tip'>你已与仓鼠君成为好友……</view>
+		</view>
+	</navigator>
+</view>
+
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无订单</view>
+<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->

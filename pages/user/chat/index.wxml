@@ -1,0 +1,23 @@
+<!--pages/user/chat/index.wxml-->
+<view class='user-pnl' wx:if='{{user.relationship<2}}'>
+	<view class='mh-15 flex-row flex-line-center'>
+		<image class='user-photo small circle mr-5' src='{{user.photo||defUserPhoto}}'></image>
+		<view class='tip flex-item'>添加对方为好友</view>
+		<button size='mini' type='theme'>添加</button>
+	</view>
+</view>
+
+<view class='list ph-15'>
+	<block wx:for="{{list}}" wx:key="wx_key">
+		<view class='group tip fs-12 hor-center mt-20 mb-5' wx:if="{{item.group}}">{{item.group}}</view>
+		
+		<view class='desc hor-center' wx:elif='{{item.desc}}'><text class=' tip fs-12'>{{item.desc}}</text></view>
+		<view class='item fs-14 flex-row {{item.uid == user.id?"l":"r flex-row-reverse"}}' wx:else>
+			<image class='user-photo small circle mr-5' src='{{(item.uid == user.id?user.photo:me.photo)||defUserPhoto}}'></image>
+			<view class='msg' style='max-width:50%;'>{{item.content}}</view>
+		</view>
+	</block>
+</view>
+
+<!-- 回复留言框 -->
+<reply visible='{{true}}' msg='{{replyMsg}}' audio='{{true}}' placeholder="说点什么吧" auto-close='{{false}}' bindsend='handleReplySend'></reply>

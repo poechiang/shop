@@ -1,0 +1,46 @@
+<!--pages/user/order/list.wxml-->
+
+<!-- 切换标签 开始 -->
+<tabs style='font-size:12px;' items='{{tabs}}' current-index="{{tabIndex}}"   bindchange="handleTabChange"></tabs>
+<!-- 切换标签 结束  -->
+
+<view class='order-list'>
+	<view class='order-item ph-15 section' wx:for="{{orders}}" wx:key='id' wx:for-item='order'>
+		<view class='ordr-item-title flex-row pv-5 flex-line-center'>
+			<navigator class='link p-5'  url="/pages/user/order/detail?id={{order.id}}">{{order.sn}} </navigator>
+			<text class='flex-item'></text>
+			<text class='tip'>{{order.front_state_label}}</text>
+		</view>
+		<view class='good-list {{order.details.length>1?"flex-row ":""}}'>
+			<navigator class='{{order.details.length==1?"flex-row ":""}}' url='/pages/shop/good/detail?id={{detail.good.id}}'  wx:for="{{order.details}}" wx:for-item="detail" wx:key="id">
+				<image class='good-photo m-5' mode='aspectFill' src='{{detail.good.heads[0]}}' wx:if='{{detail.good && detail.good.heads && detail.good.heads.length>0}}'></image>
+				<view class='good-item flex-item m-5' wx:if="{{order.details.length==1}}">
+					<view class='good-title'>{{detail.good.group_title||detail.good.title}}</view>
+					<view class='tip'>{{detail.good.norms}}</view>
+					<view class='f-right'>
+						<text class='f-left'>{{detail.good.group_label}} </text>
+						<text class='price'>{{detail.price}}</text> x {{detail.count}}
+					</view>
+				</view>
+			</navigator>
+		</view>
+		<view class='flex-row mv-5 flex-line-center'>
+			<view>总价：<text class='price'>{{order.amount}}</text></view>
+			<view class='flex-item'></view>
+			<button class='ml-5' type='error' size='mini' wx:if="{{order.state>=0 && order.state<10}}">取消</button>
+			<button class='ml-5' type='primary' size='mini' wx:if="{{order.state==9}}">支付</button>
+			<button class='ml-5' type='warn' size='mini' wx:if='{{order.state==20||order.state==29||order.state==40}}'>签收</button>
+			<button class='ml-5' type='warn' size='mini' wx:if='{{order.state==20||order.state==29}}'>退换</button>
+			<button class='ml-5' type='secondary' size='mini' wx:if='{{order.state==50}}'>评价</button>
+		</view>
+	</view>
+</view>
+
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无订单</view>
+<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->

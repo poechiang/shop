@@ -1,0 +1,82 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.4.3",
+	"appid": "wxe1576ed2c27f14c2",
+	"projectname": "cst",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": 0,
+					"name": "带参数",
+					"pathName": "pages/user/home/index",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "个人中心",
+					"pathName": "pages/user/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "推荐欢迎页面",
+					"pathName": "pages/user/welcome",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "产品列表",
+					"pathName": "pages/shop/good/list",
+					"query": "id=10",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "团购详情",
+					"pathName": "pages/shop/group/detail",
+					"query": "id=1",
+					"scene": null
+				}
+			]
+		}
+	}
+}

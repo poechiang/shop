@@ -1,0 +1,11 @@
+/* pages/user/order/list.wxss */
+.good-list{
+	background-color: #f8f8f8;
+}
+.good-photo{
+	height: 60px;
+	width:60px;
+}
+.order-list button{
+	padding:0 5px!important;
+}

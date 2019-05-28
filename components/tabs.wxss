@@ -1,0 +1,30 @@
+/* components/tabs.wxss */
+.tabs .pnl{
+	background-color: #ffffff;
+}
+.tabs .pnl.shadow{
+	box-shadow: 0 0 5px #efefef;
+}
+tabs .pnl.pos-fixed{
+	z-index: 99999;
+	transition: top .2s ease-in-out;
+	-webkit-transition: top .2s ease-in-out;
+	-moz-transition: top .2s ease-in-out;
+	-o-transition: top .2s ease-in-out;
+}
+.tabs .tab{
+	position: relative;
+}
+.tabs .tab:after{
+	content:"";
+	position: absolute;
+	width:50%;
+	height:4px;
+	background-color: #FFD900;
+	bottom:4px;
+	left:25%;
+	display: none;
+}
+.tabs .tab.selected:after{
+	display: block;
+}

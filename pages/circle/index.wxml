@@ -1,0 +1,93 @@
+<!--pages/circle/index.wxml-->
+<!-- 自定义顶部导航栏 开始 -->
+<cust-nav-bar>
+	<view class='flex-row' style='height:44px;'>
+		<view class='flex-item'>
+			<view class='f-left icon-home1 small' style='width:44px;' bindtap='handleLocRestore'></view>
+		</view>
+		<view wx:if="{{currCity}}" class='curr-city icon-group arrow-down-icon small' bindtap='handleLocChange'>{{currCity.name}}</view>
+		<view class='delay-loading' wx:else>正在定位</view>
+		<view class='flex-item'></view>
+	</view>
+</cust-nav-bar>
+<!-- 自定义顶部导航栏 结束 -->
+
+<!-- 切换标签 开始 -->
+<tabs items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" dock="{{tabFixed?true:false}}" bindchange="handleTabChange"></tabs>
+<!-- 切换标签 结束  -->
+
+
+
+<view class='section art mv-10 pv-10' wx:for="{{articles}}" wx:key="id" >
+	
+	<!-- 文章作者 -->
+	<view class='art-title of-hidden flex-row flex-line-center' >
+		<navigator class='flex-item' url='/pages/user/home/index?id={{item.user.id}}'>
+			<image class="user-photo circle small f-left mr-5 mt-4" src='{{item.user.photo || defUserPhoto}}' mode='aspectFill' ></image>
+			<view style='line-height:56rpx;'>{{item.user.nick||'匿名用户'}}</view>
+			<view class='tip' style='line-height:28rpx;'>{{item.post_date}}</view>
+		</navigator>
+		<button size='mini' type='theme' class='rect' wx:if="{{item.user.relationship==0}}" data-uid="{{item.user.id}}" bindtap='attach'><text class='icon icon-guanzhu0'></text> 加关注</button>
+		<button size='mini' type='theme' class='rect' wx:if="{{item.user.relationship==1}}" data-uid="{{item.user.id}}" bindtap='attach'><text class='icon icon-guanzhu1'></text> 加关注</button>
+		<button size='mini' class='rect' wx:if="{{item.user.relationship==2}}" data-uid="{{item.user.id}}" data-unick="{{item.user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu2'></text></button>
+		<button size='mini' class='rect' wx:if="{{item.user.relationship==3}}" data-uid="{{item.user.id}}" data-unick="{{item.user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu3'></text></button>
+		<button size='mini' class='rect' data-index="{{index}}" bindtap='showUserMoreActions'><text class='icon icon-more2'></text></button>
+	</view>
+	
+	<!-- 文章内容 -->
+	<view class='art-body mv-10'>
+	<navigator class='link' bindtap='handleTopicTap' wx:if="{{item.topic}}">#{{item.topic}}#</navigator> 
+	<view hover-class='clickable-hover' bindtap='handleViewDetail' data-id='{{item.id}}'> <text>{{item.brief100}}</text> <text class='link fs-14'>查看全文</text></view>
+	<!-- <navigator url="/pages/circle/detail?aid={{item.id}}"> <text>{{item.brief100}}</text> <text class='link fs-14'>查看全文</text></navigator> -->
+	</view>
+
+	<!-- 文章附件 目前仅限文章配图 最多九张 -->
+	<view class='attach pic-box flex-row flex-wrap {{item.pictures.length>1?("items-"+item.pictures.length):""}}' wx:if='{{item.pictures.length>0}}'>
+		<image class='pic' src='{{item}}' wx:for="{{item.pictures}}" wx:key="*this" mode='aspectFill'></image>
+	</view>
+
+	<!-- 所在位置及互动信息入口 -->
+	<view class='foot flex-row flex-line-center'>
+		<view class='loc'><text class='icon-loc1 small mr-5'></text>{{item.city}}</view>
+		<view class='flex-item'></view>
+		<button class='op normal' plain open-type="share" data-index="{{index}}" disabled='{{!item.meta.allow.share}}'><text class='icon-share' style='font-size:.83em'></text> <text class='count' wx:if='{{item.stat.shares>0}}'>{{item.stat.shares}}</text></button>
+		<button class='op normal' plain bindtap='handleMsg' data-index="{{index}}"  disabled='{{!item.meta.allow.reply}}'><text class='icon-msg' style='font-size:.83em'></text> <text wx:if='{{item.stat.msgs>0}}'>{{item.stat.msgs}}</text></button>
+		<view class='op normal' wx:if='{{item.stat.myfav}}'><text class='icon-zaned' style='font-size:.96em'></text> <text class='count'>{{item.stat.favs}}</text></view>
+		<button class='op normal' plain bindtap='handleFav' data-index="{{index}}"  disabled='{{!item.meta.allow.fav}}' wx:else><text class='icon-zan'  style='font-size:.96em'></text> <text class='count' wx:if='{{item.stat.favs>0}}'>{{item.stat.favs}}</text></button>
+	</view>
+
+	<!-- 留言精选及点赞列表 -->
+	<view class='zan-list mv-10 fs-14' wx:if='{{item.favs && item.favs.length>0}}'>
+		<block wx:for="{{item.favs}}" wx:key='id'>	
+			<block wx:if='{{index>0}}'>、</block><navigator class='link'>{{item.user.nick}}</navigator>
+		</block>
+		等 <navigator class='link'>{{item.favs.length}}</navigator> 人感觉很赞
+	</view>
+	<view class='msg-list fs-14 mt-10'  wx:if='{{item.msgs && item.msgs.length>0}}'>
+		 <view class='mv-5' wx:for="{{item.msgs}}" wx:key='id'>	
+			<navigator class='link'>{{item.user.nick}}</navigator>：<text>{{item.content}}</text>
+		</view>
+		<view class='hor-center mv-10'>
+			<navigator class='link'>查看更多>></navigator>
+		</view>
+	</view>
+</view>
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->
+
+<!-- 回复留言框 -->
+<reply visible='{{replyVisible}}' msg='{{replyMsg}}' bindsend='handleReplySend' bindcancel="handleReplyCancel"></reply>
+
+
+<!-- 浮动面板区 -->
+<flex-block blocks="{{blocks}}" top="70%" right="5px"></flex-block>
+<!-- <flex-block type="post"  top="50%"></flex-block>
+<flex-block type="share"  top="calc(50% + 50px)"></flex-block>
+<flex-block type="del" top="calc(50% + 100px)"></flex-block>
+<flex-block type="top" top="calc(50% + 150px)"></flex-block> -->

@@ -1,0 +1,161 @@
+/* pages/shop/pay.wxss */
+page{
+	padding-bottom: 80px;
+}
+.m-list .ml-item{
+	font-size: 28rpx;
+}
+input.ml-value{
+	height:72rpx;
+}
+.m-list .ml-item .ml-label{
+	width:25%;
+}
+.m-list .ml-item button{
+	padding:0;
+	border:none;
+}
+.m-list .ml-item button .icon{
+	font-size:1em;
+	color:#fff000;
+}
+
+.good-item{
+	position: relative;
+	margin-top: 2rpx;
+}
+.good-item .pnl{
+	background-color:#fff;
+	padding:10px 15px;
+	overflow: hidden;
+}
+.good-item .pnl .img{
+	width:100px;
+	height: 100px;
+	display: block;
+	margin-right: 5px;
+	border-radius: 10px;
+}
+
+.good-item .pnl .notice .tip{
+	padding:0 10px;
+	background-color:#F8F8F8;
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}
+.good-item .pnl .btn{
+	border-color: #eee;
+	padding:0;
+	width:20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 50%;
+	display: inline-block;
+}
+.good-item .pnl .counter{
+	padding:0 5px;
+	width:30px;
+	margin:0 5px;
+	text-align: center;
+	display: inline-block;
+	color: #FFC801;
+	height: 24px;
+	line-height: 22px;
+	min-height: 24px;
+}
+
+
+
+
+.pricer-box .arrow{
+	height:24px;
+	width:24px;
+	text-align:center;
+	position:absolute;
+	line-height:24px;
+	top:50%;
+	margin-top:-12px;
+	z-index: 2;
+}
+
+.pricer-box .arrow.left{
+	left:5px;
+}
+.pricer-box .arrow.right{
+	right:5px;
+}
+.pricers{
+	width:100%;
+	white-space:nowrap;
+}
+.pricers .item{
+	display:inline-block;
+	margin:10px;
+	line-height:60px;
+	height:60px;
+	padding:10px;
+	width:120px;
+	background-color:#fff;
+	border-radius: 5px;
+	border:1px solid #ffffff;
+}
+.pricers .item .sel{
+	color: #FFC801;
+	display: none;
+	line-height: 1;
+	position: absolute;
+	right:5px;
+	bottom:5px;
+	
+}
+.pricers .item.selected{
+	border:1px solid #FFC801;
+	position: relative;
+	
+}
+
+.pricers .item.selected .sel{
+	display: block;
+}
+
+.pricers .item .tip{
+	float:right;
+	line-height: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.status{
+	width:100%;
+	bottom:0;
+	text-align: center;
+	background-color:rgba(0,0,0,.8);
+}
+.status button{
+	border: none;
+	line-height: inherit;
+	position: relative;
+}
+.status button[plain]{
+	color:#fff;
+}

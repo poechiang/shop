@@ -1,0 +1,5 @@
+/* pages/common/404.wxss */
+view.path{
+	word-break:break-all;
+	white-space:wrap;
+}

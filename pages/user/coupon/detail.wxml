@@ -1,0 +1,47 @@
+<!--pages/shop/good/detail.wxml-->
+
+<!-- 轮播图片 开始 -->
+<block wx:if='{{good}}'> 
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}"  indicator-color="#0e0e0e" indicator-active-color="#FFF000">
+  <block wx:for="{{good.heads}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 轮播图片 结束 -->
+
+<!-- 产品信息 开始 -->
+<view class='ph-15 pb-10 pos-relative' style='background-color:#F7F7F7;'>
+	<button class='trolley-btn f-right mt-20' plain bindtap='addToTrolley' data-good-id="{{good.id}}">+</button>
+	<view class='good-title h4'>{{good.group_title||good.title}}</view>
+	<view class='tags mv-5'> <text class='tag tip b5 mr-5' wx:for="{{good.tags}}" wx:key="*this">{{item}}</text></view>
+	<view> <text class='price2 mr-5'>{{good.retail_price}}</text> <text class="tip">{{good.norms}}</text></view>
+	<!-- <view class='notice mv-5'><text class='tip'> {{good.notice}}…</text></view> -->
+	<!-- <view class='notice mv-5'> <text class='icon icon-zan small'></text> <text class='tip'> 共有{{good.totalZan||'2000'}}个老乡感觉对味</text></view> -->
+</view>
+<!-- 产品信息 结束 -->
+
+<!-- 产品详情 开始 -->
+<view class='detail'>
+	<import src="/wxParse/wxParse.wxml" />
+	<template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+</view>
+<!-- 产品详情 结束  -->
+
+<!-- 产品详情页面状态栏 开始 -->
+<view class='status pos-fixed flex-row' style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;bottom:{{statusBottom}}px'>
+	<button plain open-type="share"><text class='icon icon-share fs-14'></text></button>
+	<button plain bindtap='handleMsg'><text class='icon icon-msg fs-14'></text></button>
+	<button plain disabled='{{article.stat.myfav}}' bindtap='handleFav'><text class='icon icon-zan{{article.stat.myfav?"ed":""}}'></text></button>
+	<view class='flex-item'></view>
+	<button plain bindtap='handleToTrolley'><text class='icon icon-trolley'></text><text class='bullet {{trolleyCount>9?"more":""}}'  wx:if="{{trolleyCount>0}}"><text class='count' wx:if="{{trolleyCount>0 && trolleyCount<=9}}">{{trolleyCount}}</text></text></button>
+	<button class='rect' type='theme' bindtap='handleBuy'>尝一份</button>
+</view>
+<!-- 产品详情页面状态栏 结束 -->
+
+
+<!-- 浮动面板区 -->
+<flex-block blocks="{{blocks}}" top="70%" right="5px" trolley="{{trolleyCount}}"></flex-block>
+</block>
+<view class='delay-loading mv-20' wx:else>正在加载请稍后……</view>

@@ -1,0 +1,28 @@
+/* components/cust-nav-bar.wxss */
+.cus-header .fixed-bar{
+	background-color:#F1A23B;
+	position: fixed;
+	top:0;
+	width:100%;
+	line-height: 32px;
+	font-size:36rpx;
+	font-weight: 600;
+	z-index: 100020;
+}
+
+.delay-loading{
+	text-align: center;
+	color:#616161;
+	font-size: 14px;
+	position: relative
+}
+.delay-loading::before{
+	height:40rpx;
+	width:40rpx;
+	display: inline-block;
+	content: "";
+	margin-right: .05rem;
+	vertical-align: middle;
+	background-image: url(http://res.yshealthy.com/Uploads/i/2017-12-12/A1E5E054-578A-C4D3-4D0C-3875DB84BF1C.gif);
+	background-size: contain;
+}

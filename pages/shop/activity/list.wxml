@@ -1,0 +1,54 @@
+<!--pages/shop/good/list.wxml-->
+
+<view class='tip  mv-50 mh-15' style='text-indent:2em'>
+	当前时间段内没有正在进行中的优惠打折活动,关注公众号留意后续活动的最新动态
+</view>
+
+<button type='primary' class='m-15' bindtap='goshop'> 去商城首页逛逛 </button>
+<!-- 切换标签 开始 -->
+<!-- <tabs items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" align="center" dock="{{tabFixed?true:false}}" bindchange="handleTabChange" shadow="{{false}}"></tabs> -->
+<!-- 切换标签 结束  -->
+<block wx:if='{{false}}'>
+<!-- 切换标签 开始 -->
+<!-- <tabs items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" align="center" dock="{{tabFixed?true:false}}" bindchange="handleTabChange" shadow="{{false}}"></tabs> -->
+<!-- 切换标签 结束  -->
+
+<!-- 轮播图片 开始 -->
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}"  indicator-color="#0e0e0e" indicator-active-color="#FFF000">
+  <block wx:for="{{banners}}" wx:key="id">
+    <swiper-item>
+      <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 轮播图片 结束 -->
+
+<!-- 产品列表 开始 -->
+<view class='good-list'>
+	<view class='good of-hidden mv-10' wx:for="{{goods}}"  wx:key="id" style='background-color:#ffffff'>
+		<navigator class='pic' url="/pages/shop/good/detail?id={{item.id}}">
+			<image src="{{item.heads[0]}}" class='good-image' />
+		</navigator>
+		<view class='ph-15'>
+			<button class='trolley-btn f-right mt-20' plain bindtap='addToTrolley' data-good-id="{{item.id}}">+</button>
+			<view class='good-title h4'>{{item.group_title||item.title}}</view>
+			<view class='tags mv-5'> <text class='tag tip b5 mr-5' wx:for="{{item.tags}}" wx:key="*this">{{item}}</text></view>
+			<view> <text class='price2 mr-10'>{{item.retail_price}}</text> <text class="tip">{{item.norms}}</text></view>
+			<!-- <view class='notice mv-10'><text class='tip'> {{item.notice}}…</text></view> -->
+		</view>
+	</view>
+</view>
+<!-- 产品列表 结束 -->
+
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->
+
+<!-- 浮动面板区 -->
+<flex-block blocks="{{blocks}}" top="70%" right="5px" trolley="{{trolleyCount}}"></flex-block>
+</block>

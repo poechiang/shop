@@ -1,0 +1,30 @@
+/* pages/shop/good/list.wxss */
+swiper{
+	height: 400rpx;
+}
+.slide-image{
+	width:750rpx;
+	height:400rpx;
+}
+.good-image{
+	width:750rpx;
+	height:750rpx;
+	display: block;
+}
+.tags .tag{
+	background-color:#F8F8F8;
+	display: inline-block;
+	padding:0 5px;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+	color:#b1b1b1;
+}
+.notice .tip{
+	padding:0 10px;
+	background-color:#F8F8F8;
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}

@@ -1,0 +1,96 @@
+/* components/flexblock.wxss */
+@charset "utf-8";
+@font-face {
+  font-family: 'iconfont';  /* project id 936976 */
+  src: url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.eot');
+  src: url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.woff') format('woff'),
+  url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_936976_cqxnxkopnm7.svg#iconfont') format('svg');
+}
+.icon{
+    font-family:"iconfont" !important;
+    font-size:1em;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    margin:0 .05rem;
+	font-weight: 300%
+}
+.icon-trolley::before,
+.trolley-icon::after{
+	content:"\e98f";
+}
+
+.icon-del::before,
+.del-icon::after{
+	content:"\e889";
+}
+.icon-post::before,
+.post-icon::after{
+	content:"\e738";
+}
+.icon-more::before,
+.more-icon::after{
+	content:"\e7e6";
+}
+.icon-top::before,
+.top-icon::after{
+	content:"\e740";
+}
+.icon-share::before,
+.share-icon::after{
+	content:"\e6e8";
+}
+
+.blocks{
+	position: fixed;
+	z-index: 100050;
+}
+.blocks .block{
+	display: table;
+	border-radius: 5px;
+}
+
+.blocks .block:not(:first-child){
+	margin-top:5px;
+}
+.blocks.light .block{
+	background-color:rgba(255,255,255,.5);
+	color:#414141;
+}
+.blocks.dark .block{
+	background-color:rgba(0,0,0,.5);
+	color:#ffffff;
+}
+.blocks .block .cell{
+	display: table-cell;
+	width:100%;
+	height: 100%;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+}
+
+.blocks .block .cell .bullet{
+	position: absolute;
+	font-size: 9px;
+	background-color:#FFEF00;
+	color:#000000;
+	width:12px;
+	height: 12px;
+	line-height:12px;
+	text-align: 12px;
+	border-radius: 6px;
+	left:5px;
+	top:5px;
+}
+.blocks .block .cell .bullet.more{
+	width:6px;
+	height: 6px;
+	border-radius: 3px;
+	left:7px;
+	top:7px;
+}

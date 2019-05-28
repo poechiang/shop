@@ -1,0 +1,108 @@
+<!--pages/user/index.wxml-->
+<view wx:if="{{!user.id}}">
+	<image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
+	<view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>
+	<button class='mh-15 mv-30' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo" disabled='{{logining}}'>点击登录</button>
+</view>
+<block wx:else>
+	<view class='section header of-hidden mt-0 pt-15 pb-30'>
+		<view class='f-left photo mh-10'>
+			<image class='user-photo circle ' src='{{user.photo}}'></image>
+		</view>
+		<navigator class='qrcode icon-scode large f-right mt-10 mr-10' url='/pages/user/vipcode'></navigator>
+		<view class='of-hidden'>
+			<view class='u-nick b3'>{{user.nick||user.name}}</view>
+			<view class='u-sign fs-12'>{{user.sign||'这货有点儿懒...'}}</view>
+			<view style='lh-15'><text class='u-level lv0 fs-12'><text class='fs-italic'>LV</text> {{user.level||'0'}}</text></view>
+		</view>
+
+		<view class='flex-row stat-pnl hor-center'>
+			<navigator class='flex-item art'>
+				{{userInfo.artTotal||0}}
+			</navigator>
+			<navigator class='flex-item att'>
+				{{userInfo.attTotal||0}}
+			</navigator>
+			<navigator class='flex-item fans'>
+				{{userInfo.fanTotal||0}}
+			</navigator>
+		</view>
+	</view>
+	<view class='pos-relative mb-30'>
+	<view class='section super p-0 of-hidden' style='line-height:40px;border-radius:10px;'>
+		<view class='ph-15' hover-class='clickable-hover' bindtap='handleTip1'>
+		<image class='rk ver-4'  src='https://res.shibu365.com/i/2019-04-03/b7271ae8ff1a40e2a9f6b161442c651d.png' mode='aspectFit' style='width:40px;height:20px'></image>
+		开通会员即领50元叠加券
+		<text class='f-right fs-12 tgray .more3-icon mini'>立即开通 </text>
+		</view>
+	</view>
+	</view>
+	
+	<!-- 我的订单 -->
+	<view class='section order'>
+		<view class='sec-head'>我的订单 <navigator class='link fs-14 more3-icon mini f-right mt-2' url='/pages/user/order/list'>全部订单</navigator></view>
+		<view class='sec-body flex-row pv-10'>
+			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=1'>
+				<text class='icon-unpay large '></text>
+				<text class='fs-12 tgray'>待支付</text> 
+			</navigator>
+			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=2'>
+				<text class='icon-unreceive large '></text>
+				<text class='fs-12 tgray'>待签收</text> 
+			</navigator>
+			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=2'>
+				<text class='icon-unreply large '></text>
+				<text class='fs-12 tgray'>待评价</text> 
+			</navigator>
+			<navigator class='flex-item hor-center' url='/pages/user/order/list2?t=0'>
+				<text class='icon-exchange large '></text>
+				<text class='fs-12 tgray'>退换 / 售后</text> 
+			</navigator>
+			<navigator class='flex-item hor-center' url='/pages/user/order/buylist'>
+				<text class='icon-buylist large '></text>
+				<text class='fs-12 tgray'>常购清单</text> 
+			</navigator>
+		</view>
+	</view>
+
+	<!-- 卡券 -->
+	<view class='section coupon'>
+		<view class='sec-head'>我的优惠券<navigator class='link fs-14 more3-icon mini f-right mt-2' url='/pages/user/coupon/list'>更多</navigator></view>
+		<scroll-view scroll-x="{{true}}" >
+			<view class='hor-center tip' style="line-height:160rpx"> ( 空 ) </view>
+		<!-- <view class='flex-row pv-10' style='width:{{160*4 - 640}}px;'>
+			<view class='tick'>
+				<view class='title'>￥<text class='b3'>10</text> <text class='fs-12 fs-italic'>满减券</text></view>
+				<view class='condi fs-12'>满100减10</view>
+				<view class='region tgray fs-12'>平台全品类</view>
+			</view>
+		</view> -->
+		</scroll-view>
+	</view>
+
+<!-- 
+	<view class='section profit hor-center'>
+		<view class='fs-14 mt-10'>我的收益</view>
+		<view class='flex-row pv-10'>
+			<view class='flex-item day'>{{userInfo.profitDay||0}}</view>
+			<view class='flex-item month'>{{userInfo.profitMonth||0}}</view>
+			<view class='flex-item total'>{{userInfo.profitTotal||0}}</view>
+			<view class='flex-item balance'>{{userInfo.profitBalance||0}}</view>
+		</view>
+		<view class='fs-12 mb-10 hor-left tgray'> <text class='icon-help1'></text> 通过您的乡圈阅读量/点赞量/评论量 多维度计算，获得现金收益</view>
+	</view> -->
+	<view class='section tool'>
+		<view class='sec-head'>我的工具</view>
+		<view class='flex-row pv-10'>
+			<view class='hor-center tip flex-item' style="line-height:160rpx"> 更多功能，即将上线 </view>
+		</view>
+	</view>
+	<!-- <view class='m-list icon mv-10'>
+		<navigator class='ml-item ifont more icon-order' url="/pages/user/order/list">订单管理</navigator>
+		<navigator class='ml-item ifont more icon-tixian' url="/">提现设置</navigator>
+		<navigator class='ml-item ifont more icon-chguan' url="/">加入城管队伍，坐享收益 <text class='tag'>认证城管</text> </navigator>
+	</view> -->
+
+	<button class='mv-10 mh-15' type='error' bindtap='exit'>退出商城</button>
+</block>
+

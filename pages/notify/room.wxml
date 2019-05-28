@@ -1,0 +1,4 @@
+<!--pages/notify/room.wxml-->
+<view class='tip mt-5 hor-center'>欢迎光临</view>
+
+<reply visible="{{true}}" auto-close="{{false}}" placeholder="有什么问题可以帮您？"/>

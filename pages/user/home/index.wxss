@@ -1,0 +1,37 @@
+/* pages/user/home/index.wxss */
+button{
+	height: 30px !important;
+	line-height: 30px !important;
+	padding:0 5px !important;
+	font-size: 14px !important;
+	margin-left:5px;
+	margin-right: 2px;
+	box-sizing: border-box;
+	border:none!important;
+}
+button::after,
+button::before,{
+	box-sizing: border-box;
+	background-color:red!important;
+}
+button .icon{
+	vertical-align: 0px;
+}
+.wall-paper{
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.user-pnl{
+	background-color: #fff;
+}
+.user-pnl .user-info .tags .tag{
+	display: inline-block;
+	background-color:#f0f0f0;
+	color:#616161;
+	padding:2px 4px;
+	margin-right:5px;
+}
+.user-pnl .user-info navigator.link{
+	margin-right: 10px;
+}

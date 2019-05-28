@@ -1,0 +1,157 @@
+/* pages/user/index.wxss */
+.link{
+	color:#888;
+}
+.section{
+	margin:10px;
+	border-radius: 10px;
+}
+.section .sec-head{
+	padding: 5px 0;
+	border-bottom: 1px solid #efefef;
+}
+.section.header{
+	background:#F1A23B;
+	color:#ffffff;
+	margin:10px 0;
+	border-radius: 0;
+}
+.section.header .u-nick{
+	margin:3px 0 2px;
+}
+.section.header .photo{
+	position: relative;
+	border:2px solid #FEEFB2;
+	width:64px;
+	height: 64px;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+.section.header .photo:after{
+	content:"去实名认证";
+	font-size: 10px;
+	position: absolute;
+	background-color: #FEEFB2;
+	color:#414141;
+	bottom:-10px;
+	width:60px;
+	height: 18px;
+	line-height: 18px;
+	border-radius: 9px;
+	left:0;
+	text-align: center;
+
+}
+.section.header .u-sign{
+	line-height: 1.5;
+}
+.section.header .u-level{
+	background-color:#212121;
+	padding: 0 10px;
+	border-radius: 8px;
+}
+.section.header .stat-pnl{
+	margin-top:10px;
+}
+.section.header .stat-pnl .flex-item{
+	font-size: 1.33em;
+	padding:10px 0;
+}
+.section.header .stat-pnl .flex-item::after{
+	display: block;
+	margin:auto;
+	font-size:14px;
+}
+.section.header .stat-pnl .art::after{
+	content:"云钻";
+}
+.section.header .stat-pnl .att::after{
+	content:"关注";
+}
+.section.header .stat-pnl .fans::after{
+	content:"粉丝";
+}
+.section.super{
+	position: absolute;
+	top:-40px;
+	left:0;
+	width:calc(100% - 40rpx);
+}
+
+.section.order .large:before{
+	font-size: 1.5em;
+}
+
+.section.coupon .tick{
+	color:#F1A23B;
+	width:150px;
+	margin:0 5px;
+	padding:5px 10px;
+	border-radius:5px;
+	box-shadow: 0 0 3px rgba(0,0,0,.2);
+	position:relative;
+}
+.section.coupon .tick:after{
+	position:absolute;
+	height: 100%;
+	border-left:1px dashed #efefef;
+	padding:10px 5px;
+	content: '立即使用';
+	font-size: 12px;
+	right:0;
+	top:0;
+	width:22px;
+	text-align: center;
+	line-height: 1;
+	vertical-align: middle;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+
+
+
+.section.profit{
+	margin-top:5px;
+	border-top:1px solid #efefef;
+}
+.section.profit .flex-item{
+	font-size: 1.5em;
+	color:#FE4F00;
+}
+.section.profit .flex-item:not(:last-child){
+	border-right:1px solid #efefef;
+}
+.section.profit .flex-item::after{
+	display: block;
+	margin:auto;
+	font-size:14px;
+	color:#888888;
+}
+.section.profit .day::after{
+	content:"今日收益";
+}
+.section.profit .month::after{
+	content:"当月收益";
+}
+.section.profit .total::after{
+	content:"收益总额";
+}
+.section.profit .balance::after{
+	content:"当前余额";
+}
+
+.section.profit .balance::after{
+	content:"当前余额";
+}
+.m-list .ml-item .tag{
+	display: inline;
+	padding:2px 5px;
+	border-radius: 10px;
+	background-color: #FFF001;
+	font-size:12px;
+	font-weight: 700;
+}

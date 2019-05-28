@@ -1,0 +1,23 @@
+/* pages/notify/index.wxss */
+.grp .grp-item .grp-block{
+	width:80rpx;
+	height:80rpx;
+	padding:20rpx;
+	margin:20rpx 40rpx;
+	background-color:#ffffff;
+	border-radius:10rpx;
+	margin-bottom:10rpx;
+}
+.grp .grp-item .grp-tag{
+	margin-bottom:10rpx;
+}
+.assist-list .assist-item{
+	margin-top:2rpx;
+	padding:20rpx 30rpx;
+	background-color:#fff;
+}
+.session-list .session-item{
+	margin-top:20rpx;
+	padding:20rpx 30rpx;
+	background-color:#fff;
+}

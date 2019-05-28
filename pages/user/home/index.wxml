@@ -1,0 +1,40 @@
+<!--pages/user/home/index.wxml-->
+<delay-loading wx:if="{{!ready}}" height="50">正在加载...</delay-loading>
+<block wx:else>
+<!-- 背景墙 开始 -->
+<view class='wall-paper' style='height:250rpx; background-image:url({{wp|| "https://res.shibu365.com/i/2019-02-20/74f282f463ed41418c2eb6bad84fcbf7.jpeg"}});' ></view>
+<!-- 背景墙 结束 -->
+<!-- 用户面板 开始 -->
+<view class='user-pnl pos-relative ph-15 pv-10'>
+	<image class='user-photo circle pos-absolute' style='top:-20px;border:3px solid #fff;width:80px;height:80px' src='{{user.photo||"https://res.shibu365.com/i/2018-12-16/88e15fd6f83e4cd3bd2c579ed37ce7ec.jpg"}}'></image>
+	<view class='hor-right' style='margin-bottom:30px;'>
+		<button size='mini' type='theme' class='rect' wx:if="{{user.relationship==0}}"  data-uid="{{user.id}}" data-unick="{{user.nick}}"  bindtap='attach'><text class='icon icon-guanzhu0'></text> 加关注</button>
+		<button size='mini' type='theme' class='rect' wx:elif="{{user.relationship==1}}"  data-uid="{{user.id}}" data-unick="{{user.nick}}"  bindtap='attach'><text class='icon icon-guanzhu1'></text> 加关注</button>
+		<block wx:else>
+			<button size='mini' type='theme' class='rect' bindtap='handleMsg'><text class='icon icon-msg'></text> 发消息</button>
+			<button size='mini' class='rect' wx:if="{{user.relationship==2}}"  data-uid="{{user.id}}" data-unick="{{user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu2'></text></button>
+			<button size='mini' class='rect' wx:if="{{user.relationship==3}}"  data-uid="{{user.id}}" data-unick="{{user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu3'></text></button>
+		</block>
+		<button size='mini' class='rect' data-uid="{{user.id}}" data-unick="{{user.nick}}" bindtap='showUserMoreActions'><text class='icon icon-more2'></text></button>
+	</view>
+	<view class='user-info'>
+		<view class='fs-22 mb-5'>{{user.nick}}</view>
+		<view class='fs-14 mb-10'>{{user.uuid}}</view>
+		<view class='tip pt-5 mb-10' style='border-top:1px solid #efefef;' wx:if="{{user.signature}}">{{user.signature}}</view>
+		<view class='tags fs-12'>
+			<text class='tag' wx:if="{{user.age}}">{{user.age}}岁</text>
+			<text class='tag' wx:if="{{user.loc_desc}}">{{user.loc_desc}}</text>
+		</view>
+		<view class='mt-10'>
+			<navigator class='link'>{{user.interaction.fav}} 获赞</navigator>
+			<navigator class='link'>{{user.interaction.follows}} 关注</navigator>
+			<navigator class='link'>{{user.interaction.fans}} 粉丝</navigator>
+		</view>
+	</view>
+</view>
+<!-- 用户面板 结束 -->
+
+<!-- 切换标签 开始 -->
+<tabs items='{{tabs}}' current-index="{{tabIndex}}" bindchange="handleTabChange"></tabs>
+<!-- 切换标签 结束  -->
+</block>

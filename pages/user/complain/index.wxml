@@ -1,0 +1,17 @@
+<!--pages/user/complain/index.wxml-->
+<block wx:if="{{user}}">
+<view class='hor-center mh-15 of-hidden'>
+	<image class='user-photo mt-20 mb-10' src='{{user.photo||"https://res.shibu365.com/i/2018-12-16/88e15fd6f83e4cd3bd2c579ed37ce7ec.jpg"}}'></image>
+	<view >{{user.nick}}</view>
+</view>
+
+<view class='reasons  mh-15 mt-20'>
+	<view class='r flex-row' wx:for="{{reasons}}" wx:key="*this"><view class='flex-item'>{{item.reason}}</view> <switch color='#F1A23B' checked='{{item.checked}}' data-index="{{index}}" bindchange='checkReason'></switch></view>
+</view>
+
+<view class='mh-15 mt-20'> 
+<textarea  placeholder='其他原因 或 备注' value='{{remark}}' bindinput='inputRemark'></textarea>
+</view>
+
+<button class=' mh-15 mt-20' type='error' bindtap='submit'>提交</button>
+</block>

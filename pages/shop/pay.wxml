@@ -1,0 +1,109 @@
+<!--pages/shop/pay.wxml-->
+<view class='m-list'>
+    <view class='ml-item'>
+        <text class='ml-label'>收货人</text>
+        <button class='f-right' plain size='mini' bindtap='getAddr'>
+            <text class='icon icon-book'></text>
+        </button>
+        <input class='ml-value' value='{{name}}' bindtap='handleAddrInput' data-key="name"></input>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>联系电话</text>
+        <button class='f-right' plain size='mini' bindgetphonenumber='getPhoneNumber' open-type='getPhoneNumber'>
+            <text class='icon icon-phone'></text>
+        </button>
+        <input class='ml-value' value='{{phone}}' bindtap='handleAddrInput' data-key="phone"></input>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>所在地区</text>
+        <text class='icon icon-arrow-down f-right'></text>
+        <picker class='ml-value' mode="region" value="{{region}}" custom-item="未选择" bindchange='handleRegionSelect'>
+            <view class='tip' wx:if="{{region.length<=0}}">选择所在地区</view>
+            <view wx:else>{{region[0]}}, {{region[1]}}, {{region[2]}}</view>
+        </picker>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>详细地址</text>
+        <button class='f-right' plain size='mini' bindtap='chooseLocation'>
+            <text class='icon icon-map'></text>
+        </button>
+        <input class='ml-value' value='{{addr}}' bindtap='handleAddrInput' data-key="detail"></input>
+    </view>
+</view>
+<view class='good-list mt-20' wx:if='{{goods.length>0}}'>
+    <view class='good-item' wx:for='{{goods}}' wx:key="id">
+        <view class='pnl flex-row flex-line-center'>
+            <image class='img' src='{{item.heads[0]}}' mode='asceptFill'></image>
+            <view class='of-hidden flex-item'>
+                <view class='title ellipsis mb-5'>{{item.group_title|| item.title}}</view>
+                <view class='norms tip'>{{item.norms}}</view>
+                <view class='notice fs-12 mv-5'>
+                    <text class='tip'>{{item.notice}}</text>
+                </view>
+                <view class='flex-row'>
+                    <text class='price2'>{{item.retail_price}}</text>
+                    <view class='flex-item hor-right mt-5' wx:if="{{mode == 'buy'||mode == 'open-group'||mode == 'join-group'}}">
+                        <button class='btn sub ' plain size='mini' bindtap='handleCountSub' data-index="{{index}}">-</button>
+                        <input class='counter hor-center' value='{{item.count}}' type='number' bindinput='handleCountChange' data-index="{{index}}"></input>
+                        <button class='btn add ' plain size='mini' bindtap='handleCountAdd' data-index="{{index}}">+</button>
+                    </view>
+                    <view class='flex-item mt-5 ml-5' wx:else> x {{item.count}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='delay-loading mv-20' wx:else>正在加载……</view>
+
+<!-- 开团支付，价格标签选择区块 -->
+<block wx:if="{{mode=='open-group'}}">
+    <view class='tip mt-20 mh-15'>团购价格</view>
+    <view class='pricer-box pos-relative'>
+		<text class='arrow left icon-arrow-left'></text>
+		<text class='arrow right icon-arrow-right'></text>
+        <scroll-view class='pricers' scroll-x>
+            <view class='item {{item.id == pricerid?"selected":""}}' wx:for="{{group.pricers}}" wx:key="id" hover-class='clickable-hover' data-id="{{item.id}}" bindtap='togglePricerId'>
+                <text class='tip f-right'>{{item.count}}人团</text>
+				<text class='price2'>{{item.price}}</text>
+                <text class='sel icon-selector' ></text>
+            </view>
+        </scroll-view>
+    </view>
+</block>
+
+
+
+<view class='m-list mt-20 hor-right'>
+    <view class='ml-item'>
+        <text class='ml-label'>订单金额</text>
+        <view class='ml-value'>
+            <view class='price'>{{total.price||0}}</view>
+            <view class='tip'> 运费:
+                <text class='price {{total.freight>0?"":"free"}}'>{{total.freight>0?total.freight:'免运费'}}</text> </view>
+        </view>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>代金卡券</text>
+        <text class='ml-value'><text class='price'>{{totalPrice||0}}</text></text>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>红包抵用</text>
+        <text class='ml-value'><text class='price'>{{totalPrice||0}}</text></text>
+    </view>
+    <view class='ml-item'>
+        <text class='ml-label'>商家满减</text>
+        <text class='ml-value'><text class='price'>{{totalPrice||0}}</text></text>
+    </view>
+</view>
+<!-- 产品列表 结束 -->
+
+<!-- 状态栏 开始 -->
+<view class='status pos-fixed flex-row flex-line-center' style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;bottom:{{statusBottom}}px'>
+    <view class='flex-item pl-15 hor-left' style='color:#fff;'>
+        <view>总计： ￥
+            <text class='price3'>{{(total.price+total.freight)|| 0}}</text>
+        </view>
+    </view>
+    <button class='rect ph-20' type='theme' bindtap='handlePay' disabled='{{!name||!phone||region.length<=0||!addr||total.count<=0}}'>支付</button>
+</view>
+<!-- 状态栏 结束 -->

@@ -1,0 +1,60 @@
+/* pages/user/chat/index.wxss */
+page{
+	padding-top:50px;
+	padding-bottom:100px;
+}
+.user-pnl{
+	position: fixed;
+	width:100%;
+	left:0;
+	top:0;
+	background-color: #fff;
+	padding:5px 0;
+	z-index: 2;
+}
+.list .item{
+	margin:10px 0;
+}
+.list .title{
+	margin:10px 0;
+}
+.list .msg{
+	padding:10px 15px;
+	border-radius: 5px;
+	position: relative;
+	box-shadow: 0 0 3px rgba(0,0,0,.2);
+	line-height: 1.5;
+	word-wrap: break-word;
+}
+.list .desc .tip{
+	line-height: 26px;
+	background-color:#dedede;
+	padding:0 10px;
+	border-radius: 13px;
+}
+.list .l .msg{
+	background-color:#FFFFFF;
+	margin-left:15px;
+}
+
+.list .r .msg{
+	margin-right:15px;
+	background-color:#F1A23B;
+}
+
+.list .l .msg::before,
+.list .r .msg::after{
+	content:"";
+	position: absolute;
+	border:5px solid transparent;
+	top:15px;
+
+}
+.list .l .msg::before{
+	left:-10px;
+	border-right-color:#FFFFFF;
+}
+.list .r .msg::after{
+	right:-10px;
+	border-left-color:#F1A23B;
+}

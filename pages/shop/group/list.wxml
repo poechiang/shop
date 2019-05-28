@@ -1,0 +1,63 @@
+<!--pages/shop/good/list.wxml-->
+<!-- 轮播图片 开始 -->
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}" indicator-color="#0e0e0e" indicator-active-color="#FFF000" wx:if="{{banners && banners.length>0}}">
+	<block wx:for="{{banners}}" wx:key="id">
+		<swiper-item>
+			<navigator url='{{item.url||item.path}}' v-if="{{!(item.url||item.path)}}">
+				<image src="{{item.pic}}" class="slide-image" mode='aspectFill' />
+			</navigator>
+			<image src="{{item.pic}}" class="slide-image" mode='aspectFill' />
+		</swiper-item>
+	</block>
+</swiper>
+
+<block wx:if="{{ready}}">
+    <block wx:if="{{groups.length<=0}}">
+        <view class='tip hor-center mv-20'>
+            更多实惠的产品组合套装正在筹备中
+        </view>
+        <button type='warn' class='m-15' bindtap='goshop'> 去商城首页逛逛 </button>
+    </block>
+    <!-- 切换标签 开始 -->
+    <!-- <tabs items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" align="center" dock="{{tabFixed?true:false}}" bindchange="handleTabChange" shadow="{{false}}"></tabs> -->
+    <!-- 切换标签 结束  -->
+    <block wx:else>
+        <!-- 产品列表 开始 -->
+        <view class='good-list'>
+            <view class='good of-hidden mv-10' wx:for="{{groups}}" wx:key="id" style='background-color:#ffffff'>
+                <navigator class='pic' url="/pages/shop/group/detail?id={{item.id}}">
+                    <image src="{{item.meta.good.heads[0]}}" class='good-image' />
+                </navigator>
+                <view class='ph-15'>
+                    <view class='good-title h4'>{{item.meta.good.group_title||item.meta.good.title}}</view>
+                    <view class='tags mv-5'>
+                        <text class='tag tip b5 mr-5' wx:for="{{item.meta.good.tags}}" wx:key="*this">{{item}}</text>
+                    </view>
+                    <view class='mb-10 flex-row flex-line-center'>
+                        <text class='price2 mr-10'>{{item.meta.good.retail_price}}</text>
+						<text class='tip flex-item hor-right mr-5'>{{item.start_date}} </text>
+						<button type="warn" size='mini' disabled='{{!item.started}}'>{{item.least_count}}人可开团 > </button>
+                    </view>
+                    <!-- <view class='notice mv-10'><text class='tip'> {{item.notice}}…</text></view> -->
+                </view>
+            </view>
+        </view>
+        <!-- 产品列表 结束 -->
+
+        <!-- 分布加载动画展示 开始 -->
+        <view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+        <view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+        <view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+            <view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+        </view>
+        <!-- 分页加载动画展示 结束 -->
+
+        <!-- 浮动面板区 -->
+        <flex-block blocks="{{blocks}}" top="70%" right="5px" trolley="{{trolleyCount}}"></flex-block>
+
+
+    </block>
+</block>
+<view wx:else class='mv-20'>
+<delay-loading >正在加载……</delay-loading>
+</view>

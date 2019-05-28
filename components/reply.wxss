@@ -1,0 +1,21 @@
+/* components/reply.js.wxss */
+
+.reply{
+	width:100%;
+	bottom:-60px;
+	background-color:#ffffff;
+	border-top:1px solid #C2C2C4;
+	position: fixed;
+	-webkit-transition: bottom .2s ease-in-out;
+	-moz-transition: bottom .2s ease-in-out;
+	-o-transition: bottom .2s ease-in-out;
+	transition: bottom .2s ease-in-out;
+}
+.reply.shown{
+	bottom:0;
+}
+.reply .icon{
+	text-align: center;
+}
+
+

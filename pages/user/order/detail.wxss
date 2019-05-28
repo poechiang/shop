@@ -1,0 +1,89 @@
+/* pages/user/order/detail.wxss */
+page{
+	padding-bottom: 80px;
+}
+.info{
+	position: relative;
+}
+.info .o-state{
+	position: absolute;
+	right:30rpx;
+	bottom:10rpx;
+}
+.bdr text{
+	-webkit-transform: skew(30deg);
+	-moz-transform: skew(30deg);
+	-ms-transform: skew(30deg);
+	-o-transform: skew(30deg);
+	transform: skew(30deg); 
+}
+.bdr text{
+	background-color:#ffc107; 
+}
+.bdr text:nth-child(2n){
+	background-color: #FFF029; 
+}
+
+.good-item{
+	position: relative;
+	margin-top: 2rpx;
+}
+.good-item .pnl{
+	background-color:#fff;
+	padding:10px 15px;
+	overflow: hidden;
+}
+.good-item .pnl .img{
+	width:100px;
+	height: 100px;
+	display: block;
+	margin-right: 5px;
+	border-radius: 10px;
+}
+
+.good-item .pnl .notice .tip{
+	padding:0 10px;
+	background-color:#F8F8F8;
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}
+.good-item .pnl .btn{
+	border-color: #eee;
+	padding:0;
+	width:20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 50%;
+	display: inline-block;
+}
+.good-item .pnl .counter{
+	padding:0 5px;
+	width:30px;
+	margin:0 5px;
+	text-align: center;
+	display: inline-block;
+	color: #FFC801;
+	height: 24px;
+	line-height: 22px;
+	min-height: 24px;
+}
+
+.status{
+	width:100%;
+	bottom:0;
+	text-align: center;
+	background-color:#ffffff;
+	border-top:1px solid #C2C2C4;
+	-webkit-transition: bottom .4s ease-in-out;
+	-mos-transition: bottom .4s ease-in-out;
+	-o-transition: bottom .4s ease-in-out;
+	transition: bottom .4s ease-in-out;
+}
+.status button{
+	border: none;
+	line-height: inherit;
+	position: relative;
+}

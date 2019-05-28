@@ -1,0 +1,6 @@
+<!--pages/common/404.wxml-->
+<view class='hor-center ph-15'>
+	<view class='h1 mt-80 mb-20'>404</view>
+	<view class='tip mt-20 mb-40'>你找的页面未找到</view>
+	<view class='hor-left tip path'>页面路径：<text style="color:#414141;">{{path}}</text></view>
+</view>

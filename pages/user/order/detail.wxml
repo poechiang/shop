@@ -1,0 +1,47 @@
+<!--pages/user/order/detail.wxml-->
+<block wx:if='{{order}}'>
+<view class='section mt-0 fs-14 info' style='line-height:2'>
+	<view class='hor-center mb-10'>{{order.sn}}</view>
+	<view>订单金额：<text class='price'>{{order.amount||0}}</text> <text class='fs-12 tip-default'>(运费：<text class='price {{order.freight>0?"":"free"}}'>{{order.freight>0?order.freight:'免运费'}}</text>)</text>
+	</view>
+	<view>代金卡券：<text class='price'>{{order.coupon||0}}</text></view>
+	<view>红包抵用：<text class='price'>{{order.red||0}}</text></view>
+	<view>商家满减：<text class='price'>{{order.reduct||0}}</text></view>
+	<text class='tip o-state'>{{order.front_state_label}}</text>
+</view>
+
+<view class='bdr flex-row mt-20' style='height:5px;margin:0 -10rpx;width:770rpx'><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text><text class='flex-item'></text></view>
+<view class='section mt-0'>
+	<view>{{order.rname}} <text class='link' bindtap='handlePhoneCall'>{{order.rphone}}</text></view>
+	<view class='tip'>{{order.raddr}}</view>
+</view>
+<view class='good-list mt-20'>
+	<view class='good-item' wx:for='{{order.details}}' wx:key="id">
+		<view class='pnl flex-row flex-line-center'>
+			<image class='img' src='{{item.good.heads[0]}}' mode='asceptFill'></image>
+			<view class='of-hidden flex-item'>
+				<view class='title ellipsis mb-5'>{{item.good.group_title|| item.good.title}}</view>
+				<view class='norms tip'>{{item.good.norms}}</view>
+				<view class='notice fs-12 mv-5'><text class='tip'>{{item.good.notice}}</text></view>
+				<view class='flex-row'>
+					<text class='price2'>{{item.price}}</text>
+					<view class='flex-item mt-5 ml-5'> x {{item.count}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 状态栏 开始 -->
+<view class='status pos-fixed flex-row flex-line-center' style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;bottom:{{statusBottom}}px'>
+	<button class='rect ph-20 flex-item' plain open-type='contact'>客服</button>
+	<button class='rect ph-20 flex-item' plain wx:if="{{order.state>=0 && order.state<10}}">取消</button>
+	<button class='rect ph-20 flex-item' plain wx:if='{{order.state==20||order.state==29}}'>签收</button>
+	<button class='rect ph-20 flex-item' plain wx:if='{{order.state==20||order.state==29}}'>退换</button>
+	<button class='rect ph-20 flex-item' plain wx:if='{{order.state==40}}'>评价</button>
+	<button class='rect ph-20 flex-item' plain bindtap='handlePay' wx:if="{{order.state == 9}}">支付</button>
+</view>
+<!-- 状态栏 结束 -->
+</block>
+
+<view class='delay-loading mv-20' wx:else>正在加载……</view>

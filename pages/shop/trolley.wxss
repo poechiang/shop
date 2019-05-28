@@ -1,0 +1,108 @@
+/* pages/shop/trolley.wxss */
+.tro-item{
+	position: relative;
+	margin-top: 2rpx;
+}
+.tro-item .pnl{
+	background-color:#fff;
+	padding:10px 15px;
+	overflow: hidden;
+}
+.sel{
+	width:18px;
+	height: 18px;
+	line-height: 16px!important;
+	text-align: center;
+	border:1px solid #eee;
+	border-radius: 50%; 
+	margin-right: 5px;
+	display: inline-block;
+}
+.sel.icon-select2{
+	width:20px;
+	height: 20px;
+	color:#414141!important;
+	background-color: #FFF000;
+	font-size: 12px!important;
+	border: none;
+}
+.tro-item .pnl .img{
+	width:100px;
+	height: 100px;
+	display: block;
+	margin-right: 5px;
+	border-radius: 10px;
+}
+
+.tro-item .pnl .notice .tip{
+	padding:0 10px;
+	background-color:#F8F8F8;
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}
+.tro-item .pnl .btn{
+	border-color: #eee;
+	padding:0;
+	width:20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 50%;
+	display: inline-block;
+}
+.tro-item .pnl .counter{
+	padding:0 5px;
+	width:30px;
+	margin:0 5px;
+	text-align: center;
+	display: inline-block;
+	color: #FFC801;
+	height: 24px;
+	line-height: 22px;
+	min-height: 24px;
+}
+
+
+.status{
+	width:100%;
+	bottom:0;
+	text-align: center;
+	background-color:rgba(0,0,0,.8);
+}
+.status button{
+	border: none;
+	line-height: inherit;
+	position: relative;
+}
+.status button[plain]{
+	color:#fff;
+}
+.status button .icon{
+	vertical-align: 2px;
+}
+.status button .icon-zaned{
+	color:#ff5722;
+}
+
+.status button .bullet{
+	position: absolute;
+	font-size: 9px;
+	background-color:#FFEF00;
+	color:#000000;
+	width:12px;
+	height: 12px;
+	line-height:12px;
+	text-align: 12px;
+	border-radius: 6px;
+	left:5px;
+	top:5px;
+}
+.status button .bullet.more{
+	width:6px;
+	height: 6px;
+	border-radius: 3px;
+	left:7px;
+	top:7px;
+}

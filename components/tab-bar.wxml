@@ -1,0 +1,10 @@
+<!--components/tab-bar.wxml-->
+
+<view class='tab-bar flex-row flex-line-stretch hor-center shadow' style='line-height:{{height}}px;height:{{height}}px;width:100%;left:0;bottom:0;'>
+	<button class='tab' plain open-type="share"><text class='icon icon-share fs-14'></text></button>
+	<button class='tab' plain bindtap='handleMsg'><text class='icon icon-msg fs-14'></text></button>
+	<button class='tab' plain bindtap='handleFav' disabled='{{article.stat.myfav}}'><text class='icon icon-zan{{hasFav?"ed":""}}'></text></button>
+	<view class='flex-item'></view>
+	<slot></slot>
+</view>
+

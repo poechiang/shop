@@ -1,0 +1,6 @@
+<!--components/delay-loading.wxml-->
+<view class='delay {{display}} {{empty?"empty":""}} {{ended?"ended":""}}' style='height:{{height}}px;line-height:{{height}}px;'>
+	<block wx:if="{{empty}}">{{empty===true?'敬请期待':empty}}</block>
+	<block wx:elif="{{ended}}">{{ended===true?'没有更多内容了':ended}}</block>
+	<block wx:else><slot></slot></block>
+</view>

@@ -1,0 +1,67 @@
+/* pages/circle/post.wxss */
+page{
+	/* background-color: #ffffff; */
+	padding-bottom: 60px;
+}
+.content textarea{
+	width:calc(100% - 60rpx);
+	min-height: 200px;
+	resize:none;
+	padding:20rpx 30rpx 20px;
+	background-color: #ffffff;
+}
+.content .chars{
+	position: absolute;
+	right:30rpx;
+	bottom:10rpx;
+}
+.attach::before{
+	content:"";
+	position: absolute;
+	border-bottom:1px solid #efefef;
+	height: 0;
+	width:calc(100% - 60rpx);
+	top:0;
+}
+.attach .list{
+	width:690rpx;
+}
+.attach .list .item{
+	width:226rpx;
+	height: 226rpx;
+	margin:2rpx;
+}
+.attach .list button.item{
+	border:none;
+	line-height: 226rpx;
+	margin:0;
+}
+
+
+
+
+
+.loc{
+	background-color: #FFF000;
+	color:#414141;
+	padding:0 10px;
+	font-size: 12px;
+	line-height: 20px;
+	height: 24px;
+	border-radius: 10px;
+	border:none;
+}
+.m-list{
+	font-size: 14px;
+}
+
+.m-list .ml-title,
+.m-list .ml-desc{
+	font-size:12px;
+}
+button.post{
+	position: fixed;
+	bottom:0;
+	width:100%;
+	z-index: 100020;
+}

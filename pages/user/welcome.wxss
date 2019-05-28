@@ -1,0 +1,10 @@
+/* pages/user/welcome.wxss */
+page{
+	background-color:#F1A23B;
+	color:#ffffff;
+}
+input{
+	background-color: #ffffff;
+	padding:10px 5px;
+	color:#000000;
+}

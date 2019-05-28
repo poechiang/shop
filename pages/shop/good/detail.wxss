@@ -1,0 +1,78 @@
+/* pages/shop/good/detail.wxss */
+
+swiper{
+	height: 750rpx;
+}
+.slide-image{
+	width:750rpx;
+	height:750rpx;
+}
+.detail image{
+	width:100%!important;
+	display: block;
+}
+.tags .tag{
+	/* background-color:#F8F8F8; */
+	display: inline-block;
+	padding:0 5px;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+	color:#b1b1b1;
+}
+.notice .tip{
+	padding:0 10px;
+	/* background-color:#F8F8F8; */
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}
+.trolley-btn{
+	position:absolute;
+	right:15px;
+	bottom:15px;
+
+}
+/* 
+.tab-bar{
+	width:100%;
+	bottom:0;
+	text-align: center;
+	background-color:rgba(0,0,0,.8);
+} */
+.tab-bar button{
+	border: none;
+	line-height: inherit;
+	position: relative;
+}
+.tab-bar button[plain]{
+	color:#fff;
+}
+.tab-bar button .icon{
+	vertical-align: 2px;
+}
+.tab-bar button .icon-zaned{
+	color:#ff5722;
+}
+
+.tab-bar button .bullet{
+	position: absolute;
+	font-size: 9px;
+	background-color:#FFEF00;
+	color:#000000;
+	width:12px;
+	height: 12px;
+	line-height:12px;
+	text-align: 12px;
+	border-radius: 6px;
+	left:5px;
+	top:5px;
+}
+.tab-bar button .bullet.more{
+	width:6px;
+	height: 6px;
+	border-radius: 3px;
+	left:7px;
+	top:7px;
+}

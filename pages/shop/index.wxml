@@ -1,0 +1,68 @@
+<!--pages/shop/index.wxml-->
+<!-- 轮播图片 开始 -->
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" circular="{{true}}"  indicator-color="#0e0e0e" indicator-active-color="#FFF000">
+  <block wx:for="{{banners}}" wx:key="id">
+    <swiper-item>
+     <navigator url='{{item.url||item.path}}' v-if="{{!(item.url||item.path)}}">
+	  <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+	 </navigator>
+	  <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 首页分类 开始 -->
+<view class='kinds flex-row flex-wrap p-10'>
+	<view class='kind'>
+		<navigator class='ma-0 pv-5' url="/pages/shop/good/list">
+			<image src='https://res.shibu365.com/i/2019-04-10/952d233b6b1a4491838acc997595c396.png'></image>
+			<view>拾补优选</view>
+		</navigator>
+	</view>
+	<view class='kind'>
+		<navigator class='ma-0 pv-5' url="/pages/shop/group/list">
+			<image src='https://res.shibu365.com/i/2019-04-10/33a3ba7b5ab1401ab49573b68f4626bc.png'></image>
+			<view>拼团</view>
+		</navigator>
+	</view>
+	<view class='kind'>
+		<navigator class='ma-0 pv-5' url="/pages/shop/activity/list">
+			<image src='https://res.shibu365.com/i/2019-04-10/5de5167347c84e469ef0fb0125149f13.png'></image>
+			<view>限时折扣</view>
+		</navigator>
+	</view>
+	<view class='kind'>
+		<navigator class='ma-0 pv-5' url="/pages/user/coupon/list">
+			<image src='https://res.shibu365.com/i/2019-04-10/56c20d61ed3a4f0ca2b585e200d062f2.png'></image>
+			<view>礼品优惠</view>
+		</navigator>
+	</view>
+</view>
+
+<!-- 产品列表 开始 -->
+<view class='jxtj ifont fs-14 mt-10 mh-10 mb-5' > 精选推荐</view>
+<view class='good-list mh-10 flex-row flex-main-between flex-wrap'>
+	<navigator class='good of-hidden pb-5 mv-5' wx:for="{{goods}}"  wx:key="id" style='background-color:#ffffff' url="/pages/shop/good/detail?id={{item.id}}">
+		<image src="{{item.heads[0]}}" mode='aspectFill' class='good-image' />
+		<view class='ph-5'>
+			<!-- <button class='trolley-btn f-right mt-20' plain bindtap='addToTrolley' data-good-id="{{item.id}}">+</button> -->
+			<view class='good-title h4'>{{item.abbr || item.group_title||item.title}}</view>
+			<view class='tags mv-5'> <text class='tag fs-12 mr-5' wx:for="{{item.tags}}" wx:key="*this">{{item}}</text></view>
+			<view> <text class='price2 mr-10'>{{item.retail_price}}</text> <text class="tip">{{item.norms}}</text></view>
+			<!-- <view class='notice mv-10'><text class='tip'> {{item.notice}}…</text></view> -->
+		</view>
+	</navigator>
+</view>
+<!-- 产品列表 结束 -->
+
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->
+
+<!-- 浮动面板区 -->
+<flex-block blocks="{{blocks}}" top="70%" right="5px" trolley="{{trolleyCount}}"></flex-block>

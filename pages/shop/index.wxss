@@ -1,0 +1,61 @@
+/* pages/shop/index.wxss */
+/* 轮播广告 */
+swiper{
+	height: 400rpx;
+}
+.slide-image{
+	width:750rpx;
+	height:400rpx;
+}
+
+/* 产品分类 */
+.kinds{
+	background-color:#fff;
+}
+.kinds .kind{
+	width:25%;
+	text-align: center;
+	font-size: 12px;
+	color:#616161;
+	
+}
+.kinds .kind image{
+	width:100rpx;
+	height:100rpx;
+}
+
+
+/* 推荐列表 */
+.jxtj::before{
+	content:"\e8de";
+	vertical-align:-.1em; 
+}
+.good-list .good{
+	border-radius: 20rpx;
+	overflow: hidden;
+	width:345rpx;
+}
+.good-list .good image{
+	width:345rpx;
+	height:345rpx;
+}
+.good-list .good .good-title{
+	height: 2.5em;
+}
+.tags .tag{
+	display: inline-block;
+	/* background-color:#F8F8F8;
+	padding:0 5px;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px; */
+	color:#b1b1b1;
+}
+.notice .tip{
+	padding:0 10px;
+	background-color:#F8F8F8;
+	display: inline-block;
+	line-height:20px;
+	height: 20px;
+	border-radius: 10px;
+}

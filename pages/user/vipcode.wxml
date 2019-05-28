@@ -1,0 +1,11 @@
+<!--pages/user/vipcode.wxml-->
+<view class='dp-table full-width full-height' >
+	<view class='dp-table-cell ver-middle hor-center'>
+		<view class='box mh-30 mb-60' wx:if="{{vipcode}}">
+			<image src='{{vipcode}}' mode='aspectFit'></image>
+			<view class='desc fs-12 tgray mt-30'>分享个人专属会员码</view>
+			<view class='desc fs-12 tgray mt-5'>邀请更多亲朋好友</view>
+		</view>
+		<delay-loading wx:else>正在加载中……</delay-loading>
+	</view>
+</view>
