@@ -24,21 +24,7 @@ App({
 	onLaunch() {
 		this.getSystemInfo()
 
-		// 隐藏导航栏
-		// wx.hideTabBar({
-		// 	aniamtion: true,
-		// })
-		wx.hideTabBar({
-			aniamtion: true,
-			success: function(res) {
-				console.log('tab bar loaded success')
-			},
-			fail: function(res) {
-
-				console.log('tab bar loaded failed')
-			},
-			complete: function(res) {},
-		})
+		
 
 		console.log('小程序启动……')
 	},
@@ -66,6 +52,21 @@ App({
 				}
 			}
 		}
+		// 隐藏导航栏
+		// wx.hideTabBar({
+		// 	aniamtion: true,
+		// })
+		wx.hideTabBar({
+			aniamtion: true,
+			success: function (res) {
+				console.log('tab bar loaded success')
+			},
+			fail: function (res) {
+
+				console.log('tab bar loaded failed')
+			},
+			complete: function (res) { },
+		})
 	},
 	getSystemInfo(options){
 		options = options ||{}

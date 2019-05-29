@@ -194,6 +194,7 @@
 page {
     font-size: 16px;
 	background-color: #292929;
+	color:#fefefe;
 
 }
 .link{
@@ -764,4 +765,47 @@ image.full-row {
 	color:#414141;
 	font-size:40px;
 	border-radius:50%;
+}
+
+
+
+
+
+
+
+.sec-head{
+	color:#A5A5A5;
+	font-size: 24rpx;
+}
+.sec-head:before{
+	content:"";
+	display: inline-block;
+	background-color: #FF9175;
+	width:6rpx;
+	height:30rpx;
+	margin-right: 10rpx;
+	vertical-align: -6rpx;
+}
+
+.nav-button{
+	height: 100rpx;
+	overflow: hidden;
+	line-height: 100rpx;
+	font-size: 28rpx;
+	background-color:#202022;
+	border-radius: 20rpx;
+	padding:0 20rpx;
+	box-sizing:border-box;
+}
+
+.nav-button.more:after{
+	content:"\e600";
+	color:#A5A5A5;
+	float: right;
+
+    font-family:"iconfont" !important;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: .133em;
 }

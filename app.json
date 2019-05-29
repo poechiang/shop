@@ -28,7 +28,8 @@
 		"pages/circle/post",
 		"pages/user/vipcode",
 		"pages/user/welcome",
-		"pages/notify/room"
+		"pages/notify/room",
+		"pages/task/index"
 	],
 	"permission": {
 		"scope.userLocation": {
@@ -61,7 +62,7 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/shop/index",
+				"pagePath": "pages/task/index",
 				"iconPath": "static/images/shop0.png",
 				"selectedIconPath": "static/images/shop1.png",
 				"text": "商城"

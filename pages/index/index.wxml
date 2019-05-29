@@ -15,11 +15,39 @@
     </view>
 </view>
 
+<view class='info-bar mh-15  mt-20 flex-row flex-main-center flex-line-stretch'>
+	<view class='flex-item hor-center'>
+		<view><image class='logo' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image> 已经坚持</view>
+		<view><text class='val'>1</text>天</view>
+	</view>	
+	<view class='bdr-v'></view>
+	<view class='flex-item hor-center'>
+		<view><image class='logo' src='https://res.shibu365.com/i/2019-05-28/b48f1ef7a4074f0d9c82525d1ea88baa.png'></image> 当前体重</view>
+		<view><text class='val'>125</text>KG</view>
+	</view>
+	<view class='bdr-v'></view>
+	<view class='flex-item hor-center'>
+		<view><image class='logo' src='https://res.shibu365.com/i/2019-05-28/2dc16aa1b2804e3d80caa14c68d2301c.png'></image> 目标体重</view>
+		<view><text class='val'>60</text>KG</view>
+	</view>
+</view>
 
+<view class='hzh mh-15 mt-20'>
+	<view class='sec-head'>我的徽章</view>
+	<view class='flex-row flex-main-around mh-5 mt-15'>
+		<view class='hz-block'><image class='hz' src='https://res.shibu365.com/i/2019-05-28/4b2594a691fb45a68e95efe806bc6dcf.png'></image></view>
+		<view class='hz-block null'></view>
+		<view class='hz-block null'></view>
+		<view class='hz-block null'></view>
+		<view class='hz-block null'></view>
+		<view class='hz-block more'></view>
+	</view>
+</view>
 
-
-
-
-
+<view class='sec-more mh-15 mt-20'>
+	<image class='banner' src='https://res.shibu365.com/i/2019-05-28/f0b54bdd106549899206e3d0e80b9a19.png'></image>
+	<navigator class='msg nav-button more mb-10'> <image class='logo' src='https://res.shibu365.com/i/2019-05-28/ca718631b97644ddb4540b36946a01c3.png'></image> 我的消息</navigator>
+	<navigator class='hot nav-button more'> <image class='logo' src='https://res.shibu365.com/i/2019-05-28/4a8f5b54cec5409e9060751d65414863.png'></image> 热闹活动</navigator>
+</view>
 
 <tab-bar curr="0" type="buildin"></tab-bar>

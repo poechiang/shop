@@ -1,0 +1,151 @@
+/* pages/task/index.wxss */
+page{
+	padding-bottom: 150rpx;
+}
+.task-tab{
+	margin:40rpx auto;
+}
+.task-tab .tabs .pnl{
+	background-color: #202022;
+	color:#FF9470;
+	border-radius: 15rpx;
+	overflow: hidden;
+}
+.task-tab .tabs .pnl .tab.selected{
+	background-color:#FF9472;
+	color:#202022;
+}
+.task-tab .tabs .pnl .tab:after{
+	display: none;
+}
+.bar{
+	text-align: center;
+	line-height:80rpx;
+	height: 80rpx;
+	border-radius: 20rpx;
+	background-color: #202022;
+}
+.bar .nav{
+	background-color:transparent;
+	color:#ffffff;
+	padding:0;
+	height:80rpx;
+	line-height:76rpx;
+	width: 60rpx;
+
+	border:none!important;
+
+}
+.bar .bdr-v{
+	color:#D97F64;
+}
+.bar .jd{
+	color:#FD5063;
+}
+.bar .logo{
+	width:40rpx;
+	height: 40rpx;
+	vertical-align: -10rpx;
+}
+.bar .days{
+	color:#9C9D9F;
+}
+.bar .days .val{
+	color:#FE9E6E;
+}
+.candy{
+	font-size:28rpx;
+	color:#707070;
+	text-align: center;
+}
+.candy .days{
+	color:#a5a5a5;
+}
+.candy .days .d{
+	height: 50rpx;
+	width:50rpx;
+	margin: 10rpx 20rpx;
+	line-height: 50rpx;
+	border-radius: 50%;
+	font-weight: 700;
+}
+.candy .days .d.done{
+	background-color:#FD7172;
+	color:#000000;
+}
+.candy .days .d.undo{
+	background-color:#828282;
+	color:#000000;
+}
+.candy .tip-desc{
+	margin-top:10rpx;
+	font-size: 20rpx;
+	text-align: left;
+	padding-left: 30rpx;
+}
+.candy .tip-desc :before{
+	content:"";
+	display: inline-block;
+	width:20rpx;
+	height:20rpx;
+	border-radius: 50%;
+	vertical-align: -2rpx;
+}
+.candy .tip-desc .done:before{	
+	background-color:#FD7172;
+}
+.candy .tip-desc .undo:before{	
+	margin-left:30rpx;
+	background-color:#828282;
+}
+
+.today .nav-button{
+	margin:10rpx 0;
+}
+.today .nav-button:before{
+	content:"";
+	display: inline-block;
+	width:10rpx;
+	height: 10rpx;
+	border-radius: 50%;
+	vertical-align: 4rpx;
+	margin-right:20rpx;
+}
+.today .nav-button.undo:before{
+	background-color:#FC302F;
+}
+.today .nav-button.undo .tip-undo{
+	color:#FF9470;
+}
+.today .nav-button.done:before{
+	background-color:#30FEAC;
+}
+.today .nav-button.done .tip-done{
+	color:#30FEAC;
+	float: right;
+}
+
+
+
+.lib .nav-button:before{
+	content:"";
+	display: inline-block;
+	width:10rpx;
+	height: 10rpx;
+	border-radius: 50%;
+	vertical-align: 4rpx;
+	margin-right:20rpx;
+}
+.lib .nav-button.unlock:before{
+	background-color:#FC302F;
+}
+.lib .nav-button.unlock .tip-unlock{
+	color:#FF9470;
+}
+.lib .nav-button.locked:before{
+	background-color:#30FEAC;
+}
+.lib .nav-button.locked .tip-locked{
+	color:#30FEAC;
+	float: right;
+}

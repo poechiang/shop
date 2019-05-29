@@ -57,7 +57,8 @@ Component({
 	},
 	options: {
 		addGlobalClass: true,
-		multipleSlots: true
+		multipleSlots: true,
+		
 	},
 	/**
 	 * 组件的方法列表

@@ -1,0 +1,77 @@
+<!--pages/task/index.wxml-->
+<view class='task-tab'>
+	<tabs items="{{tabs}}" current-index="{{currTabIndex}}" align="stretch" width="380rpx" height="36" space="0" shadow="{{false}}" bindchange="handleTabChange"></tabs>
+</view>
+<block wx:if="{{currTabIndex==0}}">
+<view class='bar mh-15'>
+	<button class='nav prev icon-arrow-left f-left' plain size='mini'></button>
+	<text>2019年05月</text><text class='bdr-v'>|</text> <text class='jd'>第二阶段</text> <image class='logo ml-5' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image> <text class='days'>已坚持 <text class='val'>20</text> 天 </text>
+	<button class='nav next icon-arrow-right f-right' style='line-height:80rpx;' plain size='mini'></button>	
+</view>
+<view class='candy mh-15'>
+	<view class='head flex-row flex-main-around'>
+		<text class='flex-item'>SUN</text>
+		<text class='flex-item'>MON</text>
+		<text class='flex-item'>TUE</text>
+		<text class='flex-item'>WEN</text>
+		<text class='flex-item'>THU</text>
+		<text class='flex-item'>FRI</text>
+		<text class='flex-item'>SAT</text>
+	</view>
+	<view class='days flex-row flex-main-around flex-wrap'>
+		<text class='d'></text>
+		<text class='d'></text>
+		<text class='d done'>1</text>
+		<text class='d done'>2</text>
+		<text class='d done'>3</text>
+		<text class='d done'>4</text>
+		<text class='d done'>5</text>
+		<text class='d undo'>6</text>
+		<text class='d undo'>7</text>
+		<text class='d'>8</text>
+		<text class='d'>9</text>
+		<text class='d'>10</text>
+		<text class='d'>11</text>
+		<text class='d'>12</text>
+		<text class='d'>13</text>
+		<text class='d'>14</text>
+		<text class='d'>15</text>
+		<text class='d'>16</text>
+		<text class='d'>17</text>
+		<text class='d'>18</text>
+		<text class='d'>19</text>
+		<text class='d'>20</text>
+		<text class='d'>21</text>
+		<text class='d'>22</text>
+		<text class='d'>23</text>
+		<text class='d'>24</text>
+		<text class='d'>25</text>
+		<text class='d'>26</text>
+		<text class='d'>27</text>
+		<text class='d'>28</text>
+		<text class='d'>29</text>
+		<text class='d'>30</text>
+		<text class='d'>31</text>
+		<text class='d e'></text>
+		<text class='d e'></text>
+	</view>
+	<view class='tip-desc'>
+		<text class='done'>完成</text> 
+		<text class='undo'>未完成任务（点击灰色日期可进行补卡）</text>
+	</view>
+</view>
+<view class='today mh-15 mt-20'>
+<view class='sec-head mb-10'>今日任务</view>
+
+<navigator class='nav-button undo more'>看初心视频 <text class='tip-undo'>未完成</text></navigator>
+<navigator class='nav-button undo more'>看健身教程 <text class='tip-undo'>未完成</text></navigator>
+<view class='nav-button done'>体重打卡 <text class='tip-done'>完成</text></view>
+
+</view>
+</block>
+<view class='lib mh-15' wx:if="{{currTabIndex==1}}">
+	<navigator class='nav-button unlock mb-10 more'>健康食谱 <text class='tip-unlock'>观看有奖励~</text></navigator>
+	<view class='nav-button locked'>体重打卡 <text class='tip-locked'>第二阶段解锁</text></view>
+</view>
+
+<tab-bar curr="1" type="buildin"></tab-bar>
