@@ -1,31 +1,31 @@
 <!--pages/circle/post.wxml-->
 <view class='content pos-relative of-hidden'>
 	<textarea bindinput='handleContentInput' maxlength="-1" auto-height></textarea>
-	<text class='chars {{article.content.length>800?"tip-error":(article.content.length>700?"tip-warning":"tip-success")}} fs-12' >{{article.content.length}}  / 800</text>
+	<text class='chars {{article.content.length>limitTotal?"tip-error":(article.content.length>limitWarn?"tip-warning":"tip-success")}} fs-12' >{{article.content.length}}  / {{limitTotal}}</text>
 </view>
-<view class='attach ph-15 pos-relative pt-15 pb-20' style='background-color:#ffffff;'>
+<view class='attach ph-15 pos-relative pt-15 pb-20'>
 	<view class='tgray fs-12 mb-5'>选择照片（ <text class='tip-error'>* 长按图片替换或删除</text> ）</view>
 	<view class='list flex-row flex-wrap'>
 		<image class='item' mode='aspectFill' src='{{item}}' wx:for="{{article.pictures}}" wx:key="*this" bindlongpress='handleShowActionSheet' data-index="{{index}}"></image>
 		<button class='item icon-addnew' plain bindtap='handleAddFiles' wx:if="{{article.pictures.length>=9}}"></button>
 	</view>
-	<view class='pt-15'>
-		<text class='loc dp-inline-block' bindtap='handleCityToggle'> <text class='icon icon-loc2 mr-5'></text>{{currCity.city}}</text>
-	</view>
 </view>
-<view class='m-list'>
+<view class='options m-list'>
 	<view class='ml-title'>谁可以看</view>
-	<picker class='ml-item' range='{{visibilities}}' value='{{article.visible}}' bindchange='handleVisibeChange'>{{visibilities[article.visible]}} <text class='icon icon-arrow-down small f-right'></text></picker>
+	<view class='ml-item'>
+		仅自己可见 <switch class='f-right' color='#5ACBCF' checked='{{article.visible}}' bindchange="handleVisibeChange"></switch>
+	</view>
+	<!-- <picker class='ml-item' range='{{visibilities}}' value='{{article.visible}}' bindchange='handleVisibeChange'>{{visibilities[article.visible]}} <text class='icon icon-arrow-down small f-right'></text></picker> -->
 	<view class='ml-title'>选项</view>
-	<view class='ml-item'>
-		允许评论 <switch class='f-right' color='#FFE12B' checked='{{article.meta.allow.reply}}' bindchange="handleChangeReply"></switch>
+	<view class='ml-item bdr'>
+		允许评论 <switch class='f-right' color='#5ACBCF' checked='{{article.meta.allow.reply}}' bindchange="handleChangeReply"></switch>
+	</view>
+	<view class='ml-item bdr'>
+		允许点赞 <switch class='f-right' color='#5ACBCF' checked='{{article.meta.allow.zan}}' bindchange="handleChangeShare"></switch>
 	</view>
 	<view class='ml-item'>
-		允许分享 <switch class='f-right' color='#FFE12B' checked='{{article.meta.allow.share}}' bindchange="handleChangeShare"></switch>
-	</view>
-	<view class='ml-item'>
-		允许收藏 <switch class='f-right' color='#FFE12B' checked='{{article.meta.allow.fav}}' bindchange="handleChangeFav"></switch>
+		允许收藏 <switch class='f-right' color='#5ACBCF' checked='{{article.meta.allow.fav}}' bindchange="handleChangeFav"></switch>
 	</view>
 </view>
-<button bindtap='handlePost' type='theme' class='post rect' disabled='{{!article.content}}'> <text class='icon-post2'></text> 发送</button>
+<button bindtap='handlePost' class='post rect  send-btn' disabled='{{!article.content}}'> <text class='icon-send' style='vertical-align:-5px;'></text> 发送</button>
 

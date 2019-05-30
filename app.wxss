@@ -207,7 +207,6 @@ page {
 .section {
     margin: 10rpx 0;
     padding: 10rpx 30rpx;
-    background-color: #fff;
 }
 .section .sec-title {
 	font-size:1.33em;
@@ -528,6 +527,18 @@ button[disabled] {
 }
 
 
+.send-btn{
+	background-color:transparent!important;
+	color:#59CCCD!important;
+}
+.send-button-hover {
+	opacity: .6;
+}
+.send-btn[disabled] {
+	color:#616161!important;
+	
+}
+
 
 
 
@@ -808,4 +819,9 @@ image.full-row {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     vertical-align: .133em;
+}
+.txt-logo{
+	width:1.5em;
+	height:1.5em;
+	vertical-align:-.3em;
 }

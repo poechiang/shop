@@ -1,19 +1,9 @@
 <!--pages/circle/index.wxml-->
-<!-- 自定义顶部导航栏 开始 -->
-<cust-nav-bar>
-	<view class='flex-row' style='height:44px;'>
-		<view class='flex-item'>
-			<view class='f-left icon-home1 small' style='width:44px;' bindtap='handleLocRestore'></view>
-		</view>
-		<view wx:if="{{currCity}}" class='curr-city icon-group arrow-down-icon small' bindtap='handleLocChange'>{{currCity.name}}</view>
-		<view class='delay-loading' wx:else>正在定位</view>
-		<view class='flex-item'></view>
-	</view>
-</cust-nav-bar>
-<!-- 自定义顶部导航栏 结束 -->
-
 <!-- 切换标签 开始 -->
-<tabs items='{{tabs}}' current-index="{{tabIndex}}" top="{{tabTop}}" dock="{{tabFixed?true:false}}" bindchange="handleTabChange"></tabs>
+<!-- <tabs items='{{tabs}}' current-index="{{tabIndex}}"  top="{{tabTop}}" dock="{{tabFixed?true:false}}" bindchange="handleTabChange"></tabs> -->
+<view class='comm-tab'>
+	<tabs items="{{tabs}}" current-index="{{currIndex}}" align="left" space="10" shadow="{{false}}" bindchange="handleTabChange" ></tabs>
+</view>
 <!-- 切换标签 结束  -->
 
 
@@ -22,22 +12,27 @@
 	
 	<!-- 文章作者 -->
 	<view class='art-title of-hidden flex-row flex-line-center' >
-		<navigator class='flex-item' url='/pages/user/home/index?id={{item.user.id}}'>
-			<image class="user-photo circle small f-left mr-5 mt-4" src='{{item.user.photo || defUserPhoto}}' mode='aspectFill' ></image>
-			<view style='line-height:56rpx;'>{{item.user.nick||'匿名用户'}}</view>
-			<view class='tip' style='line-height:28rpx;'>{{item.post_date}}</view>
+		<navigator class='author flex-item' url='/pages/user/home/index?id={{item.author.id}}'>
+			<image class="user-photo circle small f-left mr-5 mt-4" src='{{item.author.photo || defUserPhoto}}' mode='aspectFill' ></image>
+			<text class='sex nv icon-nv'></text>
+			<view style='line-height:56rpx;'>{{item.author.nick||'匿名用户'}}</view>
+			<view class='tip down'> 
+			<image class='down txt-logo' src='https://res.shibu365.com/i/2019-05-30/3b4610a5f26046f08860843c867351e0.png'></image>
+			<image class='up txt-logo' src='https://res.shibu365.com/i/2019-05-30/5baefafd87d2442f8e60d8426db53024.png'></image> {{'0.5kg'}}</view>
 		</navigator>
-		<button size='mini' type='theme' class='rect' wx:if="{{item.user.relationship==0}}" data-uid="{{item.user.id}}" bindtap='attach'><text class='icon icon-guanzhu0'></text> 加关注</button>
-		<button size='mini' type='theme' class='rect' wx:if="{{item.user.relationship==1}}" data-uid="{{item.user.id}}" bindtap='attach'><text class='icon icon-guanzhu1'></text> 加关注</button>
-		<button size='mini' class='rect' wx:if="{{item.user.relationship==2}}" data-uid="{{item.user.id}}" data-unick="{{item.user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu2'></text></button>
-		<button size='mini' class='rect' wx:if="{{item.user.relationship==3}}" data-uid="{{item.user.id}}" data-unick="{{item.user.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu3'></text></button>
-		<button size='mini' class='rect' data-index="{{index}}" bindtap='showUserMoreActions'><text class='icon icon-more2'></text></button>
+		<!-- 关注按钮 -->
+		<!-- <button size='mini' type='theme' class='rect' wx:if="{{item.author.relationship==0}}" data-uid="{{item.author.id}}" bindtap='attach'><text class='icon icon-guanzhu0'></text> 加关注</button>
+		<button size='mini' type='theme' class='rect' wx:if="{{item.author.relationship==1}}" data-uid="{{item.author.id}}" bindtap='attach'><text class='icon icon-guanzhu1'></text> 加关注</button>
+		<button size='mini' class='rect' wx:if="{{item.author.relationship==2}}" data-uid="{{item.author.id}}" data-unick="{{item.author.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu2'></text></button>
+		<button size='mini' class='rect' wx:if="{{item.author.relationship==3}}" data-uid="{{item.author.id}}" data-unick="{{item.author.nick}}"  bindtap='cancelAttach'><text class='icon icon-guanzhu3'></text></button>
+		<button size='mini' class='rect' data-index="{{index}}" bindtap='showUserMoreActions'><text class='icon icon-more2'></text></button> -->
 	</view>
 	
 	<!-- 文章内容 -->
 	<view class='art-body mv-10'>
-	<navigator class='link' bindtap='handleTopicTap' wx:if="{{item.topic}}">#{{item.topic}}#</navigator> 
-	<view hover-class='clickable-hover' bindtap='handleViewDetail' data-id='{{item.id}}'> <text>{{item.brief100}}</text> <text class='link fs-14'>查看全文</text></view>
+	<view hover-class='clickable-hover' data-id='{{item.id}}'> <text>{{item.brief}}</text></view>
+	
+	<navigator class=' topic link' bindtap='handleTopicTap' wx:if="{{item.topic||true}}">#{{item.topic||"IFPLANE第一阶段"}}#</navigator> 
 	<!-- <navigator url="/pages/circle/detail?aid={{item.id}}"> <text>{{item.brief100}}</text> <text class='link fs-14'>查看全文</text></navigator> -->
 	</view>
 
@@ -47,30 +42,41 @@
 	</view>
 
 	<!-- 所在位置及互动信息入口 -->
-	<view class='foot flex-row flex-line-center'>
-		<view class='loc'><text class='icon-loc1 small mr-5'></text>{{item.city}}</view>
-		<view class='flex-item'></view>
-		<button class='op normal' plain open-type="share" data-index="{{index}}" disabled='{{!item.meta.allow.share}}'><text class='icon-share' style='font-size:.83em'></text> <text class='count' wx:if='{{item.stat.shares>0}}'>{{item.stat.shares}}</text></button>
-		<button class='op normal' plain bindtap='handleMsg' data-index="{{index}}"  disabled='{{!item.meta.allow.reply}}'><text class='icon-msg' style='font-size:.83em'></text> <text wx:if='{{item.stat.msgs>0}}'>{{item.stat.msgs}}</text></button>
-		<view class='op normal' wx:if='{{item.stat.myfav}}'><text class='icon-zaned' style='font-size:.96em'></text> <text class='count'>{{item.stat.favs}}</text></view>
-		<button class='op normal' plain bindtap='handleFav' data-index="{{index}}"  disabled='{{!item.meta.allow.fav}}' wx:else><text class='icon-zan'  style='font-size:.96em'></text> <text class='count' wx:if='{{item.stat.favs>0}}'>{{item.stat.favs}}</text></button>
+	<view class='foot flex-row flex-line-center flex-main-around'>
+		<view class='op normal' wx:if='{{item.stat.myZan}}'>
+			<image class='txt-logo' src='https://res.shibu365.com/i/2019-05-30/57afe4785ca442999cba3833b26a75ea.png'></image> {{item.stat.zans||200}}
+		</view>
+		<button class='op normal' plain bindtap='handleZan' data-index="{{index}}"  disabled='{{!item.meta.allow.fav}}' wx:else>
+			<image class='txt-logo' src='https://res.shibu365.com/i/2019-05-30/7193962714804a60ab9fa8f154e2f65b.png'></image> {{item.stat.zans||200}}
+		</button>
+
+		<button class='op normal' plain bindtap='handleMsg' data-index="{{index}}" disabled='{{!item.meta.allow.reply}}'>
+			<image class='txt-logo' src='https://res.shibu365.com/i/2019-05-30/c5091efd1f2f4027ac56c25d159036ff.png'></image> {{item.stat.msgs||200}}
+		</button>
+		
+		<view class='op normal' wx:if='{{item.stat.myfav}}'>
+			<image class='txt-logo' src='https://res.shibu365.com/i/2019-05-30/68a4f2df1f8449fd9e56424acd18d882.png'></image> {{item.stat.favs||200}}
+		</view>
+		<button class='op normal' plain bindtap='handleFav' data-index="{{index}}"  disabled='{{!item.meta.allow.fav}}' wx:else>
+			<image class='txt-logo' src='https://res.shibu365.com/i/2019-05-30/68a4f2df1f8449fd9e56424acd18d882.png'></image> {{item.stat.favs||200}}
+		</button>
 	</view>
 
 	<!-- 留言精选及点赞列表 -->
-	<view class='zan-list mv-10 fs-14' wx:if='{{item.favs && item.favs.length>0}}'>
+	<!-- <view class='zan-list mv-10 fs-14' wx:if='{{item.favs && item.favs.length>0}}'>
 		<block wx:for="{{item.favs}}" wx:key='id'>	
-			<block wx:if='{{index>0}}'>、</block><navigator class='link'>{{item.user.nick}}</navigator>
+			<block wx:if='{{index>0}}'>、</block><navigator class='link'>{{item.author.nick}}</navigator>
 		</block>
 		等 <navigator class='link'>{{item.favs.length}}</navigator> 人感觉很赞
 	</view>
 	<view class='msg-list fs-14 mt-10'  wx:if='{{item.msgs && item.msgs.length>0}}'>
 		 <view class='mv-5' wx:for="{{item.msgs}}" wx:key='id'>	
-			<navigator class='link'>{{item.user.nick}}</navigator>：<text>{{item.content}}</text>
+			<navigator class='link'>{{item.author.nick}}</navigator>：<text>{{item.content}}</text>
 		</view>
 		<view class='hor-center mv-10'>
 			<navigator class='link'>查看更多>></navigator>
 		</view>
-	</view>
+	</view> -->
 </view>
 
 <!-- 分布加载动画展示 开始 -->
@@ -86,8 +92,5 @@
 
 
 <!-- 浮动面板区 -->
-<flex-block blocks="{{blocks}}" top="70%" right="5px"></flex-block>
-<!-- <flex-block type="post"  top="50%"></flex-block>
-<flex-block type="share"  top="calc(50% + 50px)"></flex-block>
-<flex-block type="del" top="calc(50% + 100px)"></flex-block>
-<flex-block type="top" top="calc(50% + 150px)"></flex-block> -->
+<!-- <flex-block blocks="{{blocks}}" top="70%" right="5px"></flex-block> -->
+<tab-bar curr="2" type="buildin"  visible='{{navBarVisible}}'></tab-bar>

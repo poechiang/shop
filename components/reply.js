@@ -7,27 +7,7 @@ Component({
 	properties: {
 		visible:{
 			type:Boolean,
-			value:false,
-			observer(newVal,oldVal,changePath){
-				if(newVal){
-					wx.hideTabBar({
-						animation:true
-					})
-					setTimeout(()=>{
-						this.setData({
-							focused:true
-						})
-					},400)
-				}
-				else{
-					
-					setTimeout(() => {
-						wx.showTabBar({
-							animation: true
-						})
-					}, 400)
-				}
-			}
+			value:false
 		},
 		msg:String,
 		audio:Boolean,

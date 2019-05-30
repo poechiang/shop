@@ -149,3 +149,29 @@ page{
 	color:#30FEAC;
 	float: right;
 }
+
+.get-hzh{
+	position: fixed;
+	top:0;
+	bottom: 0;
+	left:0;
+	right:0;
+	display: table;
+	width: 100%;
+	height:100%;
+}
+.get-hzh .inner{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.get-hzh .inner .box{
+	width:600rpx;
+	margin:auto;
+	border-radius:30rpx;
+	background-color:rgba(0,0,0,.9);
+	font-size:1.3em;
+	line-height:2;
+	font-weight:200;
+	padding:120rpx 0 100rpx;
+}

@@ -9,14 +9,15 @@ Page({
 		defUserPhoto:app.data.defUserPhoto,
 		blocks:['post','top'],
 		currCity:null,
-		tabs: ['推荐', '同城同乡', '关注'],
+		tabs: ['狂人社区', '我的', '收藏'],
 		tabIndex:0,
 		page:{ended:false,empty:false},
 		bottomLoading:{
 			height:0,
 			opacity:0
 		},
-		replyVisible:false
+		replyVisible:false,
+		navBarVisible:true
 	},
 
 	/**
@@ -45,18 +46,30 @@ Page({
 	/**
 	 * 加载数据
 	 */
-	loadData(options){
-		options = options||{}
+	loadData(){
+		
+		var options = this.options,
+			url
+			
+		if (this.data.tabIndex == 1) {
+			url = 'essay/my_essays'
+		}
+		else if (this.data.tabIndex == 2) {
+			url = 'essay/my_fav_essays'
+		}
+		else {
+			url = 'essay/get_all_essays'
+		}
+
 		app.http.request({
-			url:'art/get_list',
+			url:url,
 			param:{
 				page:options.page||1,
-				filter: this.data.tabIndex,
 				adcode: this.data.currCity ? this.data.currCity.adcode : 0,
 			},
 			done:rlt=>{
-				var page = rlt.data.page
-				var list = rlt.data.articles
+				var page = rlt.page
+				var list = rlt.data
 				page.ended = page.curr == page.last
 				page.empty = page.total == 0
 				var old = this.data.articles||[]
@@ -252,7 +265,8 @@ Page({
 		
 		this.currArtIndex = e.currentTarget.dataset.index
 		this.setData({
-			replyVisible:true,
+			replyVisible: true,
+			navBarVisible: false
 		})
 
 	},
@@ -281,6 +295,7 @@ Page({
 							this.setData({
 								articles: list,
 								replyVisible: false,
+								navBarVisible: true,
 								replyMsg:''
 							})
 						
@@ -297,6 +312,7 @@ Page({
 		this.currArtIndex = -1
 		this.setData({
 			replyVisible: false,
+			navBarVisible: true,
 			replyMsg: ''
 		})
 	},

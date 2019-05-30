@@ -37,7 +37,7 @@ Page({
 			meta:{
 				allow: {
 					fav: 1,
-					share: 1,
+					zan: 1,
 					reply: 1
 				},
 			},
@@ -46,6 +46,8 @@ Page({
 			adcode:'',
 			city:''
 		},
+		limitTotal: 140,
+		limitWarn: 100,
 		max:-1,
 		visibilities: ["所有人可见", "关注的人可见", "仅粉丝可见", "仅好友可见", "仅自己可见"],
 		
@@ -146,14 +148,15 @@ Page({
 	},
 	handleVisibeChange(e) {
 		var art = this.data.article
-		art.visible = e.detail.value
+		art.visible = e.detail.value ? 4 : 0
+		console.log(art.visible)
 		this.setData({
 			article:art
 		})
 	},
 	handleChangeReply(e) {
 		var art = this.data.article
-		art.meta.allow.reply = e.detail.value ? '1' : '0'
+		art.meta.allow.reply = e.detail.value ?1:0
 		this.setData({
 			article: art
 		})
@@ -161,14 +164,14 @@ Page({
 	},
 	handleChangeShare(e) {
 		var art = this.data.article
-		art.meta.allow.share = e.detail.value ? '1' : '0'
+		art.meta.allow.zan = e.detail.value ?1:0
 		this.setData({
 			article: art
 		})
 	},
 	handleChangeFav(e) {
 		var art = this.data.article
-		art.meta.allow.fav = e.detail.value ? '1' : '0'
+		art.meta.allow.fav = e.detail.value ?1:0
 		this.setData({
 			article: art
 		})

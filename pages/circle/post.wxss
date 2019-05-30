@@ -5,10 +5,9 @@ page{
 }
 .content textarea{
 	width:calc(100% - 60rpx);
-	min-height: 200px;
+	min-height: 280rpx;
 	resize:none;
 	padding:20rpx 30rpx 20px;
-	background-color: #ffffff;
 }
 .content .chars{
 	position: absolute;
@@ -59,9 +58,24 @@ page{
 .m-list .ml-desc{
 	font-size:12px;
 }
+.m-list .ml-item{
+	background-color:transparent;
+	color:#a5a5a5;
+	position: relative;
+}
+.m-list .ml-item.bdr:after{
+	content:"";
+	background-color:#202022;
+	height: 2rpx;
+	width:calc(100% - 60rpx);
+	left:30rpx;
+	bottom:0;
+	position: absolute;
+}
 button.post{
 	position: fixed;
 	bottom:0;
 	width:100%;
 	z-index: 100020;
+	box-shadow: 0 0 10rpx #202022;
 }

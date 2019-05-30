@@ -49,7 +49,7 @@
 .attach.pic-box .pic{
 	border:6rpx solid transparent;
 	width:678rpx;
-	height:678rpx;
+	height:339rpx;
 	display: block;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -110,4 +110,71 @@
 	-moz-transition: opacity .2s ease-in-out;
 	-webkit-transition: opacity .2s ease-in-out;
 	-o-transition: opacity .2s ease-in-out;
+}
+
+
+page{
+	padding-bottom: 150rpx;
+}
+.comm-tab .tabs{
+	padding:0 30rpx;
+}
+.comm-tab .tabs .pnl{
+	background-color: transparent;
+}
+.comm-tab .tabs .pnl .tab.selected:after{	
+	background-color:#FF9472;
+	bottom:0;
+}
+.art-title .author{
+	position: relative;
+}
+.art-title .author .sex{
+	position: absolute;
+	font-size: .6em;
+	bottom:0;
+	left: 60rpx;
+	
+}
+.art-title .author .sex.nan{
+	color:#59CBCE;	
+}
+.art-title .author .sex.nv{
+	color:#FF4848;	
+}
+
+.art-title .author .tip.down{
+	color:#59CBCE;
+}
+.art-title .author .tip.up{
+	color:#FF4848;
+}
+.art-title .author .tip.down .up{
+	display: none;
+}
+.art-title .author .tip.up .down{
+	display: none;
+}
+.art-body .topic{
+	color:#59CBCE;
+}
+
+.attach{
+	background-color: transparent;
+	padding:10rpx;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width:690rpx;
+}
+.attach.pic-box{
+	padding:6rpx;
+
+}
+.attach.pic-box .pic{
+	border-radius: 40rpx;
+
+}
+.foot .op{
+	color:#666666;
 }

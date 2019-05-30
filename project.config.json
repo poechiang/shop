@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -78,9 +78,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "任务页面",
-					"pathName": "pages/task/index",
+					"id": 5,
+					"name": "社区页面",
+					"pathName": "pages/circle/post",
 					"query": "",
 					"scene": null
 				}

@@ -74,4 +74,19 @@
 	<view class='nav-button locked'>体重打卡 <text class='tip-locked'>第二阶段解锁</text></view>
 </view>
 
+
+<view class='get-hzh'>
+	<view class='inner'>
+	<view class='box'>
+		<image mode='widthFix' src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:300rpx'></image>
+		<view class='hor-center'>恭喜您率先完成任务</view>
+		<view class='hor-center'>获得{{hzName||'XXX'}}徽章</view>
+		<image mode='widthFix' src='{{hzSrc||"https://res.shibu365.com/i/2019-05-30/14e79dfc94f5407c97ab05612e1201c3.png"}}' style='width:400rpx'></image>
+	</view>
+	</view>
+</view>
+
+
+
+
 <tab-bar curr="1" type="buildin"></tab-bar>

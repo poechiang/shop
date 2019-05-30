@@ -5,6 +5,10 @@ Component({
      * 组件的属性列表
      */
 	properties: {
+		visible: {
+			type: Boolean,
+			value: true
+		},
 		type: {
 			type: String,
 			value: "good"
@@ -73,6 +77,12 @@ Component({
 		},
 		handleAddNew() {
 			this.triggerEvent('add-new', {}, {})
+			wx.navigateTo({
+				url: '/pages/circle/post',
+				success: function(res) {},
+				fail: function(res) {},
+				complete: function(res) {},
+			})
 		}
 	}
 })

@@ -20,7 +20,7 @@ App({
 	logs: require('utils/logs'),
 	con: cons,
 	ui: require('utils/ui'),
-	env:'remote',
+	env:'local',
 	onLaunch() {
 		this.getSystemInfo()
 
@@ -158,15 +158,15 @@ App({
 			type: options.type,
 			altitude: options.altitude,
 			success: res => {
-				con.success('微信定位成功')
+				getApp().con.success('微信定位成功')
 				this.amapwx.getRegeo({
 					location: res.longitude + ',' + res.latitude,//location的格式为'经度,纬度'
 					success: res => {
 						if (!res && res.length <= 0) {
-							con.warn('位置解析失败！')
+							getApp().con.warn('位置解析失败！')
 							return
 						}
-						con.success('高德解析成功')
+						getApp().con.success('高德解析成功')
 						res = res[0].regeocodeData.addressComponent
 
 						res.isMunicipality = ['北京市','天津市','上海市','重庆市'].indexOf(res.province)>=0
@@ -175,12 +175,12 @@ App({
 						options.success && options.success(res)
 					},
 					fail: function (res) { 
-						con.error(res)
+						getApp().con.error(res)
 					}
 				})
 			},
 			fail: function (res) {
-				con.error(res)
+				getApp().con.error(res)
 			},
 			complete: function (res) {
 				console.groupEnd()
@@ -200,7 +200,7 @@ App({
 		console.group('天气查询开始')
 		this.amapwx.getWeather({
 			success: (data) => {
-				con.success('天气查询成功')
+				getApp().con.success('天气查询成功')
 				options.success&&options.success(data)
 				console.groupEnd()
 				//成功回调
@@ -208,7 +208,7 @@ App({
 			fail: (res) => {
 				//失败回调
 
-				con.error('天气查询失败')
+				getApp().con.error('天气查询失败')
 				options.fail && options.fail(res)
 				console.groupEnd()
 			}
@@ -220,10 +220,10 @@ App({
 			location: options.long + ',' + options.lat,//location的格式为'经度,纬度'
 			success: res => {
 				if (!res && res.length <= 0) {
-					con.warn('位置解析失败！')
+					getApp().con.warn('位置解析失败！')
 					return
 				}
-				con.success('高德解析成功')
+				getApp().con.success('高德解析成功')
 				res = res[0].regeocodeData.addressComponent
 
 				res.isMunicipality = ['北京市', '天津市', '上海市', '重庆市'].indexOf(res.province) >= 0
@@ -232,7 +232,7 @@ App({
 				options.success && options.success(res)
 			},
 			fail: function (res) {
-				con.error(res)
+				getApp().con.error(res)
 			}
 		})
 	}

@@ -3,8 +3,8 @@
 .reply{
 	width:100%;
 	bottom:-60px;
-	background-color:#ffffff;
-	border-top:1px solid #C2C2C4;
+	background-color:#202022;
+	color:#a5a5a5;
 	position: fixed;
 	-webkit-transition: bottom .2s ease-in-out;
 	-moz-transition: bottom .2s ease-in-out;
@@ -13,6 +13,14 @@
 }
 .reply.shown{
 	bottom:0;
+}
+.reply .content{
+	color:#a5a5a5;
+}
+
+
+.reply .rect.back{
+	color:#a5a5a5;
 }
 .reply .icon{
 	text-align: center;

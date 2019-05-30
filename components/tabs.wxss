@@ -1,4 +1,5 @@
 /* components/tabs.wxss */
+
 .tabs .pnl{
 	background-color: #ffffff;
 }

@@ -1,9 +1,10 @@
 /* components/tab-bar.wxss */
 .tab-bar{
 	width:100%;
-	bottom:0;
+	bottom:-140rpx;
 	text-align: center;
-	background-color:rgba(0,0,0,.21);
+	/* background-color:rgba(0,0,0,.21); */
+	background-color:#202022;
 	position: fixed;
 	z-index: 99999;
 	transition: top .2s ease-in-out;
@@ -11,7 +12,9 @@
 	-moz-transition: top .4s ease-in-out;
 	-o-transition: top .4s ease-in-out;
 }
-
+.tab-bar.shown{
+	bottom:0;
+}
 .tab-bar.buildin .tab{
 	border: none;
 	line-height: 1;

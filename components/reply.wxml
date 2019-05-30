@@ -1,6 +1,6 @@
 <!--components/reply.js.wxml-->
 <view class='reply flex-row flex-line-stretch {{visible?"shown":""}}' style='height:{{statusHeight}}px;line-height:{{statusHeight}}px;'>
-	<button class='rect' plain wx:if="{{autoClose}}" style='border:none!important;line-height:inherit!important;width:{{statusHeight-1}}px' bindtap='handleBack'>
+	<button class='back rect' plain wx:if="{{autoClose}}" style='border:none!important;line-height:inherit!important;width:{{statusHeight-1}}px' bindtap='handleBack'>
 		<text class='icon icon-back' ></text>
 	</button>
 
@@ -9,9 +9,9 @@
 	</button>
 	
 	<block wx:if="{{mode!='audio'}}">
-		<input class='flex-item' focus='{{focused}}' bindinput='handleInput' value='{{msg}}' confirm-type="send" style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;margin:0 5px;' catchblur='handleBlur' catchconfirm='handleSend' placeholder='{{placeholder}}'></input>
+		<input class='content flex-item' focus='{{focused}}' bindinput='handleInput' value='{{msg}}' confirm-type="send" style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;margin:0 5px;' catchblur='handleBlur' catchconfirm='handleSend' placeholder='{{placeholder}}'></input>
 		
-	<button class='rect' type='theme' plain disabled='{{!msg}}' style='border:none!important;line-height:inherit!important;width:{{statusHeight-1}}px;' bindtap='handleSend'>
+	<button class='rect send-btn' plain disabled='{{!msg}}' style='border:none!important;line-height:inherit!important;width:{{statusHeight-1}}px;' bindtap='handleSend'>
 		<text class='icon icon-send small'></text>
 	</button>
 	</block>

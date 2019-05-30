@@ -59,19 +59,19 @@
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/shop0.png",
 				"selectedIconPath": "static/images/shop1.png",
-				"text": "首页"
+				"text": "打卡"
 			},
 			{
 				"pagePath": "pages/task/index",
 				"iconPath": "static/images/shop0.png",
 				"selectedIconPath": "static/images/shop1.png",
-				"text": "商城"
+				"text": "任务"
 			},
 			{
-				"pagePath": "pages/notify/index",
+				"pagePath": "pages/circle/index",
 				"iconPath": "static/images/msg0.png",
 				"selectedIconPath": "static/images/msg1.png",
-				"text": "消息"
+				"text": "社区"
 			},
 			{
 				"pagePath": "pages/user/index",
