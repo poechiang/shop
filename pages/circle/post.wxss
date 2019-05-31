@@ -29,11 +29,16 @@ page{
 	width:226rpx;
 	height: 226rpx;
 	margin:2rpx;
+	border-radius:20rpx;
 }
 .attach .list button.item{
-	border:none;
-	line-height: 226rpx;
-	margin:0;
+	border:2rpx dashed;
+	width:186rpx;
+	height:186rpx;
+	line-height:186rpx;
+	margin:20rpx;
+	color:#a5a5a5;
+	background-color: #202022;
 }
 
 
@@ -78,4 +83,5 @@ button.post{
 	width:100%;
 	z-index: 100020;
 	box-shadow: 0 0 10rpx #202022;
+	background-color: #202022!important;
 }

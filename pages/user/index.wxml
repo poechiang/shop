@@ -1,4 +1,28 @@
 <!--pages/user/index.wxml-->
+<block wx:if="{{!user.id}}">
+<view class='section'>
+	<view class='flex-row'>
+		<image class='user-photo circle mr-10' src='{{user.photo}}'></image>
+		<view class='flex-item'>
+			<view class='b3'>{{user.nick}}</view>
+			<view class='tip'>{{user.xuanyan||'XXXX XX XX XXX XXXX XXXXX XXXX XXXX XXXX'}}</view>
+		</view>
+	</view>
+
+	<view class='flex-row flex-line-center fs-14 mt-20 pt-10' style='color:#98999B;line-height:2;border-top:2rpx solid #292929;'>
+		<view class='flex-item mr-10' style='border-right:2rpx solid #292929;'>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/04d6a3073d0344b59ffa0d6d4290cb91.png'></image> 当前体重 <text>125</text> KG</view>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/db43805ecda34f048059b5783e3a2378.png'></image> 已减重 <text>10.5</text> KG</view>
+		</view>
+		<view class='flex-item'>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/58d210dce0f343578db04592514de7c7.png'></image> 我的目标 <text>10.5</text> KG <text class='more3-icon mini'></text></view>
+		</view>
+	</view>
+</view>
+
+
+
+</block>
 <view wx:if="{{!user.id}}">
 	<image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
 	<view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>

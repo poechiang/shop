@@ -1,0 +1,29 @@
+/* pages/index/join.wxss */
+page{
+	color:#8D8D8D;
+}
+.box{
+	background-color:#202022;
+	border-radius: 20rpx;
+	padding:20rpx 30rpx;
+}
+.rec-btn{
+	width:96rpx;
+	height:96rpx;
+	border-radius: 50%;
+	background-color:#000000;
+	line-height: 96rpx;
+	border:none;
+	padding:0;
+}
+.clickable-box{
+	border-radius: 20rpx;
+	width:275rpx;
+	height:275rpx;
+}
+.clickable-box.demo{
+	background-color: #000000;
+}
+.clickable-box.upload{
+	background-color: #181818;
+}

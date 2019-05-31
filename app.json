@@ -1,6 +1,7 @@
 {
 	"pages": [
 		"pages/index/index",
+		"pages/index/join",
 		"pages/shop/index",
 		"pages/shop/good/list",
 		"pages/shop/good/detail",
@@ -29,7 +30,8 @@
 		"pages/user/vipcode",
 		"pages/user/welcome",
 		"pages/notify/room",
-		"pages/task/index"
+		"pages/task/index",
+		"pages/task/day"
 	],
 	"permission": {
 		"scope.userLocation": {

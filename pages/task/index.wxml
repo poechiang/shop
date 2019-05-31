@@ -63,9 +63,12 @@
 <view class='today mh-15 mt-20'>
 <view class='sec-head mb-10'>今日任务</view>
 
-<navigator class='nav-button undo more'>看初心视频 <text class='tip-undo'>未完成</text></navigator>
-<navigator class='nav-button undo more'>看健身教程 <text class='tip-undo'>未完成</text></navigator>
-<view class='nav-button done'>体重打卡 <text class='tip-done'>完成</text></view>
+<navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{dayTask.video}}">看初心视频 <text class='tip-undo'>未完成</text></navigator>
+<view class='nav-button done' wx:else>看初心视频 <text class='tip-done'>完成</text></view>
+<navigator class='nav-button undo more' url='/pages/task/day?t=manual' wx:if="{{dayTask.manual}}">看健身教程 <text class='tip-undo'>未完成</text></navigator>
+<view class='nav-button done' wx:else>看健身教程 <text class='tip-done'>完成</text></view>
+<navigator class='nav-button undo more' url='/pages/task/day?t=weight' wx:if="{{dayTask.weight}}">体重打卡 <text class='tip-undo'>未完成</text></navigator>
+<view class='nav-button done' wx:else>体重打卡 <text class='tip-done'>完成</text></view>
 
 </view>
 </block>
@@ -75,9 +78,9 @@
 </view>
 
 
-<view class='get-hzh'>
+<view class='pop-layer mask' wx:if="{{getHzh}}">
 	<view class='inner'>
-	<view class='box'>
+	<view class='box pt-60 pb-50' style='font-size:1.3em;line-height:2;'>
 		<image mode='widthFix' src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:300rpx'></image>
 		<view class='hor-center'>恭喜您率先完成任务</view>
 		<view class='hor-center'>获得{{hzName||'XXX'}}徽章</view>
@@ -85,6 +88,45 @@
 	</view>
 	</view>
 </view>
+
+
+
+<view class='pop-layer' wx:if="{{jd1}}">
+	<view class='inner'>
+	<view class='box  pt-120 pb-70' style='color:#717171;line-height:1.5;'>
+		<image class='back' mode='widthFix' src='{{jdbacks[0]}}' style='width:100%;height:100%;'></image>
+		<view class='hor-center'>恭喜您进入第一阶段</view>
+		<view class='hor-center'>时间为期 <text style="color:#E35A61;">2</text> 天 明天正式开始</view>
+		<view class='hor-center mt-10'>此期间不需要控制饮食</view>
+		<view class='hor-center'>只需要您每天在打卡页面</view>
+		<view class='hor-center'>上传自己三餐的照片</view>
+		<view class='hor-center'>以帮助我们分析你的饮食习惯</view>
+		
+		<view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>时间不多了</view>
+		<view class='hor-center fs-22' style='color:#B2B2B2;'>想吃点啥就吃点啥！</view>
+		<button class='ikown mt-40 mh-30'>知道了</button>
+	</view>
+	</view>
+</view>
+
+
+
+<view class='pop-layer' wx:if="{{jd2}}">
+	<view class='inner'>
+	<view class='box  pt-140 pb-70' style='color:#717171;line-height:1.5;'>
+		<image class='back' mode='widthFix' src='{{jdbacks[1]}}' style='width:100%;height:100%;'></image>
+		<view class='hor-center'>恭喜您进入第二阶段</view>
+		<view class='hor-center'>时间为期 <text style="color:#E35A61;">30</text> 天 明天正式开始</view>
+		<view class='hor-center mt-10'>此期间请按照打卡页面</view>
+		<view class='hor-center'>推荐的食谱进行饮食</view>
+		<view class='hor-center'>并在打卡页面完成当日任务</view>
+		
+		<view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>好日子到头了！</view>
+		<button class='ikown mt-40 mh-30'>知道了</button>
+	</view>
+	</view>
+</view>
+
 
 
 

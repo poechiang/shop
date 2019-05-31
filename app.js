@@ -53,19 +53,8 @@ App({
 			}
 		}
 		// 隐藏导航栏
-		// wx.hideTabBar({
-		// 	aniamtion: true,
-		// })
 		wx.hideTabBar({
 			aniamtion: true,
-			success: function (res) {
-				console.log('tab bar loaded success')
-			},
-			fail: function (res) {
-
-				console.log('tab bar loaded failed')
-			},
-			complete: function (res) { },
 		})
 	},
 	getSystemInfo(options){
@@ -75,7 +64,7 @@ App({
 				success:options,
 			}
 		}
-		if(this.systemInfo){
+		if(options.refresh!==true && this.systemInfo){
 			options.success && options.success(this.systemInfo)
 			return 
 		}

@@ -1,28 +1,23 @@
-// pages/task/index.js
+// pages/task/day.js
+const app = getApp()
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		tabs:["任务","知识库"],
-		currTabIndex:0,
-		getHzh:false,// 是否得到了徽章
-		jdbacks:[
-			'https://res.shibu365.com/i/2019-05-31/28df56cebda44bf8943704a5fc3d3e53.png',
-			'https://res.shibu365.com/i/2019-05-31/963692d120464f5e9e8269a26e9bf851.png',
-			'https://res.shibu365.com/i/2019-05-31/4de03da28f7d419fa69e116c5792d729.png',
-			'https://res.shibu365.com/i/2019-05-31/6c6291bbc0f7414392c7249dd53bbc4d.png',
-		],
-		jd1:false,
-		jd2:true
+		type:'',
+		completed: false,
+		getLm: false,// 是否得到了徽章
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		this.setData({
+			type:options.t||'weight'
+		})
 	},
 
 	/**
@@ -36,10 +31,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		// 隐藏导航栏
-		wx.hideTabBar({
-			aniamtion: true,
-		})
+
 	},
 
 	/**
@@ -76,10 +68,12 @@ Page({
 	onShareAppMessage: function () {
 
 	},
-
-	handleTabChange(e) {
+	handleVideoEnd(){
 		this.setData({
-			currTabIndex: e.detail.index,
+			completed:true
 		})
 	},
+	handleComplete(){
+		app.ui.modal('恭喜任务完成！')
+	}
 })

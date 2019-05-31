@@ -59,6 +59,16 @@ Component({
 		addGlobalClass: true,
 		multipleSlots: true
 	},
+	ready(){
+		if(this.data.height<=0){
+			app.getSystemInfo({ refresh: true,success:res=>{
+				this.setData({
+					height:res.tabBarHeight
+				})
+			} })
+		}
+		
+	},
     /**
      * 组件的方法列表
      */

@@ -205,8 +205,9 @@ page {
 
 
 .section {
-    margin: 10rpx 0;
-    padding: 10rpx 30rpx;
+    margin: 20rpx 30rpx;
+    padding: 30rpx;
+	background-color: #202022;
 }
 .section .sec-title {
 	font-size:1.33em;
@@ -256,6 +257,10 @@ page {
 .tip-error {
 	color: #F96868;
 }
+.tip-theme{
+	color:#5ACBCF;
+}
+
 
 .m-list .ml-title {
     margin: 54rpx 0 14rpx;
@@ -432,6 +437,14 @@ button.normal{
 }
 
 
+button{
+	background-color:#202022;
+	color:#9f9f9f;
+}
+.button-hover {
+	color:rgba(255, 255, 255, 0.6);
+	background-color:#202022;
+}
 button[type='error']{
 	background-color:#E64340;
 	color:#fff;
@@ -499,30 +512,36 @@ button[type='secondary'][plain]{
 
 
 button[type='theme']{
-	background-color:#F1A23B;
+	background-color:#5ACBCF;
 	color:#FFFFFF;
 }
 .button-hover[type="theme"] {
 	color:rgba(255, 255, 255, 0.8);
-	background-color:#FFC107;
-}
-
-.button-hover[type="theme"] {
-	color:rgba(255, 255, 255, 0.8);
-	background-color:#FFC107;
+	background-color:#5ACBCF;
 }
 
 button[type='theme'][plain]{
 	background-color: transparent;
-	color:#FFC107;
-	border-color:#FFC107;
+	color:#5ACBCF;
+	border-color:#5ACBCF;
 }
 .button-hover[type="theme"][plain] {
 	opacity: 0.6;
 }
 
+
+button[plain]{
+	background-color: transparent;
+	color:#202022;
+	border-color:#202022;
+}
+.button-hover[plain] {
+	opacity: 0.6;
+}
+
 button[disabled] {
-	color:rgba(0, 0, 0, 0.2)!important;
+	background-color:#414141!important;
+	color:#888888!important;
 
 }
 

@@ -1,28 +1,26 @@
-// pages/task/index.js
+// pages/index/join.js
+const app = getApp()
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		tabs:["任务","知识库"],
-		currTabIndex:0,
-		getHzh:false,// 是否得到了徽章
-		jdbacks:[
-			'https://res.shibu365.com/i/2019-05-31/28df56cebda44bf8943704a5fc3d3e53.png',
-			'https://res.shibu365.com/i/2019-05-31/963692d120464f5e9e8269a26e9bf851.png',
-			'https://res.shibu365.com/i/2019-05-31/4de03da28f7d419fa69e116c5792d729.png',
-			'https://res.shibu365.com/i/2019-05-31/6c6291bbc0f7414392c7249dd53bbc4d.png',
-		],
-		jd1:false,
-		jd2:true
+		step:1
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		var cache = wx.getStorage({
+			key: 'ifjoin',
+			success: res=> {
+				this.setData({
+					step:res.step
+				})
+			},
+		})
 	},
 
 	/**
@@ -36,10 +34,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		// 隐藏导航栏
-		wx.hideTabBar({
-			aniamtion: true,
-		})
+
 	},
 
 	/**
@@ -69,17 +64,20 @@ Page({
 	onReachBottom: function () {
 
 	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-
-	},
-
-	handleTabChange(e) {
+	handleNext() {
 		this.setData({
-			currTabIndex: e.detail.index,
+			step: this.data.step + 1
 		})
 	},
+	handleJoin() {
+		//app.ui.modal("后续功能等完善")
+
+				wx.switchTab({
+					url: '/pages/index/index',
+					success: function (res) { },
+					fail: function (res) { },
+					complete: function (res) { },
+				})
+		
+	}
 })
