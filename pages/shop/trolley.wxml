@@ -1,42 +1,51 @@
 <!--pages/shop/trolley.wxml-->
-<block wx:if='{{goods}}'> 
-	<view class='tro-list mt-20' wx:if='{{goods.length>0}}'>
-		<view class='tro-item' wx:for='{{goods}}' wx:key="id">
-			<view class='pnl flex-row flex-line-center' bindlongpress='showActionSheet' data-index="{{index}}">
-				<text class='sel {{item.selected?"icon-select2 small":""}}' bindtap='handleSelect'  data-index="{{index}}"></text>
-				<image class='img' src='{{item.heads[0]}}' mode='asceptFill'></image>
-				<view class='of-hidden flex-item'>
-					<view class='title ellipsis mb-5'>{{item.group_title|| item.title}}</view>
-					<view class='norms tip'>{{item.norms}}</view>
-					<view class='notice fs-12 mv-5'><text class='tip'>{{item.tags}}</text></view>
-					<view class='flex-row'>
-						<text class='price2'>{{item.retail_price}}</text>
-						<view class='flex-item hor-right mt-5'>
-							<button class='btn sub ' plain size='mini' bindtap='handleCountSub' data-index="{{index}}">-</button>
-							<input class='counter hor-center' value='{{item.count}}' type='number' bindinput='handleCountChange' data-index="{{index}}"></input>
-							<button class='btn add ' plain size='mini'  bindtap='handleCountAdd' data-index="{{index}}">+</button>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-	</view>
-	<block wx:else>
-		<view class='tip mv-20 hor-center'>当前购物车为空</view>
-		<button type='primary' bindtap='goShopGood' style='width:400rpx;'>随便看看</button>
-	</block>
-	<!-- 状态栏 开始 -->
-	<view class='status pos-fixed flex-row flex-line-center' style='height:{{statusHeight}}px;line-height:{{statusHeight}}px;bottom:{{statusBottom}}px'>
-		<button plain bindtap='handleSelectAll'><text class='sel {{total.count>0 && total.count == goods.length?"icon-select2 small":""}} mr-5' style='vertical-align:{{total.count>0 && total.count == goods.length?3:-3}}px;'></text> 全选</button>
-		<view class='flex-item hor-right pr-10' style='line-height:1.3;color:#fff;'>
-			<block  wx:if="{{total && (total.price>0||total.freight>0)}}">
-				<view>总计： ￥<text class='price3'>{{total.price}}</text></view>
-				<view wx:if="{{total.freight>0}}">运费：￥<text class='price3'>{{total.freight}}</text></view>
-				<view wx:else>免运费</view>
-			</block>
-		</view>
-		<button class='rect ph-20' type='theme' bindtap='handlePay' disabled='{{total.count<=0}}'>结算</button>
-	</view>
-	<!-- 状态栏 结束 -->
+<block wx:if='{{goods}}'>
+    <view class='tro-list mt-20' wx:if='{{goods.length>0}}'>
+        <view class='tro-item section' wx:for='{{goods}}' wx:key="id">
+            <view class='pnl ' bindlongpress='showActionSheet' data-index="{{index}}">
+                <text class='sel {{item.selected?"icon-select3 small":""}}' bindtap='handleSelect' data-index="{{index}}"></text>
+                <view class='flex-row flex-line-center'>
+                    <image class='img' src='{{item.heads[0]}}' mode='asceptFill'></image>
+                    <view class='of-hidden flex-item'>
+                        <view class='title mb-5'>{{item.group_title|| item.title}}</view>
+                        <!-- <view class='norms tip'>{{item.norms}}</view>
+                        <view class='notice fs-12 mv-5'>
+                            <text class='tip'>{{item.tags}}</text>
+                        </view> -->
+                    </view>
+                </view>
+                <view class='flex-row flex-line-center'>
+                    <text class='price'>{{item.retail_price}}</text>
+                    <view class='flex-item hor-right'>
+                        <button class='btn sub ' plain size='mini' bindtap='handleCountSub' data-index="{{index}}">-</button>
+                        <input class='counter hor-center' value='{{item.count}}' type='number' bindinput='handleCountChange' data-index="{{index}}"></input>
+                        <button class='btn add ' plain size='mini' bindtap='handleCountAdd' data-index="{{index}}">+</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:else>
+        <view class='tip mv-20 hor-center'>当前购物车为空</view>
+        <button type='primary' bindtap='goShopGood' style='width:400rpx;'>随便看看</button>
+    </block>
+    <!-- 状态栏 开始 -->
+    <view class='status pos-fixed flex-row flex-line-center' style='height:{{statusHeight}}px;line-height:{{statusHeight}}px;bottom:{{statusBottom}}px'>
+        <button plain bindtap='handleSelectAll' class='pl-40' style='color:#ffffff;'><text class='sel {{total.count>0 && total.count == goods.length?"icon-select3 small":""}} mr-5' style='vertical-align:{{total.count>0 && total.count == goods.length?3:-3}}px;'></text> 全选</button>
+        <view class='flex-item ph-10'>
+			<block wx:if="{{total && total.price>0}}">合计:<text class='price'>{{total.price}}</text></block>
+            <!-- <block wx:if="{{total && (total.price>0||total.freight>0)}}">
+                <view>总计： ￥
+                    <text class='price3'>{{total.price}}</text>
+                </view>
+                <view wx:if="{{total.freight>0}}">运费：￥
+                    <text class='price3'>{{total.freight}}</text>
+                </view>
+                <view wx:else>免运费</view>
+            </block> -->
+        </view>
+        <button class='rect ph-20 pay' bindtap='handlePay' disabled='{{total.count<=0}}'>结算</button>
+    </view>
+    <!-- 状态栏 结束 -->
 </block>
 <view class='delay-loading mv-20' wx:else>正在加载……</view>

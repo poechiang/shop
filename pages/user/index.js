@@ -11,7 +11,8 @@ Page({
 			nick:''
 		},
 		userInfo:{},
-		logining:false
+		logining: false, 
+		navBarVisible:true,
 	},
 
 	/**

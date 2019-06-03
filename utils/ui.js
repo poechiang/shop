@@ -151,7 +151,7 @@ module.exports = {
 		}
 		wx.showActionSheet({
 			itemList: items,
-			itemColor: color ||'#F1A23B',
+			itemColor: color ||'#eb6864',
 			success: function(res) {
 				var key = items[res.tapIndex]
 				callbacks && callbacks[key] && callbacks[key](res.tapIndex,key) 

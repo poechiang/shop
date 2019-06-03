@@ -45,8 +45,8 @@
 				{
 					"id": 0,
 					"name": "带参数",
-					"pathName": "pages/task/day",
-					"query": "t=video",
+					"pathName": "pages/user/order/list",
+					"query": "",
 					"scene": null
 				},
 				{

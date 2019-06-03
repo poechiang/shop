@@ -13,7 +13,7 @@ Page({
 			price:0,
 			count:0,
 		},
-		statusHeight: app.systemInfo.tabBarHeight,
+		statusHeight: app.systemInfo.tabBarHeight||48,
 		statusBottom: 0,
 	},
 
@@ -129,7 +129,8 @@ Page({
 								})
 							},
 						})
-					}
+					},
+					cancel: true
 				})
 			},
 			'移除': (index, item) => {
@@ -151,7 +152,8 @@ Page({
 								})
 							}
 						})
-					}
+					},
+				cancel: true
 				})
 			}
 		})
@@ -193,7 +195,8 @@ Page({
 							})
 						}
 					})
-				}
+				},
+				cancel:true
 			})
 		}
 		else{

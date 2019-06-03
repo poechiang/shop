@@ -40,7 +40,7 @@
 
 <view class='hzh mh-15 mt-20'>
     <view class='sec-head'>我的徽章</view>
-    <view class='flex-row flex-main-around mh-5 mt-15'>
+    <view class='hzh-bar flex-row flex-main-around mh-5 mt-15'>
         <view class='hz-block'>
             <image class='hz' src='https://res.shibu365.com/i/2019-05-30/14e79dfc94f5407c97ab05612e1201c3.png'></image>
         </view>

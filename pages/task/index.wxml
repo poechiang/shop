@@ -1,130 +1,152 @@
 <!--pages/task/index.wxml-->
 <view class='task-tab'>
-	<tabs items="{{tabs}}" current-index="{{currTabIndex}}" align="stretch" width="380rpx" height="36" space="0" shadow="{{false}}" bindchange="handleTabChange"></tabs>
+    <tabs items="{{tabs}}" current-index="{{currTabIndex}}" align="stretch" width="380rpx" height="36" space="0" shadow="{{false}}" bindchange="handleTabChange"></tabs>
 </view>
 <block wx:if="{{currTabIndex==0}}">
-<view class='bar mh-15'>
-	<button class='nav prev icon-arrow-left f-left' plain size='mini'></button>
-	<text>2019年05月</text><text class='bdr-v'>|</text> <text class='jd'>第二阶段</text> <image class='logo ml-5' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image> <text class='days'>已坚持 <text class='val'>20</text> 天 </text>
-	<button class='nav next icon-arrow-right f-right' style='line-height:80rpx;' plain size='mini'></button>	
-</view>
-<view class='candy mh-15'>
-	<view class='head flex-row flex-main-around'>
-		<text class='flex-item'>SUN</text>
-		<text class='flex-item'>MON</text>
-		<text class='flex-item'>TUE</text>
-		<text class='flex-item'>WEN</text>
-		<text class='flex-item'>THU</text>
-		<text class='flex-item'>FRI</text>
-		<text class='flex-item'>SAT</text>
-	</view>
-	<view class='days flex-row flex-main-around flex-wrap'>
-		<text class='d'></text>
-		<text class='d'></text>
-		<text class='d done'>1</text>
-		<text class='d done'>2</text>
-		<text class='d done'>3</text>
-		<text class='d done'>4</text>
-		<text class='d done'>5</text>
-		<text class='d undo'>6</text>
-		<text class='d undo'>7</text>
-		<text class='d'>8</text>
-		<text class='d'>9</text>
-		<text class='d'>10</text>
-		<text class='d'>11</text>
-		<text class='d'>12</text>
-		<text class='d'>13</text>
-		<text class='d'>14</text>
-		<text class='d'>15</text>
-		<text class='d'>16</text>
-		<text class='d'>17</text>
-		<text class='d'>18</text>
-		<text class='d'>19</text>
-		<text class='d'>20</text>
-		<text class='d'>21</text>
-		<text class='d'>22</text>
-		<text class='d'>23</text>
-		<text class='d'>24</text>
-		<text class='d'>25</text>
-		<text class='d'>26</text>
-		<text class='d'>27</text>
-		<text class='d'>28</text>
-		<text class='d'>29</text>
-		<text class='d'>30</text>
-		<text class='d'>31</text>
-		<text class='d e'></text>
-		<text class='d e'></text>
-	</view>
-	<view class='tip-desc'>
-		<text class='done'>完成</text> 
-		<text class='undo'>未完成任务（点击灰色日期可进行补卡）</text>
-	</view>
-</view>
-<view class='today mh-15 mt-20'>
-<view class='sec-head mb-10'>今日任务</view>
+    <view class='bar mh-15'>
+        <button class='nav prev icon-arrow-left f-left' plain size='mini'></button>
+        <text>2019年05月</text>
+        <text class='bdr-v'>|</text>
+        <text class='jd'>第二阶段</text>
+        <image class='logo ml-5' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image>
+        <text class='days'>已坚持 <text class='val'>20</text> 天 </text>
+        <button class='nav next icon-arrow-right f-right' style='line-height:80rpx;' plain size='mini'></button>
+    </view>
+    <view class='candy mh-15'>
+        <view class='head flex-row flex-main-around'>
+            <text class='flex-item'>SUN</text>
+            <text class='flex-item'>MON</text>
+            <text class='flex-item'>TUE</text>
+            <text class='flex-item'>WEN</text>
+            <text class='flex-item'>THU</text>
+            <text class='flex-item'>FRI</text>
+            <text class='flex-item'>SAT</text>
+        </view>
+        <view class='days flex-row flex-main-around flex-wrap'>
+            <text class='d'></text>
+            <text class='d'></text>
+            <text class='d done'>1</text>
+            <text class='d done'>2</text>
+            <text class='d done'>3</text>
+            <text class='d done'>4</text>
+            <text class='d done'>5</text>
+            <text class='d undo'>6</text>
+            <text class='d undo'>7</text>
+            <text class='d'>8</text>
+            <text class='d'>9</text>
+            <text class='d'>10</text>
+            <text class='d'>11</text>
+            <text class='d'>12</text>
+            <text class='d'>13</text>
+            <text class='d'>14</text>
+            <text class='d'>15</text>
+            <text class='d'>16</text>
+            <text class='d'>17</text>
+            <text class='d'>18</text>
+            <text class='d'>19</text>
+            <text class='d'>20</text>
+            <text class='d'>21</text>
+            <text class='d'>22</text>
+            <text class='d'>23</text>
+            <text class='d'>24</text>
+            <text class='d'>25</text>
+            <text class='d'>26</text>
+            <text class='d'>27</text>
+            <text class='d'>28</text>
+            <text class='d'>29</text>
+            <text class='d'>30</text>
+            <text class='d'>31</text>
+            <text class='d e'></text>
+            <text class='d e'></text>
+        </view>
+        <view class='tip-desc'>
+            <text class='done'>完成</text>
+            <text class='undo'>未完成任务（点击灰色日期可进行补卡）</text>
+        </view>
+    </view>
+    <view class='today mh-15 mt-20'>
+        <view class='sec-head mb-10'>今日任务</view>
 
-<navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{dayTask.video}}">看初心视频 <text class='tip-undo'>未完成</text></navigator>
-<view class='nav-button done' wx:else>看初心视频 <text class='tip-done'>完成</text></view>
-<navigator class='nav-button undo more' url='/pages/task/day?t=manual' wx:if="{{dayTask.manual}}">看健身教程 <text class='tip-undo'>未完成</text></navigator>
-<view class='nav-button done' wx:else>看健身教程 <text class='tip-done'>完成</text></view>
-<navigator class='nav-button undo more' url='/pages/task/day?t=weight' wx:if="{{dayTask.weight}}">体重打卡 <text class='tip-undo'>未完成</text></navigator>
-<view class='nav-button done' wx:else>体重打卡 <text class='tip-done'>完成</text></view>
+        <navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{dayTask.video}}">看初心视频
+            <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>看初心视频
+            <text class='tip-done'>完成</text>
+        </view>
+        <navigator class='nav-button undo more' url='/pages/task/day?t=manual' wx:if="{{dayTask.manual}}">看健身教程
+            <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>看健身教程
+            <text class='tip-done'>完成</text>
+        </view>
+        <navigator class='nav-button undo more' url='/pages/task/day?t=weight' wx:if="{{dayTask.weight}}">体重打卡
+            <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>体重打卡
+            <text class='tip-done'>完成</text>
+        </view>
 
-</view>
+    </view>
 </block>
 <view class='lib mh-15' wx:if="{{currTabIndex==1}}">
-	<navigator class='nav-button unlock mb-10 more'>健康食谱 <text class='tip-unlock'>观看有奖励~</text></navigator>
-	<view class='nav-button locked'>体重打卡 <text class='tip-locked'>第二阶段解锁</text></view>
+    <navigator class='nav-button unlock mb-10 more'>健康食谱
+        <text class='tip-unlock'>观看有奖励~</text>
+    </navigator>
+    <view class='nav-button locked'>体重打卡
+        <text class='tip-locked'>第二阶段解锁</text>
+    </view>
 </view>
 
 
 <view class='pop-layer mask' wx:if="{{getHzh}}">
-	<view class='inner'>
-	<view class='box pt-60 pb-50' style='font-size:1.3em;line-height:2;'>
-		<image mode='widthFix' src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:300rpx'></image>
-		<view class='hor-center'>恭喜您率先完成任务</view>
-		<view class='hor-center'>获得{{hzName||'XXX'}}徽章</view>
-		<image mode='widthFix' src='{{hzSrc||"https://res.shibu365.com/i/2019-05-30/14e79dfc94f5407c97ab05612e1201c3.png"}}' style='width:400rpx'></image>
-	</view>
-	</view>
+    <view class='inner'>
+        <view class='box pt-60 pb-50' style='font-size:1.3em;line-height:2;'>
+            <image mode='widthFix' src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:300rpx'></image>
+            <view class='hor-center'>恭喜您率先完成任务</view>
+            <view class='hor-center'>获得{{hzName||'XXX'}}徽章</view>
+            <image mode='widthFix' src='{{hzSrc||"https://res.shibu365.com/i/2019-05-30/14e79dfc94f5407c97ab05612e1201c3.png"}}' style='width:400rpx'></image>
+        </view>
+    </view>
 </view>
 
 
 
 <view class='pop-layer' wx:if="{{jd1}}">
-	<view class='inner'>
-	<view class='box  pt-120 pb-70' style='color:#717171;line-height:1.5;'>
-		<image class='back' mode='widthFix' src='{{jdbacks[0]}}' style='width:100%;height:100%;'></image>
-		<view class='hor-center'>恭喜您进入第一阶段</view>
-		<view class='hor-center'>时间为期 <text style="color:#E35A61;">2</text> 天 明天正式开始</view>
-		<view class='hor-center mt-10'>此期间不需要控制饮食</view>
-		<view class='hor-center'>只需要您每天在打卡页面</view>
-		<view class='hor-center'>上传自己三餐的照片</view>
-		<view class='hor-center'>以帮助我们分析你的饮食习惯</view>
-		
-		<view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>时间不多了</view>
-		<view class='hor-center fs-22' style='color:#B2B2B2;'>想吃点啥就吃点啥！</view>
-		<button class='ikown mt-40 mh-30'>知道了</button>
-	</view>
-	</view>
+    <view class='inner'>
+        <view class='box  pt-120 pb-70' style='color:#717171;line-height:1.5;'>
+            <image class='back' mode='widthFix' src='{{jdbacks[0]}}' style='width:100%;height:100%;'></image>
+            <view class='hor-center'>恭喜您进入第一阶段</view>
+            <view class='hor-center'>时间为期
+                <text style="color:#E35A61;">2</text> 天 明天正式开始</view>
+            <view class='hor-center mt-10'>此期间不需要控制饮食</view>
+            <view class='hor-center'>只需要您每天在打卡页面</view>
+            <view class='hor-center'>上传自己三餐的照片</view>
+            <view class='hor-center'>以帮助我们分析你的饮食习惯</view>
+
+            <view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>时间不多了</view>
+            <view class='hor-center fs-22' style='color:#B2B2B2;'>想吃点啥就吃点啥！</view>
+            <button class='ikown mt-40 mh-30'>知道了</button>
+        </view>
+    </view>
 </view>
 
 
 
 <view class='pop-layer' wx:if="{{jd2}}">
-	<view class='inner'>
-	<view class='box  pt-140 pb-70' style='color:#717171;line-height:1.5;'>
-		<image class='back' mode='widthFix' src='{{jdbacks[1]}}' style='width:100%;height:100%;'></image>
-		<view class='hor-center'>恭喜您进入第二阶段</view>
-		<view class='hor-center'>时间为期 <text style="color:#E35A61;">30</text> 天 明天正式开始</view>
-		<view class='hor-center mt-10'>此期间请按照打卡页面</view>
-		<view class='hor-center'>推荐的食谱进行饮食</view>
-		<view class='hor-center'>并在打卡页面完成当日任务</view>
-		
-		<view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>好日子到头了！</view>
-		<button class='ikown mt-40 mh-30'>知道了</button>
-	</view>
-	</view>
+    <view class='inner'>
+        <view class='box  pt-140 pb-70' style='color:#717171;line-height:1.5;'>
+            <image class='back' mode='widthFix' src='{{jdbacks[1]}}' style='width:100%;height:100%;'></image>
+            <view class='hor-center'>恭喜您进入第二阶段</view>
+            <view class='hor-center'>时间为期
+                <text style="color:#E35A61;">30</text> 天 明天正式开始</view>
+            <view class='hor-center mt-10'>此期间请按照打卡页面</view>
+            <view class='hor-center'>推荐的食谱进行饮食</view>
+            <view class='hor-center'>并在打卡页面完成当日任务</view>
+
+            <view class='hor-center fs-22 mt-20' style='color:#B2B2B2;'>好日子到头了！</view>
+            <button class='ikown mt-40 mh-30'>知道了</button>
+        </view>
+    </view>
 </view>
 
 

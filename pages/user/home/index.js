@@ -6,39 +6,62 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		ready:false,
-		tabs: ['乡圈', '动态', '收藏'],
-		tabIndex:0,
+		ready: false,
+		defUserPhoto: app.data.defUserPhoto,
 		user:null,
+		essays:null
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		options = options||{}
+
+		if (!options.id) {
+			app.ui.modal('无效的用户标识', {
+				cancel: false
+			})
+			return
+		}
+
+		app.http.request({
+			url: 'user/get_home_data',
+			param: { user_id: options.id },
+			done: (rlt) => {
+				this.setData({
+					user: rlt.data,
+				})
+			}
+		})
+		options.page = 1
 		this.loadData(options)
 	},
 
 	loadData:function(options){
 
-		options = options || {}
-		if(!options.id){
-			app.ui.modal('无效的用户标识',{
-				cancel:false
-			})
-		}
+		var options = this.options
+
 		app.http.request({
-			url:'user/get_home_data',
-			param:{uid:options.id},
-			done:(rlt)=>{
+			url: 'essay/my_essays',
+			param: {
+				page: options.page || 1
+			},
+			done: rlt => {
+				var page = rlt.page
+				var list = rlt.data
+				page.ended = page.curr == page.last
+				page.empty = page.total == 0
+				var old = this.data.articles || []
 				this.setData({
-					ready:true,
-					user:rlt.data,
+					essays: page.curr == 1 ? list : old.concat(list),
+					page: page
 				})
+
+				options.complete && options.complete(rlt)
 			}
 		})
 	},
+
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

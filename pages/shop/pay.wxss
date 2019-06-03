@@ -2,36 +2,16 @@
 page{
 	padding-bottom: 80px;
 }
-.m-list .ml-item{
-	font-size: 28rpx;
-}
-input.ml-value{
-	height:72rpx;
-}
-.m-list .ml-item .ml-label{
-	width:25%;
-}
-.m-list .ml-item button{
-	padding:0;
-	border:none;
-}
-.m-list .ml-item button .icon{
-	font-size:1em;
-	color:#fff000;
-}
+.get-addr{
+	height:180rpx;
 
+}
 .good-item{
 	position: relative;
-	margin-top: 2rpx;
-}
-.good-item .pnl{
-	background-color:#fff;
-	padding:10px 15px;
-	overflow: hidden;
 }
 .good-item .pnl .img{
-	width:100px;
-	height: 100px;
+	width:60px;
+	height: 60px;
 	display: block;
 	margin-right: 5px;
 	border-radius: 10px;
@@ -125,7 +105,12 @@ input.ml-value{
 	float:right;
 	line-height: 1;
 }
-
+.pay{
+	position: fixed;
+	bottom:20rpx;
+	left:30rpx;
+	width:calc(100% - 60rpx);
+}
 
 
 

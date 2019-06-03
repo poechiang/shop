@@ -12,7 +12,7 @@ Page({
 		addr:'',
 		goods:[],
 		total:{},
-		statusHeight: app.systemInfo.tabBarHeight,
+		statusHeight: app.systemInfo.tabBarHeight||48,
 		statusBottom: 0,
 	},
 
@@ -306,10 +306,11 @@ Page({
 	},
 	statistics(cb) {
 		var goods = this.data.goods,
-			info = { price: 0, count: 0, freight: 0 }
+			info = { price: 0, count: 0, freight: 0,total:0 }
 		for (var i = 0; i < goods.length; i++) {
 			info.price += goods[i].retail_price * goods[i].count
 			info.count += 1
+			info.total += goods[i].count
 
 			info.freight += goods[i].freight * goods[i].count / (goods[i].freight_count || 1)
 		}

@@ -1,5 +1,12 @@
 <!--pages/user/index.wxml-->
-<block wx:if="{{!user.id}}">
+
+
+<view wx:if="{{!user.id}}">
+	<image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
+	<view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>
+	<button class='mh-15 mv-30' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo" disabled='{{logining}}'>点击登录</button>
+</view>
+<block wx:else>
 <view class='section'>
 	<view class='flex-row'>
 		<image class='user-photo circle mr-10' src='{{user.photo}}'></image>
@@ -9,124 +16,39 @@
 		</view>
 	</view>
 
-	<view class='flex-row flex-line-center fs-14 mt-20 pt-10' style='color:#98999B;line-height:2;border-top:2rpx solid #292929;'>
-		<view class='flex-item mr-10' style='border-right:2rpx solid #292929;'>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/04d6a3073d0344b59ffa0d6d4290cb91.png'></image> 当前体重 <text>125</text> KG</view>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/db43805ecda34f048059b5783e3a2378.png'></image> 已减重 <text>10.5</text> KG</view>
+	<view class='total-info fs-14 mt-20 pt-10'>
+		<view class='left'>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/04d6a3073d0344b59ffa0d6d4290cb91.png'></image> 当前体重 <text class='tip-theme2'>125</text> KG</view>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/db43805ecda34f048059b5783e3a2378.png'></image> 已减重 <text class='tip-theme1'>10.5</text> KG</view>
 		</view>
-		<view class='flex-item'>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/58d210dce0f343578db04592514de7c7.png'></image> 我的目标 <text>10.5</text> KG <text class='more3-icon mini'></text></view>
+		<view class='right'>
+			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/58d210dce0f343578db04592514de7c7.png'></image> 我的目标 <text class='tip-theme2'>10.5</text> KG <text class='f-right more3-icon mini'></text></view>
 		</view>
 	</view>
 </view>
 
-
-
-</block>
-<view wx:if="{{!user.id}}">
-	<image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
-	<view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>
-	<button class='mh-15 mv-30' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo" disabled='{{logining}}'>点击登录</button>
+<view class='section flex-row fs-14'>
+	<view class='mh-5'>
+		<text style='color:#FF9472'>IFPLAN</text> 第二阶段 <text style='color:#a2a2a4'><text class='icon-arrow-right small' style='vertical-align:-.1em;'></text> 第 <text class='tip-theme2'>6</text> 天 </text>
+	</view>
+	<progress class='mh-5 flex-item' activeColor='#FF9472' percent='30' backgroundColor='#000000' border-radius="4" ></progress>
 </view>
-<block wx:else>
-	<view class='section header of-hidden mt-0 pt-15 pb-30'>
-		<view class='f-left photo mh-10'>
-			<image class='user-photo circle ' src='{{user.photo}}'></image>
-		</view>
-		<navigator class='qrcode icon-scode large f-right mt-10 mr-10' url='/pages/user/vipcode'></navigator>
-		<view class='of-hidden'>
-			<view class='u-nick b3'>{{user.nick||user.name}}</view>
-			<view class='u-sign fs-12'>{{user.sign||'这货有点儿懒...'}}</view>
-			<view style='lh-15'><text class='u-level lv0 fs-12'><text class='fs-italic'>LV</text> {{user.level||'0'}}</text></view>
-		</view>
 
-		<view class='flex-row stat-pnl hor-center'>
-			<navigator class='flex-item art'>
-				{{userInfo.artTotal||0}}
-			</navigator>
-			<navigator class='flex-item att'>
-				{{userInfo.attTotal||0}}
-			</navigator>
-			<navigator class='flex-item fans'>
-				{{userInfo.fanTotal||0}}
-			</navigator>
-		</view>
-	</view>
-	<view class='pos-relative mb-30'>
-	<view class='section super p-0 of-hidden' style='line-height:40px;border-radius:10px;'>
-		<view class='ph-15' hover-class='clickable-hover' bindtap='handleTip1'>
-		<image class='rk ver-4'  src='https://res.shibu365.com/i/2019-04-03/b7271ae8ff1a40e2a9f6b161442c651d.png' mode='aspectFit' style='width:40px;height:20px'></image>
-		开通会员即领50元叠加券
-		<text class='f-right fs-12 tgray .more3-icon mini'>立即开通 </text>
-		</view>
-	</view>
-	</view>
-	
-	<!-- 我的订单 -->
-	<view class='section order'>
-		<view class='sec-head'>我的订单 <navigator class='link fs-14 more3-icon mini f-right mt-2' url='/pages/user/order/list'>全部订单</navigator></view>
-		<view class='sec-body flex-row pv-10'>
-			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=1'>
-				<text class='icon-unpay large '></text>
-				<text class='fs-12 tgray'>待支付</text> 
-			</navigator>
-			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=2'>
-				<text class='icon-unreceive large '></text>
-				<text class='fs-12 tgray'>待签收</text> 
-			</navigator>
-			<navigator class='flex-item hor-center' url='/pages/user/order/list?t=2'>
-				<text class='icon-unreply large '></text>
-				<text class='fs-12 tgray'>待评价</text> 
-			</navigator>
-			<navigator class='flex-item hor-center' url='/pages/user/order/list2?t=0'>
-				<text class='icon-exchange large '></text>
-				<text class='fs-12 tgray'>退换 / 售后</text> 
-			</navigator>
-			<navigator class='flex-item hor-center' url='/pages/user/order/buylist'>
-				<text class='icon-buylist large '></text>
-				<text class='fs-12 tgray'>常购清单</text> 
-			</navigator>
-		</view>
-	</view>
 
-	<!-- 卡券 -->
-	<view class='section coupon'>
-		<view class='sec-head'>我的优惠券<navigator class='link fs-14 more3-icon mini f-right mt-2' url='/pages/user/coupon/list'>更多</navigator></view>
-		<scroll-view scroll-x="{{true}}" >
-			<view class='hor-center tip' style="line-height:160rpx"> ( 空 ) </view>
-		<!-- <view class='flex-row pv-10' style='width:{{160*4 - 640}}px;'>
-			<view class='tick'>
-				<view class='title'>￥<text class='b3'>10</text> <text class='fs-12 fs-italic'>满减券</text></view>
-				<view class='condi fs-12'>满100减10</view>
-				<view class='region tgray fs-12'>平台全品类</view>
-			</view>
-		</view> -->
-		</scroll-view>
-	</view>
+<view class="kar mh-15 flex-row flex-wrap flex-main-between">
 
-<!-- 
-	<view class='section profit hor-center'>
-		<view class='fs-14 mt-10'>我的收益</view>
-		<view class='flex-row pv-10'>
-			<view class='flex-item day'>{{userInfo.profitDay||0}}</view>
-			<view class='flex-item month'>{{userInfo.profitMonth||0}}</view>
-			<view class='flex-item total'>{{userInfo.profitTotal||0}}</view>
-			<view class='flex-item balance'>{{userInfo.profitBalance||0}}</view>
-		</view>
-		<view class='fs-12 mb-10 hor-left tgray'> <text class='icon-help1'></text> 通过您的乡圈阅读量/点赞量/评论量 多维度计算，获得现金收益</view>
-	</view> -->
-	<view class='section tool'>
-		<view class='sec-head'>我的工具</view>
-		<view class='flex-row pv-10'>
-			<view class='hor-center tip flex-item' style="line-height:160rpx"> 更多功能，即将上线 </view>
-		</view>
-	</view>
-	<!-- <view class='m-list icon mv-10'>
-		<navigator class='ml-item ifont more icon-order' url="/pages/user/order/list">订单管理</navigator>
-		<navigator class='ml-item ifont more icon-tixian' url="/">提现设置</navigator>
-		<navigator class='ml-item ifont more icon-chguan' url="/">加入城管队伍，坐享收益 <text class='tag'>认证城管</text> </navigator>
-	</view> -->
+	<navigator class='nav-button more'><text class='flag flag-theme1'></text> 我的KOL <text class='b3 tip-theme1'>20</text></navigator>
+	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/3d4d0121cf334808a60e06de78b61513.png'></image> 我的初心视频</navigator>
+	<navigator class='nav-button more'><text class='flag flag-theme2'></text> 我的藜麦 <text class='b3 tip-theme2'>5000</text> <text class='tgray'> g</text></navigator>
+	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/44cf15c1b6534677bacc0ab51c368e54.png'></image> 我的导师</navigator>
+	<navigator class='nav-button more' url='/pages/shop/index'><image src='https://res.shibu365.com/i/2019-06-03/0ab219a3609743318308581f7a39876e.png' style="height:40rpx;width:200rpx;margin:30rpx 0;"></image></navigator>
+	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/bee9f35875e742aabcb9c665bbf25ee4.png'></image> 卡券包 </navigator>
+</view>
 
 	<button class='mv-10 mh-15' type='error' bindtap='exit'>退出商城</button>
+
+	
+<tab-bar curr="3" type="buildin"  visible='{{navBarVisible}}'></tab-bar>
 </block>
+
 

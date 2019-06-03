@@ -6,17 +6,17 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		banners: [],
 		goods: [],
-		tabs: ['推荐', '热销'],
+		orders:[],
 		blocks: ['top', 'trolley'],
-		tabIndex: 0,
+		currTab: 0,
 		page: { ended: false, empty: false },
 		bottomLoading: {
 			height: 0,
 			opacity: 0
 		},
 		trolleyCount: (wx.getStorageSync('trolley') || {}).total || 0,
+		page: { ended: false, empty: false },
 	},
 
 	loading: false,
@@ -37,22 +37,6 @@ Page({
 		var ready={}
 		options = options || {}
 		
-		app.http.request({
-			url: 'shop/get_banners',
-			data:{type:1},
-			done: rlt => {
-				ready.banner = true
-				if (rlt.status == 1) {
-					this.setData({
-						banners: rlt.data
-					})
-					if(ready.good){
-						this.loading = false
-						options.complete && options.complete({goods:this.data.goods,banner:rlt.data})
-					}
-				}
-			}
-		});
 		app.http.request({
 			url: 'shop/recommend_goods',
 			data:{rows:20,page:options.page},
@@ -76,7 +60,29 @@ Page({
 
 				}
 			}
-		});
+		})
+
+
+		app.http.request({
+			url: 'shop/all_orders',
+			param: {
+				page: options.page || 1,
+				filter: this.data.tabIndex,
+			},
+			done: rlt => {
+				var page = rlt.page
+				var list = rlt.data
+				page.ended = page.curr == page.last
+				page.empty = page.total == 0
+				var old = this.data.orders || []
+				this.setData({
+					orders: page.curr == 1 ? list : old.concat(list),
+					page: page
+				})
+
+				options.complete && options.complete(rlt)
+			}
+		})
 		
 	},
 	/**
@@ -90,7 +96,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		if (this.data.banners.length <= 0 || this.data.goods.length <= 0) {
+		if (this.data.orders.length <= 0 || this.data.goods.length <= 0) {
 			this.loadData(this.options)
 		}
 		
@@ -169,5 +175,11 @@ Page({
 			trolleyCount: trolley.total || 0
 		})
 		app.ui.success('添加成功')
+	},
+	navToTrolley(){
+
+		wx.navigateTo({
+			url: '/pages/shop/trolley',
+		})
 	}
 })
