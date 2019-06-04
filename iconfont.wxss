@@ -107,7 +107,10 @@
 }
 
 
-
+.icon-speak::before,
+.speak-icon::after{
+	content:"\e90c";
+}
 
 
 

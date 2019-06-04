@@ -9,7 +9,7 @@
 const svr_list = {
 	local: 'http://shi-api.localhost.com/ifthin',
 	remote: 'https://api.shibu365.com/ifthin',
-	res:'https://api.shibu365.com'
+	res: 'https://api.shibu365.com'
 }
 
 const domain = path => {
@@ -280,7 +280,7 @@ module.exports = {
 		cb = cb ||options.success
 		var session = wx.getStorageSync('session'),
 			param = {}
-		var upUrl = options.url || res('res/resource/upload')
+		var upUrl = options.url || res('res/index/upload_res')
 		param.field = options.name || 'pic'
 		param.path = options.path || ''
 		if (options.file) {  // 单文件上传

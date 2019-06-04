@@ -1,6 +1,9 @@
 <!--index.wxml-->
 <image class='dp-block ma-20' src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:178rpx;' mode='widthFix'></image>
 
+<delay-loading class="pv-20" wx:if="{{!user}}">正在加载数据</delay-loading>
+<block wx:else>
+
 <view class='pan'>
     <view class='back'>
         <view class='thumb thumb2' style='transform:rotate(123deg);'></view>
@@ -60,4 +63,5 @@
         <image class='logo' src='https://res.shibu365.com/i/2019-05-28/4a8f5b54cec5409e9060751d65414863.png'></image> 热闹活动</navigator>
 </view>
 
+</block>
 <tab-bar curr="0" type="buildin"></tab-bar>

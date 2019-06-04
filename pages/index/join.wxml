@@ -9,9 +9,21 @@
 
 	<view class='box mh-15 mt-20 hor-center of-hidden'>
 		<view class='mv-20'>请录制一句您的减肥宣言，用来提醒与告诫自己长度为 10秒 以内</view>
-		<button class='rec-btn mv-20'>
-			<image src='https://res.shibu365.com/i/2019-05-31/30eea7806a5645f88dd215e1f001d47b.png' style='width:48rpx;height:48rpx;margin:24rpx;' mode='aspectFit'></image>
-		</button>
+		<view class='flex-row'>
+			<view class='flex-item'>
+			<button class='rec-btn voice-btn mt-20' bindtap='handleStartRecAudio'>
+				<text class='icon-mic tip-theme2'></text>
+			</button>
+			<progress wx:if="{{recording}}" percent='{{curr}}' class='ma-15' style='width:50%;' activeColor='#ff9472' backgroundColor='#000000' stroke-width="9" border-radius="4"></progress>
+			<view class='tip mv-10' wx:else>{{voicePath?'点击重录':'点击开始'}}</view>
+			</view>
+			<view class='flex-item' wx:if="{{voicePath}}">
+			<button class='rec-btn voice-btn mt-20' bindtap='handlePlayRecAudio'>
+				<text class='icon-speak tip-theme2'></text>
+			</button>
+			<view class='tip mv-10'>点击试听</view>
+			</view>
+		</view>
 	</view>
 </block>
 <block wx:if="{{step==2}}">
@@ -28,10 +40,10 @@
 				<image src='https://res.shibu365.com/i/2019-05-31/13cff6dac3e447e7ae64a7de250ff780.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
 				<view>示例</view>
 			</view>
-			<view class='upload clickable-box'  hover-class='clickable-hover'>
+			<view class='upload clickable-box'  hover-class='clickable-hover' bindtap='handleVideoUpload'>
 				<image src='https://res.shibu365.com/i/2019-05-31/126eb605047048e68be2ea89d135f1de.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
 				<view>上传</view>
-			</view>
+			</view>			
 		</view>
 	</view>
 	<view class='tip-default fs-12 mv-10 mh-15'>
@@ -40,6 +52,11 @@
 	<view class='tip-error fs-12 mv-10 mh-15'>
 		声明：此视频仅为用户本人观看的私密视频，并不对外在任何平台以任何形式展示
 	</view>
+	<!-- <view class='camera-box'>
+	
+			<camera device-position="front" flash="auto" style="position:fixed;z-index:100;top:0;bottom:0;left:0;right:0;"></camera>
+			
+	</view> -->
 </block>
 <block wx:if="{{step==3}}">
 
@@ -87,4 +104,6 @@
 	</view>
 </block>
 <button class='mh-15 mt-10' bindtap='handleJoin' wx:if="{{step==4}}">开始我的计划</button>
-<button class='mh-15 mt-10' bindtap='handleNext' wx:else>下一步</button>
+<button class='mh-15 mt-10' bindtap='handleNext'  wx:else>下一步</button>
+
+<!-- disabled='{{step==1&&!voicePath||step==2||true}}' -->

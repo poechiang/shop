@@ -7,7 +7,7 @@ page{
 	border-radius: 20rpx;
 	padding:20rpx 30rpx;
 }
-.rec-btn{
+.voice-btn{
 	width:96rpx;
 	height:96rpx;
 	border-radius: 50%;
