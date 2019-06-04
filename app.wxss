@@ -64,30 +64,6 @@
     font-style: italic;
 }
 
-.fs-12{
-	font-size: 12px;
-}
-.fs-13{
-	font-size: 13px;
-}
-.fs-14{
-	font-size: 14px;
-}
-.fs-15{
-	font-size: 15px;
-}
-.fs-18{
-	font-size: 18px;
-}
-.fs-20{
-	font-size: 20px;
-}
-.fs-22{
-	font-size: 22px;
-}
-.fs-italic{
-	font-style: italic;
-}
 
 .lh-10{
 	line-height:1;
@@ -267,6 +243,33 @@ page {
 .tip-theme2{
 	color:#FD8F71;
 }
+
+
+.fs-12{
+	font-size: 12px;
+}
+.fs-13{
+	font-size: 13px;
+}
+.fs-14{
+	font-size: 14px;
+}
+.fs-15{
+	font-size: 15px;
+}
+.fs-18{
+	font-size: 18px;
+}
+.fs-20{
+	font-size: 20px;
+}
+.fs-22{
+	font-size: 22px;
+}
+.fs-italic{
+	font-style: italic;
+}
+
 .flag{
 	display:inline-block;
 	width:.2em;

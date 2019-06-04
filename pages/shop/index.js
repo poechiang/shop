@@ -10,13 +10,17 @@ Page({
 		orders:[],
 		blocks: ['top', 'trolley'],
 		currTab: 0,
-		page: { ended: false, empty: false },
-		bottomLoading: {
+		pageGood: { ended: false, empty: false },
+		goodBottomLoading: {
+			height: 0,
+			opacity: 0
+		},
+		orderBottomLoading: {
 			height: 0,
 			opacity: 0
 		},
 		trolleyCount: (wx.getStorageSync('trolley') || {}).total || 0,
-		page: { ended: false, empty: false },
+		pageOrder: { ended: false, empty: false },
 	},
 
 	loading: false,
@@ -34,14 +38,12 @@ Page({
 
 		this.loading = true
 		
-		var ready={}
 		options = options || {}
-		
+		if(this.data.currTab==0){
 		app.http.request({
 			url: 'shop/recommend_goods',
 			data:{rows:20,page:options.page},
 			done: rlt => {
-				ready.good = true
 				if (rlt.status == 1) {
 					var page = rlt.page
 					var list = rlt.data
@@ -50,39 +52,42 @@ Page({
 					var old = this.data.goods || []
 					this.setData({
 						goods: page.curr == 1 ? list : old.concat(list),
-						page: page
+						pageGood: page
 					})
 
-					if (ready.good) {
-						this.loading = false
-						options.complete && options.complete({ goods: rlt.data, banner: this.data.banners })
-					}
+					this.loading = false
+					options.complete && options.complete(rlt)
 
 				}
 			}
 		})
+		}
+		else{
+
+			app.http.request({
+				url: 'shop/all_orders',
+				param: {
+					page: options.page || 1,
+					filter: this.data.tabIndex,
+				},
+				done: rlt => {
+					var page = rlt.page
+					var list = rlt.data
+					page.ended = page.curr == page.last
+					page.empty = page.total == 0
+					var old = this.data.orders || []
+					this.setData({
+						orders: page.curr == 1 ? list : old.concat(list),
+						pageOrder: page
+					})
+
+					this.loading = false
+					options.complete && options.complete(rlt)
+				}
+			})
+		}
 
 
-		app.http.request({
-			url: 'shop/all_orders',
-			param: {
-				page: options.page || 1,
-				filter: this.data.tabIndex,
-			},
-			done: rlt => {
-				var page = rlt.page
-				var list = rlt.data
-				page.ended = page.curr == page.last
-				page.empty = page.total == 0
-				var old = this.data.orders || []
-				this.setData({
-					orders: page.curr == 1 ? list : old.concat(list),
-					page: page
-				})
-
-				options.complete && options.complete(rlt)
-			}
-		})
 		
 	},
 	/**
@@ -134,24 +139,48 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
-		if (this.data.page.ended) {
+		var page = this.data.currTab==0?this.data.pageGood:this.data.pageOrder
+
+		if (page.ended) {
 			return
 		}
-		this.setData({
-			bottomLoading: {
-				height: 41,
-				opacity: 1
-			}
-		})
+		if (this.data.currTab == 0) {
+			this.setData({
+				goodBottomLoading: {
+					height: 41,
+					opacity: 1
+				}
+			})
+		}
+		else {
+			this.setData({
+				orderBottomLoading: {
+					height: 41,
+					opacity: 1
+				}
+			})
+		}
 		this.loadData({
-			page: this.data.page.curr + 1 || 1,
+			page: page.curr + 1 || 1,
 			complete: () => {
-				this.setData({
-					bottomLoading: {
-						height: 0,
-						opacity: 0
-					}
-				})
+
+				if (this.data.currTab == 0) {
+					this.setData({
+						goodBottomLoading: {
+							height: 0,
+							opacity: 0
+						}
+					})
+				}
+				else {
+					this.setData({
+						orderBottomLoading: {
+							height: 0,
+							opacity:0
+						}
+					})
+				}
+
 			}
 		})
 	},
@@ -180,6 +209,29 @@ Page({
 
 		wx.navigateTo({
 			url: '/pages/shop/trolley',
+		})
+	},
+	toggleOrder(){
+		this.setData({
+			currTab:1
+		})
+		wx.nextTick(()=>{
+
+			if (this.data.orders.length <= 0) {
+				this.loadData({ page: 1 })
+			}
+		})
+	},
+	toggleGood() {
+		this.setData({
+			currTab: 0
+		})
+		ex.nextTick(()=>{
+
+			if (this.data.goods.length <= 0) {
+				this.loadData({ page: 1 })
+			}
+
 		})
 	}
 })

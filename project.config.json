@@ -45,7 +45,7 @@
 				{
 					"id": 0,
 					"name": "带参数",
-					"pathName": "pages/user/order/list",
+					"pathName": "pages/shop/index",
 					"query": "",
 					"scene": null
 				},

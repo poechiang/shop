@@ -1,9 +1,9 @@
 <!--pages/shop/index.wxml-->
 <view class='shop-tabs flex-row'>
-	<view class='tab {{currTab==0?"selected":""}}'>
+	<view class='tab {{currTab==0?"selected":""}}' hover-class='clickable-hover' bindtap='toggleGood'>
 		<image mode='widthFix' src='https://res.shibu365.com/i/2019-06-03/6d85ca78a3c94c0f876bc78733c9b7dc.png' style='height:1em;width:200rpx;vertical-align:-.1em;'></image>
 	</view>
-	<view class='tab {{currTab==1?"selected":""}}'>我的订单</view>
+	<view class='tab {{currTab==1?"selected":""}}'  hover-class='clickable-hover' bindtap='toggleOrder'>我的订单</view>
 </view>
 <block wx:if="{{currTab==0}}">
 
@@ -26,10 +26,10 @@
 
 
 <!-- 分布加载动画展示 开始 -->
-<view class='hor-center tip fs-14 pv-10' wx:if="{{page.ended}}">-----我们是有底线的-----</view>
-<view class='hor-center tip fs-14 pv-10' wx:if="{{page.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
-<view class="bottom-loading" style='height:{{bottomLoading.height}}px'>
-<view class='delay-loading pv-10' style='opacity:{{bottomLoading.opacity}}'>正在加载</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{pageGood.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{pageGood.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+<view class="bottom-loading" style='height:{{goodBottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{goodBottomLoading.opacity}}'>正在加载</view>
 </view>
 <!-- 分页加载动画展示 结束 -->
 
@@ -38,37 +38,42 @@
 	<text class='bullet' wx:if="{{trolleyCount>0}}">{{trolleyCount>99?'...':trolleyCount}}</text>
 </button>
 </block>
+
 <block wx:if="{{currTab == 1}}">
 
 <view class='order-list'>
-	<view class='order-item ph-15 section' wx:for="{{orders}}" wx:key='id' wx:for-item='order'>
-		<view class='ordr-item-title flex-row pv-5 flex-line-center'>
-			<navigator class='link p-5'  url="/pages/user/order/detail?id={{order.id}}">{{order.sn}} </navigator>
-			<text class='flex-item'></text>
-			<text class='tip'>{{order.front_state_label}}</text>
+	<view class='order-item section flex-row flex-line-center' wx:for="{{orders}}" wx:key='id' wx:for-item='order'>
+		<view class='flex-item'>
+			<view class="tip">{{order.sn}}</view>
+			<view class='tip fs-12'>{{order.stamp.insert.mdHi}}</view>
+			<view class='goods'>
+				<view class='good ellipsis' wx:for="{{order.details}}">{{item.good.abbr||item.good.title}}</view>
+			</view>
+			<view class='tip' wx:for="{{order.send_info.expresses}}" wx:key="waybill">{{item.exp}} {{item.waybill}}</view>
 		</view>
-		<view class='good-list {{order.details.length>1?"flex-row ":""}}'>
-			<navigator class='{{order.details.length==1?"flex-row ":""}}' url='/pages/shop/good/detail?id={{detail.good.id}}'  wx:for="{{order.details}}" wx:for-item="detail" wx:key="id">
-				<image class='good-photo m-5' mode='aspectFill' src='{{detail.good.heads[0]}}' wx:if='{{detail.good && detail.good.heads && detail.good.heads.length>0}}'></image>
-				<view class='good-item flex-item m-5' wx:if="{{order.details.length==1}}">
-					<view class='good-title'>{{detail.good.group_title||detail.good.title}}</view>
-					<view class='tip'>{{detail.good.norms}}</view>
-					<view class='f-right'>
-						<text class='f-left'>{{detail.good.group_label}} </text>
-						<text class='price'>{{detail.price}}</text> x {{detail.count}}
-					</view>
-				</view>
-			</navigator>
+		<view class='hor-center'>
+			<view class='tip-theme2 mb-5'>{{order.front_state_label}}</view>
+			<button class='ph-5' type='error' size='mini' wx:if="{{order.state==9}}">支付 {{order.amount}}</button>
+
 		</view>
-		<view class='flex-row mv-5 flex-line-center'>
+		<!-- <view class='flex-row mv-5 flex-line-center'>
 			<view>总价：<text class='price'>{{order.amount}}</text></view>
 			<view class='flex-item'></view>
 			<button class='ml-5' type='error' size='mini' wx:if="{{order.state>=0 && order.state<10}}">取消</button>
-			<button class='ml-5' type='primary' size='mini' wx:if="{{order.state==9}}">支付</button>
+			<button class='ml-5' type='primary' size='mini' wx:if="{{order.state==9}}">支付 {{order.amount}}</button>
 			<button class='ml-5' type='warn' size='mini' wx:if='{{order.state==20||order.state==29||order.state==40}}'>签收</button>
 			<button class='ml-5' type='warn' size='mini' wx:if='{{order.state==20||order.state==29}}'>退换</button>
 			<button class='ml-5' type='secondary' size='mini' wx:if='{{order.state==50}}'>评价</button>
-		</view>
+		</view> -->
 	</view>
 </view>
+
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{pageOrder.ended}}">-----我们是有底线的-----</view>
+<view class='hor-center tip fs-14 pv-10' wx:if="{{pageOrder.empty}}">当前分类无内容赶紧分享你的第一篇见闻吧</view>
+<view class="bottom-loading" style='height:{{orderBottomLoading.height}}px'>
+<view class='delay-loading pv-10' style='opacity:{{orderBottomLoading.opacity}}'>正在加载</view>
+</view>
+<!-- 分页加载动画展示 结束 -->
 </block>
