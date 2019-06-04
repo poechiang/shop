@@ -16,7 +16,8 @@ page{
 	border:none;
 	padding:0;
 }
-.clickable-box{
+.clickable-box,
+.preview{
 	border-radius: 20rpx;
 	width:275rpx;
 	height:275rpx;
@@ -24,6 +25,25 @@ page{
 .clickable-box.demo{
 	background-color: #000000;
 }
-.clickable-box.upload{
+.clickable-box.upload-idou{
 	background-color: #181818;
+}
+
+.i-agree{
+	line-height: 2;
+	font-size: 24rpx;
+}
+.i-agree:before{
+	content:"";
+	display: inline-block;
+	height: 1.5em;
+	width:1.5em;
+	vertical-align: -.4em;
+	background-color:#202022;
+}
+.i-agree.checked:before{
+	background-color:#FF9472;
+	border:.3em solid #202022;
+	width:.9em;
+	height:.9em;
 }

@@ -12,7 +12,10 @@ Page({
 		recording:false,
 		curr:0,
 		neeUpload:false,
-		videorecording:false
+		videorecording:false,
+		weights:{},
+		idouPhoto:null,
+		iAgree:false
 	},
 
 	/**
@@ -25,8 +28,12 @@ Page({
 				
 				this.setData({
 
-					step:res.data.step,
-					voicePath:res.data.voice
+					step: res.data.step,
+					voicePath: res.data.voice||null,
+					videoPath: res.data.voice||null,
+					weights:res.data.weights||{},
+					idouPhoto:res.data.idou,
+					iAgree:res.data.iAgree||false
 				})
 			},
 		})
@@ -117,7 +124,7 @@ Page({
 				data: cache,
 			})
 		}
-		else if(step==2){
+		else if (step == 2) {
 
 			cache.step = 2
 			if (this.data.neeUpload) {
@@ -131,6 +138,34 @@ Page({
 						})
 
 						cache.video = rlt.data.url
+						wx.setStorage({
+							key: 'ifjoin',
+							data: cache,
+						})
+					}
+				})
+			}
+			wx.setStorage({
+				key: 'ifjoin',
+				data: cache,
+			})
+		}
+		else if (step == 3) {
+
+			cache.step = 3
+			cache.weights=this.data.weights
+			console.log(cache)
+			if (this.data.neeUpload) {
+				app.http.uploadFile({
+					file: this.data.idouPhoto,
+					name: 'idou',
+					success: rlt => {
+						this.setData({
+							idouPhoto: rlt.data.url,
+							neeUpload: false
+						})
+
+						cache.idou = rlt.data.url
 						wx.setStorage({
 							key: 'ifjoin',
 							data: cache,
@@ -180,12 +215,72 @@ Page({
 	handleJoin() {
 		//app.ui.modal("后续功能等完善")
 
-				wx.switchTab({
-					url: '/pages/index/index',
-					success: function (res) { },
-					fail: function (res) { },
-					complete: function (res) { },
-				})
+
+		app.http.request({
+			url:'user/join_plan',
+			data:{
+				voice:this.data.voicePath,
+				video:this.data.videoPath,
+				currWeight:this.data.weights.curr,
+				targetWeight:this.data.weights.target,
+				idou:this.data.idouPhoto,
+			},
+			success:rlt=>{
+				if(rlt.status==1){
+					var cache = wx.getStorageSync('ifjoin');
+					cache.state="success"
+					cache.step=5
+					wx.setStorage({
+						key: 'ifjoin',
+						data: cache,
+					})
+					wx.switchTab({
+						url: '/pages/index/index',
+						success: function (res) { },
+						fail: function (res) { },
+						complete: function (res) { },
+					})
+				}
+				else{
+					app.ui.modal(rlt.msg)
+				}
+			}
+		})
+
 		
+		
+	},
+	handleCurrWeightInput(e) {
+		
+		var weights = this.data.weights||{}
+		weights.curr = e.detail.value
+		this.setData({
+			weights:weights
+		})
+	},
+	handleTargetWeightInput(e) {
+
+		var weights = this.data.weights || {}
+		weights.target = e.detail.value
+		this.setData({
+			weights: weights
+		})
+
+	},
+	handleChooseIdou(){
+		wx.chooseImage({
+			count: 1,
+			success: res=> {
+				this.setData({
+					idouPhoto:res.tempFilePaths[0],
+					neeUpload:true
+				})
+			},
+		})
+	},
+	handleIAgreeToggle(){
+		this.setData({
+			iAgree:!this.data.iAgree
+		})
 	}
 })

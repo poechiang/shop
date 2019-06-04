@@ -69,20 +69,26 @@
 	<view class='box mh-15 mt-20 flex-row flex-line-center'>
 		<image class='txt-logo mr-10' src='https://res.shibu365.com/i/2019-05-31/ee3df61c40ad40f0b6bb5c62e4b94e86.png'></image>		
 		<text>当前体重</text>
-		<input class='flex-item ph-5 hor-right' style='color:#FF766B;'></input>
+		<input class='flex-item ph-5 hor-right' style='color:#FF766B;' value='{{weights.curr}}' bindinput='handleCurrWeightInput'></input>
 		<text>KG</text>
 	</view>
 	<view class='box mh-15 mt-10 flex-row flex-line-center'>
 		<image class='txt-logo mr-10' src='https://res.shibu365.com/i/2019-05-31/a342214e3c9446a0b771454f1f7da473.png'></image>		
 		<text>目标体重</text>
-		<input class='flex-item ph-5 hor-right' style='color:#62FDDD;'></input>
+		<input class='flex-item ph-5 hor-right' style='color:#62FDDD;' value='{{weights.target}}' bindinput='handleTargetWeightInput'></input>
 		<text>KG</text>
 	</view>
-	
-	<view class='upload clickable-box ma-20 hor-center of-hidden'  hover-class='clickable-hover' style='width:300rpx;'>
-		<view class='mv-15'>我的偶像</view>
-		<image src='https://res.shibu365.com/i/2019-05-31/126eb605047048e68be2ea89d135f1de.png' style='width:80rpx;height:80rpx;margin:auto；'></image>
-		<view>上传</view>
+	<view class='flex-row mh-15'>
+		<view class='flex-item' wx:if="{{idouPhoto}}">
+			<image class='preview ma-20' src='{{idouPhoto}}' mode='aspectFit'></image>
+		</view>
+		<view class='flex-item'>
+			<view class='upload-idou clickable-box ma-20 hor-center of-hidden'  hover-class='clickable-hover' style='width:300rpx;' bindtap='handleChooseIdou'>
+				<view class='mv-15'>我的偶像</view>
+				<view class='icon-upload mv-10'></view>
+				<view>上传</view>
+			</view>
+		</view>
 	</view>
 
 	<view class='tip-default fs-12 mv-10 mh-15 hor-center'>
@@ -97,13 +103,74 @@
 	</view>
 	<view class='hor-center mv-10 fs-18'>契约签订完成</view>
 
-	<view class='box mh-15 mt-20' style='height:750rpx'>
+	<view class='box mh-15 mt-20' style='height:450rpx'>
 		<scroll-view class='full-height' scroll-y>
-
+			<view class='b3 hor-center'>用户协议</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
+			<view class=''>用户协议示例用户协议示例用户协议示例用户协议示例用户协议示例</view>
 		</scroll-view>
 	</view>
+
+	<view class='i-agree mh-15 mv-20 {{iAgree?"checked":""}}' hover-class='clickable-hover' bindtap="handleIAgreeToggle">  我已详细阅读理解并同意上述协议中的责任与义务</view>
 </block>
-<button class='mh-15 mt-10' bindtap='handleJoin' wx:if="{{step==4}}">开始我的计划</button>
-<button class='mh-15 mt-10' bindtap='handleNext'  wx:else>下一步</button>
+<button class='mh-15 mt-10' bindtap='handleJoin' disabled='{{!iAgree}}' wx:if="{{step==4}}">开始我的计划</button>
+<button class='mh-15 mt-10' bindtap='handleNext' disabled='{{step==1 && !voicePath||step==2 && !videoPath || step==3 && (!weights.curr ||!weights.target || !idouPhoto)}}'  wx:else>下一步</button>
 
 <!-- disabled='{{step==1&&!voicePath||step==2||true}}' -->
