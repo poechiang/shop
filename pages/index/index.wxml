@@ -6,15 +6,15 @@
 
 <view class='pan'>
     <view class='back'>
-        <view class='thumb thumb2' style='transform:rotate(123deg);'></view>
+        <view class='thumb thumb{{thumb}}' style='transform:rotate({{progress}}deg);'></view>
 
     </view>
 
     <view class='inner hor-center'>
         <view class='tgray mt-20'>已减重(KG)</view>
-        <view class='curr-weight'>18.6</view>
-        <view class='tgray'>已完成 36%</view>
-        <button class='wlog'>体重记录</button>
+        <view class='curr-weight'>{{score}}</view>
+        <view class='tgray'>已完成 {{percent}}%</view>
+        <navigator class='wlog' url='/pages/common/404'>体重记录</navigator>
     </view>
 </view>
 
@@ -23,44 +23,52 @@
         <view>
             <image class='logo' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image> 已经坚持</view>
         <view>
-            <text class='val'>1</text>天</view>
+            <text class='val'>{{days}}</text>天</view>
     </view>
     <view class='bdr-v'></view>
     <view class='flex-item hor-center'>
         <view>
             <image class='logo' src='https://res.shibu365.com/i/2019-05-28/b48f1ef7a4074f0d9c82525d1ea88baa.png'></image> 当前体重</view>
         <view>
-            <text class='val'>125</text>KG</view>
+            <text class='val'>{{plan.current_weight||'--'}}</text>KG</view>
     </view>
     <view class='bdr-v'></view>
     <view class='flex-item hor-center'>
         <view>
             <image class='logo' src='https://res.shibu365.com/i/2019-05-28/2dc16aa1b2804e3d80caa14c68d2301c.png'></image> 目标体重</view>
         <view>
-            <text class='val'>60</text>KG</view>
+            <text class='val'>{{plan.target_weight}}</text>KG</view>
     </view>
 </view>
 
 <view class='hzh mh-15 mt-20'>
     <view class='sec-head'>我的徽章</view>
     <view class='hzh-bar flex-row flex-main-around mh-5 mt-15'>
-        <view class='hz-block'>
-            <image class='hz' src='https://res.shibu365.com/i/2019-05-30/14e79dfc94f5407c97ab05612e1201c3.png'></image>
+        <view class='hz-block {{hzhlist.length>=1?"":"null"}}'>
+            <image class='hz' wx:if="{{hzhlist.length>=1}}" src='{{hzhlist[0].path||hzhlist[0]}}'></image>
         </view>
-        <view class='hz-block null'></view>
-        <view class='hz-block null'></view>
-        <view class='hz-block null'></view>
-        <view class='hz-block null'></view>
-        <view class='hz-block more'></view>
+        <view class='hz-block {{hzhlist.length>=2?"":"null"}}'>
+            <image class='hz' wx:if="{{hzhlist.length>=2}}" src='{{hzhlist[1].path||hzhlist[1]}}'></image>
+        </view>
+        <view class='hz-block {{hzhlist.length>=3?"":"null"}}'>
+            <image class='hz' wx:if="{{hzhlist.length>=3}}" src='{{hzhlist[2].path||hzhlist[2]}}'></image>
+        </view>
+        <view class='hz-block {{hzhlist.length>=4?"":"null"}}'>
+            <image class='hz' wx:if="{{hzhlist.length>=4}}" src='{{hzhlist[3].path||hzhlist[3]}}'></image>
+        </view>
+        <view class='hz-block {{hzhlist.length>=5?"":"null"}}'>
+            <image class='hz' wx:if="{{hzhlist.length>=5}}" src='{{hzhlist[4].path||hzhlist[4]}}'></image>
+        </view>
+        <navigator class='hz-block more' url="/pages/common/404"></navigator>
     </view>
 </view>
 
 <view class='sec-more mh-15 mt-20'>
     <image class='banner' src='https://res.shibu365.com/i/2019-05-28/f0b54bdd106549899206e3d0e80b9a19.png'></image>
     <navigator class='msg nav-button more mb-10'>
-        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/ca718631b97644ddb4540b36946a01c3.png'></image> 我的消息</navigator>
+        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/ca718631b97644ddb4540b36946a01c3.png'></image> 我的消息 <text class='bullet' wx:if="{{msgCount>0}}"></text></navigator>
     <navigator class='hot nav-button more'>
-        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/4a8f5b54cec5409e9060751d65414863.png'></image> 热闹活动</navigator>
+        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/4a8f5b54cec5409e9060751d65414863.png'></image> 热门活动 <text class='bullet' wx:if="{{hdCount>0}}"></text></navigator>
 </view>
 
 </block>

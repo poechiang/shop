@@ -4,18 +4,20 @@ const app = getApp()
 
 Page({
 	data: {
-		// motto: 'Hello World',
-		// userInfo: {},
-		// hasUserInfo: false,
-		// canIUse: wx.canIUse('button.open-type.getUserInfo')
-		user:null,
 		hzhlist:[],
 		msgCount:0,
 		hdCount:0,
 	},
 	onLoad: function () {
 		
-		this.loadUserInfo();
+		//this.loadUserInfo();
+
+		wx.getStorage({
+			key: 'ifthin_home_data',
+			success: res=>{
+				this.setData(res.data)
+			}
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面显示
@@ -41,9 +43,49 @@ Page({
 					})
 				}
 				else if(rlt.status==1){
+
+					var user = rlt.data,
+						plan = user.ifplan,
+						start = plan.start,
+						end = plan.end,
+						startW = plan.start_weight,
+						endW = plan.target_weight,
+						currW = plan.current_weight,
+						state = plan.state,
+						score=0,
+						progress=0,
+						now=(new Date).time(),
+						thumb=1,
+						days=0,
+						percent=0;
+
+					if(state>=0){
+						score = startW - currW 
+						percent = parseInt(score * 100 / (startW - endW))
+						progress = parseInt((now - start) * 270 / (end - start))
+						days = Math.ceil((now - start) / (3600 * 24))
+						thumb = parseInt(progress / 90)+1
+					}
+					
 					this.setData({
-						user:rlt.data
+						user:user,
+						plan:plan,
+						score: score,
+						percent: percent,
+						progress:progress,
+						thumb:thumb,
+						days:days,
 					})
+					wx.setStorage({
+						key: 'ifthin_home_data',
+						data: this.data,
+					})
+					//如果用户已加入则请求用户获得的徽章列表及消息活动的统计信息
+
+					this.loadHzh()
+					this.loadNewHotHdCount()
+					this.loadNewMsgCount()
+
 				}
 				else{
 					app.con.error(rlt.msg)
@@ -57,17 +99,16 @@ Page({
 		if(this.hzhLoading)return
 		this.hzhLoading = true
 		app.http.request({
-			url: 'ifthin/user/info',
+			url: 'user/hzh_list',
 			success: rlt => {
-				if (rlt.status == -10) {
-					// 新用户未加入
-					wx.navigateTo({
-						url: '/pages/index/join',
-					})
-				}
-				else if (rlt.status == 1) {
+				if (rlt.status == 1) {
 					this.setData({
-						user: rlt.data
+						hzhlist:rlt.data||[]
+					})
+
+					wx.setStorage({
+						key: 'ifthin_home_data',
+						data: this.data,
 					})
 				}
 				else {
@@ -83,17 +124,16 @@ Page({
 		if (this.msgLoading) return
 		this.msgLoading = true
 		app.http.request({
-			url: 'ifthin/user/info',
+			url: 'user/new_msg_count',
 			success: rlt => {
-				if (rlt.status == -10) {
-					// 新用户未加入
-					wx.navigateTo({
-						url: '/pages/index/join',
-					})
-				}
-				else if (rlt.status == 1) {
+				if (rlt.status == 1) {
 					this.setData({
-						user: rlt.data
+						msgCount: rlt.data||0
+					})
+
+					wx.setStorage({
+						key: 'ifthin_home_data',
+						data: this.data,
 					})
 				}
 				else {
@@ -109,17 +149,16 @@ Page({
 		if (this.hdLoading) return
 		this.hdLoading = true
 		app.http.request({
-			url: 'ifthin/user/info',
+			url: 'user/new_hd_count',
 			success: rlt => {
-				if (rlt.status == -10) {
-					// 新用户未加入
-					wx.navigateTo({
-						url: '/pages/index/join',
-					})
-				}
-				else if (rlt.status == 1) {
+				if (rlt.status == 1) {
 					this.setData({
-						user: rlt.data
+						hdCount: rlt.data||0
+					})
+
+					wx.setStorage({
+						key: 'ifthin_home_data',
+						data: this.data,
 					})
 				}
 				else {

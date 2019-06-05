@@ -170,7 +170,21 @@
 
 	<view class='i-agree mh-15 mv-20 {{iAgree?"checked":""}}' hover-class='clickable-hover' bindtap="handleIAgreeToggle">  我已详细阅读理解并同意上述协议中的责任与义务</view>
 </block>
+<block wx:if="{{step==5}}">
+
+	<!-- 第四步：签约支付 -->
+	<view class='hor-center mv-10'>
+		<image src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:278rpx;' mode='widthFix'></image>
+	</view>
+	<view class='hor-center mv-10 fs-18'>等待付款</view>
+
+	<view class='mh-15 mt-20 hor-center'>
+		<view style="font-size:80rpx;">￥{{payPrice}}</view>
+		<view class='tip-default mv-20'>{{insertDate}}</view>
+	</view>
+</block>
 <button class='mh-15 mt-10' bindtap='handleJoin' disabled='{{!iAgree}}' wx:if="{{step==4}}">开始我的计划</button>
+<button class='mh-15 mt-10' bindtap='handleJoin' wx:elif="{{step==5}}" bindtap='handlePay'>立即支付</button>
 <button class='mh-15 mt-10' bindtap='handleNext' disabled='{{step==1 && !voicePath||step==2 && !videoPath || step==3 && (!weights.curr ||!weights.target || !idouPhoto)}}'  wx:else>下一步</button>
 
 <!-- disabled='{{step==1&&!voicePath||step==2||true}}' -->

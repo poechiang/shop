@@ -33,7 +33,9 @@ Page({
 					videoPath: res.data.voice||null,
 					weights:res.data.weights||{},
 					idouPhoto:res.data.idou,
-					iAgree:res.data.iAgree||false
+					iAgree: res.data.iAgree || false,
+					payPrice: res.data.amount,
+					insertDate: res.data.insert
 				})
 			},
 		})
@@ -227,18 +229,24 @@ Page({
 			},
 			success:rlt=>{
 				if(rlt.status==1){
+
 					var cache = wx.getStorageSync('ifjoin');
-					cache.state="success"
-					cache.step=5
+					cache.state = "unpay"
+					cache.payid = rlt.data.id
+					cache.amount = rlt.data.amount
+					cache.insert = rlt.data.stamp.insert.YmdHis
+					cache.step = 5
+
+					this.setData({
+						payPrice:cache.amount,
+						insertDate:cache.insert
+					})
 					wx.setStorage({
 						key: 'ifjoin',
 						data: cache,
-					})
-					wx.switchTab({
-						url: '/pages/index/index',
-						success: function (res) { },
-						fail: function (res) { },
-						complete: function (res) { },
+						success: res=> {
+							this.handlePay()
+						},
 					})
 				}
 				else{
@@ -246,10 +254,60 @@ Page({
 				}
 			}
 		})
-
-		
-		
 	},
+	handlePay(){
+		var cache = wx.getStorageSync('ifjoin')
+		app.http.request({
+			url: 'shop/pay_join_order',
+			param: { id: cache.payid },
+			done: rlt => {
+				if (rlt.status == 1) {
+					wx.requestPayment({
+						timeStamp: rlt.data.timeStamp,
+						nonceStr: rlt.data.nonceStr,
+						package: rlt.data.package,
+						signType: rlt.data.signType,
+						paySign: rlt.data.paySign,
+						success: function (res) {
+							var cache = wx.getStorageSync('ifjoin');
+							cache.state = "success"
+							cache.step = 6
+							wx.setStorage({
+								key: 'ifjoin',
+								data: cache,
+							})
+							wx.switchTab({
+								url: '/pages/index/index',
+								success: function (res) { },
+								fail: function (res) { },
+								complete: function (res) { },
+							})
+						},
+						fail: function (res) {
+							var msg = res.errMsg
+							if (msg == 'requestPayment:fail cancel') {
+								msg = "支付未成功，请尽快完成支付！"
+							}
+							app.ui.modal(msg)
+						},
+					})
+				}
+				else {
+					app.ui.modal(rlt.msg)
+				}
+			}
+		})
+	},
+					
+
+
+
+
+
+
+
+
+
 	handleCurrWeightInput(e) {
 		
 		var weights = this.data.weights||{}

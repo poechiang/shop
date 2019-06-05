@@ -32,7 +32,6 @@ App({
 		console.log(msg)
 	},
 	onPageNotFound(res) {
-		console.log(res)
 		wx.redirectTo({
 			url: 'pages/common/404?path='+res.path
 		}) 

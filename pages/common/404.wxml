@@ -1,6 +1,13 @@
 <!--pages/common/404.wxml-->
 <view class='hor-center ph-15'>
-	<view class='h1 mt-80 mb-20'>404</view>
+	<!-- <view class='h1 mt-80 mb-20'>404</view>
 	<view class='tip mt-20 mb-40'>你找的页面未找到</view>
-	<view class='hor-left tip path'>页面路径：<text style="color:#414141;">{{path}}</text></view>
+	<view class='hor-left tip path'>页面路径：<text style="color:#414141;">{{path}}</text></view> -->
+
+
+
+	<image src='https://res.shibu365.com/i/4fbb8856012c48d481f21edad8b102ed.png' style="width:228rpx;height:228rpx;margin:40px auto"></image>
+	<view class='hor-center mv-20'>
+		当前页面功能优化中，敬请期待
+	</view>
 </view>
