@@ -14,10 +14,10 @@ const uploadFiles=(files,index)=>{
 				app.ui.loading(false)
 			}
 			if (index >= 0) {
-				art.pictures.splice(index,1,res.data[0].url)
+				art.pictures.splice(index,1,res.data.url)
 			}
 			else{
-				art.pictures.push(res.data[0].url)
+				art.pictures.push(res.data.url)
 			}
 			
 			page.setData({
@@ -184,7 +184,7 @@ Page({
 		}
 
 		app.http.request({
-			url:'art/post',
+			url:'essay/post',
 			param:art,
 			done:rlt =>{
 				if(rlt.status==1){

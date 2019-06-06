@@ -124,7 +124,7 @@ page{
 }
 .comm-tab .tabs .pnl .tab.selected:after{	
 	background-color:#FF9472;
-	bottom:0;
+	bottom:4rpx;
 }
 .art-title .author{
 	position: relative;

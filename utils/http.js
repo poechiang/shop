@@ -150,6 +150,7 @@ var doCheckLogin = function (cb) {
 
 var requestUrl = function (options) {
 	options = options || {}
+	options.param = options.data || options.param || {}
 	options.method = options.method || 'POST'
 
 	options.header = options.header || {}
@@ -263,15 +264,17 @@ var requestUrl = function (options) {
 
 }
 
-module.exports = {
-	request(options) {
-		options = options || {}
-		// 预处理参数
-		var param = options.data || options.param || {}
+var loadingState = {}
 
-		options.param = param
-		requestUrl(options)
-	},
+const clacDeg = plan => {
+	return parseInt(plan.days * 270 / plan.total_days)
+}
+const clacThumb = plan => {
+	return parseInt(clacDeg(plan) / 90) + 1
+}
+
+module.exports = {
+	request:requestUrl,
     /**
      * 上传文件到服务器
      */
@@ -335,6 +338,291 @@ module.exports = {
 
 
 	checkLogin: doCheckLogin,
-	login: doLogin
+	login: doLogin,
+
+
+	/**
+	 * 请求用户计划
+	 */
+	loadMyPlanInfo(page,cb){
+		
+		if (loadingState.plan) return
+		loadingState.plan = true
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+		this.request({
+			url: 'user/info',
+			success: rlt => {
+				if (rlt.status == -10) {
+					// 新用户未加入
+					wx.redirectTo({
+						url: '/pages/index/join',
+					})
+				}
+				else if (rlt.status == 1) {
+
+					var plan = rlt.data.ifplan
+					page && page.setData({
+						plan: plan,
+						deg: clacDeg(plan),
+						thumb: clacThumb(plan),
+					})
+					wx.setStorage({
+						key: 'ifthin_plan',
+						data: plan,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.plan = false
+				cb && cb(rlt)
+			},
+		})
+	},
+	/**
+	 * 请求用户徽章列表
+	 */
+
+	loadMyHzhList(page,cb) {
+		if (loadingState.hzh) return
+		loadingState.hzh = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+		this.request({
+			url: 'user/hzh_list',
+			success: rlt => {
+				if (rlt.status == 1) {
+					page && page.setData({
+						hzhList: rlt.data || []
+					})
+
+					wx.setStorage({
+						key: 'ifthin_hzhlist',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.hzh = false
+				cb && cb(rlt)
+			}
+		})
+	},
+	loadMyStatisInfo(page,cb) {
+		
+		if (loadingState.statis) return
+		loadingState.statis = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+
+		this.request({
+			url: 'user/statistics',
+			success: rlt => {
+				
+				if (rlt.status == 1) {
+					page && page.setData({
+						statis: rlt.data || 0
+					})
+
+					wx.setStorage({
+						key: 'ifthin_statis',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.statis = false
+				cb && cb(rlt)
+			}
+		})
+	},
+
+	/**
+	 * 请求当月打卡统计
+	 */
+	loadMonthTask(page,cb){
+
+		if (loadingState.month) return
+		loadingState.month = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+
+		this.request({
+			url: 'task/month_task',
+			success: rlt => {
+
+				if (rlt.status == 1) {
+					page && page.setData({
+						month: rlt.data || []
+					})
+
+					wx.setStorage({
+						key: 'ifthin_month',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.month = false
+				cb && cb(rlt)
+			}
+		})
+	},
+	loadTodayTask(page,cb){
+
+		if (loadingState.today) return
+		loadingState.today = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+
+		this.request({
+			url: 'task/today_task',
+			success: rlt => {
+
+				if (rlt.status == 1) {
+					page && page.setData({
+						today: rlt.data || null
+					})
+
+					wx.setStorage({
+						key: 'ifthin_today',
+						data: rlt.data||null,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.today = false
+				cb && cb(rlt)
+			}
+		})
+	},
+	loadMyVideo(page, cb) {
+		if (loadingState.chx) return
+		loadingState.chx = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+
+		this.request({
+			url: 'user/my_video',
+			success: rlt => {
+
+				if (rlt.status == 1) {
+					page && page.setData({
+						myVideo: rlt.data || []
+					})
+
+					wx.setStorage({
+						key: 'ifthin_my_video',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.chx = false
+				cb && cb(rlt)
+			}
+		})
+	},
+	loadManuals(page, cb) {
+
+		if (loadingState.manual) return
+		loadingState.manual = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+		this.request({
+			url: 'user/my_manuals',
+			success: rlt => {
+
+				if (rlt.status == 1) {
+					page && page.setData({
+						myVideo: rlt.data || []
+					})
+
+					wx.setStorage({
+						key: 'ifthin_manuals',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.manual = false
+				cb && cb(rlt)
+			}
+		})
+	},
+	loadTodayTaskManual(page, cb) {
+
+		if (loadingState.today_manual) return
+		loadingState.today_manual = true
+
+		var app = getApp()
+		if (typeof page == 'function') {
+			cb = page
+			page = app.pages.current()
+		}
+		this.request({
+			url: 'user/my_today_manual',
+			success: rlt => {
+
+				if (rlt.status == 1) {
+					page && page.setData({
+						todayManual: rlt.data || []
+					})
+
+					wx.setStorage({
+						key: 'ifthin_today_manual',
+						data: rlt.data,
+					})
+				}
+				else {
+					app.con.error(rlt.msg)
+					//app.ui.modal(rlt.msg)
+				}
+				loadingState.today_manual = false
+				cb && cb(rlt)
+			}
+		})
+	}
 
 }

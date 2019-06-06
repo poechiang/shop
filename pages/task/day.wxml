@@ -7,10 +7,11 @@
 	</view>
 	<view class='hor-center mv-10 fs-18'>请观看初心视频</view>
 
-	<view class='box mh-15 mt-20 hor-center of-hidden p-0' style='height:440rpx;'>
-		<video class="full-width full-height" src='https://res.shibu365.com/f/2018-12-17/c803de76628149e0898cab62a2e0dea9afbc7609.mp4' enable-progress-gesture="{{false}}" bindended="handleVideoEnd"></video>
+	<view class='box mh-15 mt-20 hor-center of-hidden p-1' style='height:440rpx;'>
+		<video class="full-width full-height" src='{{myVideo}}' enable-progress-gesture="{{false}}" bindended="uploadTaskComplete"></video>
 	</view>
-	<view class='tip-default fs-12 mv-10 mh-15 hor-center'>
+	<view class='tip-success fs-12 mv-10 mh-15 hor-center' wx:if="{{completed}}">恭喜您完成了今日任务：【观看初心视频】！</view>
+	<view class='tip-default fs-12 mv-10 mh-15 hor-center' wx:else>
 		规则：请观看完整视频，以完成当前任务
 	</view>
 </block>
@@ -23,18 +24,19 @@
 <view class='box mh-15 mt-20 flex-row flex-line-center'>
 		<image class='txt-logo mr-10' src='https://res.shibu365.com/i/2019-05-31/ee3df61c40ad40f0b6bb5c62e4b94e86.png'></image>		
 		<text>当前体重</text>
-		<input class='flex-item ph-5 hor-right' style='color:#FF766B;'></input>
+		<input class='flex-item ph-5 hor-right' style='color:#FF766B;' bindinput='handleWeightInput' value='{{weight}}'></input>
 		<text>KG</text>
 	</view>
 
 	<view class='box mh-15 mt-20 hor-center'>
 		<text>请上传今日真实体重称重照片</text>
 		<view class='flex-row flex-main-around mt-20'>
-			<view class='demo clickable-box' hover-class='clickable-hover'>
+			<image class='demo' src='{{weightPhoto}}' wx:if="{{weightPhoto}}"></image>
+			<view class='demo clickable-box' hover-class='clickable-hover' wx:else>
 				<image src='https://res.shibu365.com/i/2019-05-31/13cff6dac3e447e7ae64a7de250ff780.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
 				<view>示例</view>
 			</view>
-			<view class='upload clickable-box'  hover-class='clickable-hover'>
+			<view class='upload clickable-box'  hover-class='clickable-hover' bindtap='handleChooseImg'>
 				<image src='https://res.shibu365.com/i/2019-05-31/126eb605047048e68be2ea89d135f1de.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
 				<view>上传</view>
 			</view>
@@ -55,11 +57,13 @@
 	</view>
 	<view class='hor-center mv-10 fs-18'>请观看今日推送教程</view>
 
-	<view class='box mh-15 mt-20 hor-center of-hidden p-0' style='height:440rpx;'>
-		<video class="full-width full-height" src='https://res.shibu365.com/f/2018-12-17/c803de76628149e0898cab62a2e0dea9afbc7609.mp4' enable-progress-gesture="{{false}}" bindended="handleVideoEnd"></video>
+	<view class='box mh-15 mt-20 hor-center of-hidden p-1' style='height:440rpx;'>
+		<video class="full-width full-height" src='{{todayManual.url}}' enable-progress-gesture="{{false}}" bindended="uploadTaskComplete" wx:if="{{todayManual && todayManual.url}}"></video>
+		<delay-loading height="220" wx:else>正在加载教程视频信息</delay-loading>
 	</view>
 
-	<view class='tip-default fs-12 mv-10 mh-15 hor-center'>
+	<view class='tip-success fs-12 mv-10 mh-15 hor-center' wx:if="{{completed}}">恭喜您完成了今日任务：【观看瘦身教程】！</view>
+	<view class='tip-default fs-12 mv-10 mh-15 hor-center' wx:else>
 		规则：请观看完整视频，以完成当前任务
 	</view>
 </block>
@@ -80,4 +84,5 @@
 </view>
 
 
-<button class='mh-15 mt-10' bindtap='handleComplete' disabled='{{!completed}}'>完成</button>
+<button class='mh-15 mt-10' bindtap='uploadTaskComplete' disabled='{{!(weightPhoto && weight)}}' wx:if="{{type=='weight'}}">提交</button>
+<button class='mh-15 mt-10' bindtap='handleComplete' disabled='{{!completed}}' wx:else>完成</button>

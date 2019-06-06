@@ -1,4 +1,6 @@
 // pages/task/index.js
+const app = getApp()
+
 Page({
 
 	/**
@@ -7,6 +9,10 @@ Page({
 	data: {
 		tabs:["任务","知识库"],
 		currTabIndex:0,
+		sectionDesc: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+		plan: wx.getStorageSync('ifthin_plan') || null,
+		month: wx.getStorageSync('ifthin_month') || [],
+		today: wx.getStorageSync('ifthin_today') || {},
 		getHzh:false,// 是否得到了徽章
 		jdbacks:[
 			'https://res.shibu365.com/i/2019-05-31/28df56cebda44bf8943704a5fc3d3e53.png',
@@ -15,23 +21,9 @@ Page({
 			'https://res.shibu365.com/i/2019-05-31/6c6291bbc0f7414392c7249dd53bbc4d.png',
 		],
 		jd1:false,
-		jd2:true
+		jd2:false
 	},
-
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-
-	},
-
+	onLoad: function () {},
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
@@ -40,7 +32,16 @@ Page({
 		wx.hideTabBar({
 			aniamtion: true,
 		})
+
+
+		app.http.loadMyPlanInfo(this,rlt=>{
+			if (rlt.status == 1) {
+				app.http.loadMonthTask(this)
+				app.http.loadTodayTask(this)
+			}
+		})
 	},
+	
 
 	/**
 	 * 生命周期函数--监听页面隐藏

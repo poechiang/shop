@@ -16,7 +16,7 @@ page{
 	border:none;
 	padding:0;
 }
-.clickable-box{
+.clickable-box,.demo{
 	border-radius: 20rpx;
 	width:275rpx;
 	height:275rpx;

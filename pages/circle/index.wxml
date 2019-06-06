@@ -2,13 +2,13 @@
 <!-- 切换标签 开始 -->
 <!-- <tabs items='{{tabs}}' current-index="{{tabIndex}}"  top="{{tabTop}}" dock="{{tabFixed?true:false}}" bindchange="handleTabChange"></tabs> -->
 <view class='comm-tab'>
-	<tabs items="{{tabs}}" current-index="{{currIndex}}" align="left" space="10" shadow="{{false}}" bindchange="handleTabChange" ></tabs>
+	<tabs items="{{tabs}}" current-index="{{currIndex}}" align="left" space="10" background-color="#292929" shadow="{{false}}" bindchange="handleTabChange" ></tabs>
 </view>
 <!-- 切换标签 结束  -->
 
 
 
-<view class='section art mv-10 pv-10' wx:for="{{articles}}" wx:key="id" >
+<view class='art mh-15 mv-10 pv-10' wx:for="{{articles}}" wx:key="id" >
 	
 	<!-- 文章作者 -->
 	<view class='art-title of-hidden flex-row flex-line-center' >
@@ -32,7 +32,7 @@
 	<view class='art-body mv-10'>
 	<view hover-class='clickable-hover' data-id='{{item.id}}'> <text>{{item.brief}}</text></view>
 	
-	<navigator class=' topic link' bindtap='handleTopicTap' wx:if="{{item.topic||true}}">#{{item.topic||"IFPLANE第一阶段"}}#</navigator> 
+	<navigator class=' topic link' bindtap='handleTopicTap' wx:if="{{item.topic}}">#{{item.topic}}#</navigator> 
 	<!-- <navigator url="/pages/circle/detail?aid={{item.id}}"> <text>{{item.brief100}}</text> <text class='link fs-14'>查看全文</text></navigator> -->
 	</view>
 

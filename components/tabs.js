@@ -41,6 +41,10 @@ Component({
 			type: String,
 			value: 'stretch'
 		},
+		backgroundColor: {
+			type: String,
+			value: 'transparent'
+		},
 		space: {
 			type: Number,
 			value: 5

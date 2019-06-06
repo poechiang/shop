@@ -1,6 +1,6 @@
 <!--components/tabs.wxml-->
 <view class='tabs ma-0' style='line-height:{{height}}px;height:{{height}}px;width:{{width}}'>
-	<view class='pnl flex-row flex-line-center hor-center {{align=="center"?"flex-main-center":""}} {{isFixed?"pos-fixed":""}} {{shadow?"shadow":""}}' style='width:100%;left:0;top:{{dockTop}}px;'>
+	<view class='pnl flex-row flex-line-center hor-center {{align=="center"?"flex-main-center":""}} {{isFixed?"pos-fixed":""}} {{shadow?"shadow":""}}' style='width:100%;left:0;top:{{dockTop}}px;background-color:{{backgroundColor}}'>
 		<slot name="start">
 		</slot>
 		<view class='tab {{align=="stretch"?"flex-item":""}} {{currentIndex == index?"selected":""}}' wx:for='{{items}}' wx:key='{{key||"*this"}}' data-key="{{item.key}}" data-index="{{index}}" bindtap='handleTabToggle' style='margin:0 {{space}}px;'>{{item.title||item}}</view>

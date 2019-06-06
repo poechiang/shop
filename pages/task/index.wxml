@@ -4,13 +4,13 @@
 </view>
 <block wx:if="{{currTabIndex==0}}">
     <view class='bar mh-15'>
-        <button class='nav prev icon-arrow-left f-left' plain size='mini'></button>
-        <text>2019年05月</text>
+        <button class='nav prev icon-arrow-left f-left' plain size='mini' wx:if="{{0}}"></button>
+        <text>{{month.now.label}}</text>
         <text class='bdr-v'>|</text>
-        <text class='jd'>第二阶段</text>
+        <text class='jd'>第{{sectionDesc[plan.section]}}阶段</text>
         <image class='logo ml-5' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image>
-        <text class='days'>已坚持 <text class='val'>20</text> 天 </text>
-        <button class='nav next icon-arrow-right f-right' style='line-height:80rpx;' plain size='mini'></button>
+        <text class='days'>已坚持 <text class='val'>{{plan.days}}</text> 天 </text>
+        <button class='nav next icon-arrow-right f-right' style='line-height:80rpx;' plain size='mini' wx:if="{{0}}"></button>
     </view>
     <view class='candy mh-15'>
         <view class='head flex-row flex-main-around'>
@@ -23,41 +23,7 @@
             <text class='flex-item'>SAT</text>
         </view>
         <view class='days flex-row flex-main-around flex-wrap'>
-            <text class='d'></text>
-            <text class='d'></text>
-            <text class='d done'>1</text>
-            <text class='d done'>2</text>
-            <text class='d done'>3</text>
-            <text class='d done'>4</text>
-            <text class='d done'>5</text>
-            <text class='d undo'>6</text>
-            <text class='d undo'>7</text>
-            <text class='d'>8</text>
-            <text class='d'>9</text>
-            <text class='d'>10</text>
-            <text class='d'>11</text>
-            <text class='d'>12</text>
-            <text class='d'>13</text>
-            <text class='d'>14</text>
-            <text class='d'>15</text>
-            <text class='d'>16</text>
-            <text class='d'>17</text>
-            <text class='d'>18</text>
-            <text class='d'>19</text>
-            <text class='d'>20</text>
-            <text class='d'>21</text>
-            <text class='d'>22</text>
-            <text class='d'>23</text>
-            <text class='d'>24</text>
-            <text class='d'>25</text>
-            <text class='d'>26</text>
-            <text class='d'>27</text>
-            <text class='d'>28</text>
-            <text class='d'>29</text>
-            <text class='d'>30</text>
-            <text class='d'>31</text>
-            <text class='d e'></text>
-            <text class='d e'></text>
+            <text class='d {{item.rlt}}' wx:for="{{month.info}}" wx:key="key">{{item.day}}</text>
         </view>
         <view class='tip-desc'>
             <text class='done'>完成</text>
@@ -67,34 +33,39 @@
     <view class='today mh-15 mt-20'>
         <view class='sec-head mb-10'>今日任务</view>
 
-        <navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{dayTask.video}}">看初心视频
+        <navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{!today || today.video==0}}">看初心视频
             <text class='tip-undo'>未完成</text>
         </navigator>
         <view class='nav-button done' wx:else>看初心视频
             <text class='tip-done'>完成</text>
         </view>
-        <navigator class='nav-button undo more' url='/pages/task/day?t=manual' wx:if="{{dayTask.manual}}">看健身教程
+        <navigator class='nav-button undo more' url='/pages/task/day?t=manual' wx:if="{{!today || today.manual==0}}">看健身教程
             <text class='tip-undo'>未完成</text>
         </navigator>
         <view class='nav-button done' wx:else>看健身教程
             <text class='tip-done'>完成</text>
+
         </view>
-        <navigator class='nav-button undo more' url='/pages/task/day?t=weight' wx:if="{{dayTask.weight}}">体重打卡
-            <text class='tip-undo'>未完成</text>
-        </navigator>
-        <view class='nav-button done' wx:else>体重打卡
-            <text class='tip-done'>完成</text>
-        </view>
+		<block wx:if="{{plan.section>1}}">   <!--plan.section>1-->
+		
+			<navigator class='nav-button undo more' url='/pages/task/day?t=weight' wx:if="{{!today || today.weight<=0}}">体重打卡
+				<text class='tip-undo'>未完成</text>
+			</navigator>
+			<view class='nav-button done' wx:else>体重打卡
+				<text class='tip-done'>完成</text>
+			</view>
+		</block>
 
     </view>
 </block>
 <view class='lib mh-15' wx:if="{{currTabIndex==1}}">
-    <navigator class='nav-button unlock mb-10 more'>健康食谱
+    <navigator class='nav-button unlock mb-10 more' url="/pages/common/404">健康食谱
         <text class='tip-unlock'>观看有奖励~</text>
     </navigator>
-    <view class='nav-button locked'>体重打卡
+    <view class='nav-button locked' wx:if='{{plan.section<=1}}'>体重打卡
         <text class='tip-locked'>第二阶段解锁</text>
     </view>
+	<navigator class='nav-button unlock mb-10 more' url="/pages/common/404" wx:else>体重打卡</navigator>
 </view>
 
 

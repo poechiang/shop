@@ -26,10 +26,22 @@ Page({
 	onLoad: function (options) {
 		// 加载数据
 		options=options||{}
+		options.complete=()=>{
+
+			this.setData({
+				bottomLoading: {
+					height: 0,
+					opacity: 0
+				}
+			})
+		}
 		this.setData({
 			tabIndex:options.tab||0,
+			bottomLoading: {
+				height: 41,
+				opacity: 1
+			}
 		})
-
 		this.loadData(options)
 		// 定位当前城市
 		app.locate(loc=>{
@@ -46,10 +58,9 @@ Page({
 	/**
 	 * 加载数据
 	 */
-	loadData(){
+	loadData(options){
 		
-		var options = this.options,
-			url
+		var url
 			
 		if (this.data.tabIndex == 1) {
 			url = 'essay/my_essays'
@@ -141,6 +152,7 @@ Page({
 		this.loadData({
 			page: this.data.page.curr + 1 || 1,
 			complete:()=>{
+				console.log(456)
 				this.setData({
 					bottomLoading: {
 						height: 0,
@@ -197,6 +209,7 @@ Page({
 		this.loadData({
 			page: 1,
 			complete: () => {
+				console.log(123)
 				this.setData({
 					bottomLoading: {
 						height: 0,
