@@ -12,6 +12,7 @@
 	-webkit-transition: top .2s ease-in-out;
 	-moz-transition: top .2s ease-in-out;
 	-o-transition: top .2s ease-in-out;
+  box-shadow: 0 0 10rpx #000000;
 }
 .tabs .tab{
 	position: relative;
@@ -21,7 +22,7 @@
 	position: absolute;
 	width:50%;
 	height:4px;
-	background-color: #FFD900;
+	background-color: #FD8F71;
 	bottom:4px;
 	left:25%;
 	display: none;

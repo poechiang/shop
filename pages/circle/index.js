@@ -27,7 +27,6 @@ Page({
 		// 加载数据
 		options=options||{}
 		options.complete=()=>{
-
 			this.setData({
 				bottomLoading: {
 					height: 0,
@@ -35,6 +34,18 @@ Page({
 				}
 			})
 		}
+		wx.getStorage({
+			key: 'ifthin_fav_essay_list',
+			success: res => {
+				this.myFavEssayList = res.data || []
+			},
+		})
+		wx.getStorage({
+			key: 'ifthin_col_essay_list',
+			success: res => {
+				this.myColEssayList = res.data || []
+			},
+		})
 		this.setData({
 			tabIndex:options.tab||0,
 			bottomLoading: {
@@ -60,21 +71,19 @@ Page({
 	 */
 	loadData(options){
 		
-		var url
+		var type = 'all'
 			
 		if (this.data.tabIndex == 1) {
-			url = 'essay/my_essays'
+			type = 'my'
 		}
 		else if (this.data.tabIndex == 2) {
-			url = 'essay/my_fav_essays'
-		}
-		else {
-			url = 'essay/get_all_essays'
+			type = 'col'
 		}
 
 		app.http.request({
-			url:url,
+			url: 'essay/get_all_essays',
 			param:{
+				type:type,
 				page:options.page||1,
 				adcode: this.data.currCity ? this.data.currCity.adcode : 0,
 			},
@@ -84,6 +93,20 @@ Page({
 				page.ended = page.curr == page.last
 				page.empty = page.total == 0
 				var old = this.data.articles||[]
+
+				var favList = this.myFavEssayList
+				var colList = this.myColEssayList
+				
+				for(var x in list){
+					var art = list[x]
+					if (favList.indexOf(art.id) >= 0) {
+						art.inMyFavList = true
+					}
+					if (colList.indexOf(art.id) >= 0) {
+						art.inMyColList = true
+					}
+				}
+
 				this.setData({
 					articles: page.curr == 1 ? list : old.concat(list),
 					page:page
@@ -92,36 +115,6 @@ Page({
 				options.complete && options.complete(rlt)
 			}
 		})
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-		
-	},
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function () {
-		// 隐藏导航栏
-		wx.hideTabBar({
-			aniamtion: true,
-		})
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function () {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function () {
-
 	},
 
 	/**
@@ -278,51 +271,57 @@ Page({
 	// },
 	handleMsg:function(e){
 		
-		this.currArtIndex = e.currentTarget.dataset.index
+    this.currArtIndex = e.currentTarget.dataset.index
+    this.retoId = e.currentTarget.dataset.posterid
+    var nick = e.currentTarget.dataset.retonick
 		this.setData({
 			replyVisible: true,
-			navBarVisible: false
+			navBarVisible: false,
+      placeholder:this.retoId?('回复'+nick):'送上你的鼓励吧'
 		})
 
 	},
 	handleReplySend(e) {
 		if(e.detail.value){
-			
+			var param = {
+
+        aid: this.data.articles[this.currArtIndex].id,
+        msg: e.detail.value,
+      }
+      if(this.retoId){
+        param.rid = this.retoId
+      }
 			app.http.request({
 				check:true,
-				url:'art/do_reply',
-				param:{
-					aid:this.data.articles[this.currArtIndex].id,
-					msg:e.detail.value,
-				},
+				url:'essay/do_reply',
+				data:param,
 				done: rlt => {
-					console.log(rlt)
 					if(rlt.status==1){
 						app.ui.success('评论成功')
-						// 如果后台直接审核，则自动插入回复列表，并更新相关数据
-						if (rlt.data.audit == 1) {
-							var list = this.data.articles, index = this.currArtIndex
-							var art = list[index]
-							art.stat.msgs++
-							rlt.data.user = app.getLoginUser()
-							art.msgs = art.msgs || []
-							art.msgs.unshift(rlt.data)
-							this.setData({
-								articles: list,
-								replyVisible: false,
-								navBarVisible: true,
-								replyMsg:''
-							})
 						
-						}
+						var list = this.data.articles, index = this.currArtIndex
+						var art = list[index]
+						art.comment_count++
+						//rlt.data.user = app.getLoginUser()
+            art.comments.unshift(rlt.data)
+						
+						
 					}
 					else{
-						app.ui.modal(rlt.msg,{cancel:false})
+						app.ui.modal(rlt.msg, { cancel: false })
 					}
+
+					this.setData({
+						articles: list,
+						replyVisible: false,
+						navBarVisible: true,
+						replyMsg: ''
+					})
 				}
 			})
 		}
 	},
+	noTriggerEvent(){},
 	handleReplyCancel() {
 		this.currArtIndex = -1
 		this.setData({
@@ -331,25 +330,76 @@ Page({
 			replyMsg: ''
 		})
 	},
-	handleFav:function(e){
+	handleCollect: function (e) {
 		var index = e.currentTarget.dataset.index,
 			list = this.data.articles,
 			art = list[index]
-		art.stat.favs += 1
-		art.stat.myfav = true
-		art.favs = art.favs || []
-		art.favs.unshift({
-			user:app.getLoginUser()
-		})
+
+		art.col_count += 1
+		art.inMyColList = true
 		this.setData({
-			articles:list
+			articles: list
 		})
 		app.http.request({
 			check: true,
-			url: 'art/do_fav',
+			url: 'essay/do_collect',
 			param: {
 				aid: list[index].id,
 			},
+			success:rlt=>{
+
+				if (rlt.status == 1) {
+					this.myColEssayList.push(art.id)
+					wx.setStorage({
+						key: 'ifthin_col_essay_list',
+						data: this.myColEssayList,
+					})
+					app.ui.success()
+				}
+				else {
+					app.ui.modal(rlt.msg)
+					art.col_count -= 1
+					art.inMyColList = false
+					this.setData({
+						articles: list
+					})
+				}
+			}
+		})
+	},
+	handleFav: function (e) {
+		var index = e.currentTarget.dataset.index,
+			list = this.data.articles,
+			art = list[index]
+		art.fav_count += 1
+		art.inMyFavList = true
+		this.setData({
+			articles: list
+		})
+		app.http.request({
+			url: 'essay/do_fav',
+			param: {
+				aid: art.id,
+			},
+			success: rlt => {
+				if(rlt.status==1){
+					this.myFavEssayList.push(art.id)
+					wx.setStorage({
+						key: 'ifthin_fav_essay_list',
+						data: this.myFavEssayList,
+					})
+					app.ui.success()
+				}
+				else{
+					app.ui.modal(rlt.msg)
+
+					art.fav_count -= 1
+					art.inMyFavList = false
+        }
+        this.setData({
+          articles: list
+        })
+			}
 		})
 	},
 	/**

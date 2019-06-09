@@ -21,21 +21,21 @@
 <view class='info-bar mh-15  mt-20 flex-row flex-main-center flex-line-stretch'>
     <view class='flex-item hor-center'>
         <view>
-            <image class='logo' src='https://res.shibu365.com/i/2019-05-28/c6d485b8a68b4b14bb2c803bd28d586b.png'></image> 已经坚持</view>
+            <text class='icon-calendar tip-theme2 ver-3'></text> 已经坚持</view>
         <view>
             <text class='val'>{{plan.days}}</text>天</view>
     </view>
     <view class='bdr-v'></view>
     <view class='flex-item hor-center'>
         <view>
-            <image class='logo' src='https://res.shibu365.com/i/2019-05-28/b48f1ef7a4074f0d9c82525d1ea88baa.png'></image> 当前体重</view>
+            <text class='icon-weight tip-theme2 ver-2'></text> 当前体重</view>
         <view>
             <text class='val'>{{plan.current_weight||'--'}}</text>KG</view>
     </view>
     <view class='bdr-v'></view>
     <view class='flex-item hor-center'>
         <view>
-            <image class='logo' src='https://res.shibu365.com/i/2019-05-28/2dc16aa1b2804e3d80caa14c68d2301c.png'></image> 目标体重</view>
+            <text class='icon-target tip-theme2 ver-2'></text> 目标体重</view>
         <view>
             <text class='val'>{{plan.target_weight}}</text>KG</view>
     </view>
@@ -44,31 +44,20 @@
 <view class='hzh mh-15 mt-20'>
     <view class='sec-head'>我的徽章</view>
     <view class='hzh-bar flex-row flex-main-around mh-5 mt-15'>
-        <view class='hz-block {{hzhList.length>=1?"":"null"}}'>
-            <image class='hz' wx:if="{{hzhList.length>=1}}" src='{{hzhList[0].path||hzhList[0]}}'></image>
+        <view class='hz-block' wx:for="{{hzhList}}" wx:for-item="hzh">
+            <image class='hz' src='{{hzh.path||hzh}}'></image>
         </view>
-        <view class='hz-block {{hzhList.length>=2?"":"null"}}'>
-            <image class='hz' wx:if="{{hzhList.length>=2}}" src='{{hzhList[1].path||hzhList[1]}}'></image>
-        </view>
-        <view class='hz-block {{hzhList.length>=3?"":"null"}}'>
-            <image class='hz' wx:if="{{hzhList.length>=3}}" src='{{hzhList[2].path||hzhList[2]}}'></image>
-        </view>
-        <view class='hz-block {{hzhList.length>=4?"":"null"}}'>
-            <image class='hz' wx:if="{{hzhList.length>=4}}" src='{{hzhList[3].path||hzhList[3]}}'></image>
-        </view>
-        <view class='hz-block {{hzhList.length>=5?"":"null"}}'>
-            <image class='hz' wx:if="{{hzhList.length>=5}}" src='{{hzhList[4].path||hzhList[4]}}'></image>
-        </view>
-        <navigator class='hz-block more' url="/pages/common/404"></navigator>
+        <navigator class='hz-block more' url="/pages/common/404" wx:if="{{hzhList.length>5}}"></navigator>
+        <view class='flex-item tip hor-center' style='height:100rpx' wx:if="{{!hzhList || hzhList.length<=0}}">您还没有获得徽章</view>
     </view>
 </view>
 
 <view class='sec-more mh-15 mt-20'>
     <image class='banner' src='https://res.shibu365.com/i/2019-05-28/f0b54bdd106549899206e3d0e80b9a19.png'></image>
-    <navigator class='msg nav-button more mb-10'>
-        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/ca718631b97644ddb4540b36946a01c3.png'></image> 我的消息 <text class='bullet' wx:if="{{statis.msg>0}}"></text></navigator>
-    <navigator class='hot nav-button more'>
-        <image class='logo' src='https://res.shibu365.com/i/2019-05-28/4a8f5b54cec5409e9060751d65414863.png'></image> 热门活动 <text class='bullet' wx:if="{{statis.hd>0}}"></text></navigator>
+    <navigator class='msg nav-button more mb-10' url='/pages/common/404'>
+        <text class='icon-notify tip-theme2'></text> 我的消息 <text class='bullet' wx:if="{{statis.msg>0}}"></text></navigator>
+    <navigator class='hot nav-button more' url='/pages/common/404'>
+        <text class='icon-myhd tip-theme2'></text> 热门活动 <text class='bullet' wx:if="{{statis.hd>0}}"></text></navigator>
 </view>
 
 </block>

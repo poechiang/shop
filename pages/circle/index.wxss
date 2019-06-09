@@ -24,6 +24,12 @@
 	line-height:20px;
 	margin-top: -10px;
 }
+page{
+  background-color:#202022;
+}
+.art{
+  background-color:#292929;
+}
 .art-title button{
 	padding:0 5px!important;
 	margin-left:5px;
@@ -85,23 +91,6 @@
 .attach.pic-box.items-9 .pic{
 	height:226rpx!important;
 }
-.foot{
-	font-size: 14px;
-	margin:10px 0;
-}
-.foot view.loc{
-	padding:2px 10px;
-	background-color:#efefef;
-	border-radius: 12px;
-}
-.foot .op{
-	vertical-align: middle;
-	padding:2px 8px;
-}
-.foot .op .icon-zaned{
-	color:#ff5722;
-}
-
 .bottom-loading{
 	overflow:hidden;
 }
@@ -116,45 +105,16 @@
 page{
 	padding-bottom: 150rpx;
 }
-.comm-tab .tabs{
-	padding:0 30rpx;
-}
 .comm-tab .tabs .pnl{
+	padding:0 30rpx;
+  box-sizing: border-box;
 	background-color: transparent;
 }
 .comm-tab .tabs .pnl .tab.selected:after{	
 	background-color:#FF9472;
 	bottom:4rpx;
 }
-.art-title .author{
-	position: relative;
-}
-.art-title .author .sex{
-	position: absolute;
-	font-size: .6em;
-	bottom:0;
-	left: 60rpx;
-	
-}
-.art-title .author .sex.nan{
-	color:#59CBCE;	
-}
-.art-title .author .sex.nv{
-	color:#FF4848;	
-}
 
-.art-title .author .tip.down{
-	color:#59CBCE;
-}
-.art-title .author .tip.up{
-	color:#FF4848;
-}
-.art-title .author .tip.down .up{
-	display: none;
-}
-.art-title .author .tip.up .down{
-	display: none;
-}
 .art-body .topic{
 	color:#59CBCE;
 }
@@ -175,6 +135,20 @@ page{
 	border-radius: 40rpx;
 
 }
+.foot{
+	height:60rpx;
+	font-size: 14px;
+	margin:10rpx 0;
+}
 .foot .op{
 	color:#666666;
+	line-height: 60rpx;
+
+}
+.foot .op[disabled]{
+	color:#414141!important;
+	background-color:transparent!important;
+}
+.foot .op .icon.done{
+	color:#FD8F71;
 }

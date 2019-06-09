@@ -1,40 +1,4 @@
 /* pages/user/home/index.wxss */
-button{
-	height: 30px !important;
-	line-height: 30px !important;
-	padding:0 5px !important;
-	font-size: 14px !important;
-	margin-left:5px;
-	margin-right: 2px;
-	box-sizing: border-box;
-	border:none!important;
-}
-button::after,
-button::before,{
-	box-sizing: border-box;
-	background-color:red!important;
-}
-button .icon{
-	vertical-align: 0px;
-}
-.wall-paper{
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-/* .user-pnl{
-	background-color: #fff;
-} */
-.user-pnl .user-info .tags .tag{
-	display: inline-block;
-	background-color:#f0f0f0;
-	color:#616161;
-	padding:2px 4px;
-	margin-right:5px;
-}
-.user-pnl .user-info navigator.link{
-	margin-right: 10px;
-}
 
 
 .art-title button{
@@ -48,7 +12,7 @@ button .icon{
 	font-size: 1em;
 }
 .attach{
-	background-color: #f6f8f9;
+	background-color: transparent;
 	padding:10rpx;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -60,6 +24,7 @@ button .icon{
 
 }
 .attach.pic-box .pic{
+	border-radius: 40rpx;
 	border:6rpx solid transparent;
 	width:678rpx;
 	height:339rpx;
@@ -98,19 +63,21 @@ button .icon{
 .attach.pic-box.items-9 .pic{
 	height:226rpx!important;
 }
+
 .foot{
+	height:60rpx;
 	font-size: 14px;
-	margin:10px 0;
-}
-.foot view.loc{
-	padding:2px 10px;
-	background-color:#efefef;
-	border-radius: 12px;
+	margin:10rpx 0;
 }
 .foot .op{
-	vertical-align: middle;
-	padding:2px 8px;
+	color:#666666;
+	line-height: 60rpx;
+
 }
-.foot .op .icon-zaned{
-	color:#ff5722;
+.foot .op[disabled]{
+	color:#414141!important;
+	background-color:transparent!important;
+}
+.foot .op .icon.done{
+	color:#FD8F71;
 }

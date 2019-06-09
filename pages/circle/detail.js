@@ -9,10 +9,9 @@ Page({
 		article: null,
 		defUserPhoto: 'https://res.shibu365.com/i/2018-12-16/88e15fd6f83e4cd3bd2c579ed37ce7ec.jpg',
 		msgType: 1,
-		statusHeight: app.getSystemInfo.statusBarHeight,
+    statusHeight: app.systemInfo.tabBarHeight,
 		statusBottom:0,
 		replyVisible: false,
-		blocks: ['post', 'top'],
 	},
 
 	/**
@@ -21,7 +20,23 @@ Page({
 	onLoad: function (options) {
 		// 加载数据
 		options = options || {}
+
+
+    wx.getStorage({
+      key: 'ifthin_fav_essay_list',
+      success: res => {
+        this.myFavEssayList = res.data || []
+      },
+    })
+    wx.getStorage({
+      key: 'ifthin_col_essay_list',
+      success: res => {
+        this.myColEssayList = res.data || []
+      },
+    })
+    
 		this.loadData(options)
+    //console.log(app.getSystemInfo)
 	},
 	/**
 	 * 加载数据
@@ -29,11 +44,23 @@ Page({
 	loadData(options) {
 		options = options || {}
 		app.http.request({
-			url: 'art/get_detail',
-			param: {aid:options.aid||45},
+			url: 'essay/get_detail',
+			param: {id:options.id},
 			done: rlt => {
-				this.setData({ article: rlt.data.article })
-				app.wxParse.wxParse('content', 'html', rlt.data.article.content, this, 5)
+
+
+        var favList = this.myFavEssayList
+        var colList = this.myColEssayList
+
+        var art = rlt.data
+        if (favList.indexOf(art.id) >= 0) {
+          art.inMyFavList = true
+        }
+        if (colList.indexOf(art.id) >= 0) {
+          art.inMyColList = true
+        }
+				this.setData({ article: art })
+				app.wxParse.wxParse('content', 'html', rlt.data.content, this, 5)
 				options.complete && options.complete(rlt)
 			}
 		})
@@ -123,47 +150,59 @@ Page({
 
 	handleMsg: function (e) {
 
+    this.retoId = e.currentTarget.dataset.posterid
+    var nick = e.currentTarget.dataset.retonick
 		this.setData({
 			statusBottom: -this.data.statusHeight,
-			replyVisible: true,
+      replyVisible: true,
+      placeholder: this.retoId ? ('回复' + nick) : '送上你的鼓励吧'
 		})
 
+    // this.setData({
+    //   replyVisible: true,
+    //   navBarVisible: false
+    // })
 	},
-	handleReplySend(e) {
-		if (e.detail.value) {
-			app.http.request({
-				check: true,
-				url: 'art/do_reply',
-				param: {
-					aid: this.data.article.id,
-					msg: e.detail.value,
-				},
-				done: rlt => {
-					console.log(rlt)
-					if (rlt.status == 1) {
-						app.ui.success('评论成功')
-						// 如果后台直接审核，则自动插入回复列表，并更新相关数据
-						if (rlt.data.audit == 1) {
-							var art = this.data.article
-							art.stat.msgs++
-							rlt.data.user = app.getLoginUser()
-							art.msgs= art.msgs||[]
-							art.msgs.unshift(rlt.data)
-							this.setData({
-								article: art,
-								replyVisible: true,
-								replyMsg: ''
-							})
+  handleReplySend(e) {
+    if (e.detail.value) {
 
-						}
-					}
-					else {
-						app.ui.modal(rlt.msg, { cancel: false })
-					}
-				}
-			})
-		}
-	},
+      var param = {
+        aid: this.data.article.id,
+          msg: e.detail.value,
+        }
+      if (this.retoId){
+        param.rid= this.retoId
+        }
+      app.http.request({
+        check: true,
+        url: 'essay/do_reply',
+        data:param,
+        done: rlt => {
+          if (rlt.status == 1) {
+            app.ui.success('评论成功')
+
+            var art = this.data.article
+            art.comment_count++
+            
+            art.comments.unshift(rlt.data)
+
+
+          }
+          else {
+            app.ui.modal(rlt.msg, { cancel: false })
+          }
+
+          this.setData({
+            article: art,
+            replyVisible: false,
+            statusBottom: 0,
+            replyMsg: ''
+          })
+        }
+      })
+    }
+  },
+  noTriggerEvent() { },
 	handleReplyCancel() {
 
 		this.setData({
@@ -171,29 +210,78 @@ Page({
 			replyVisible: false,
 			replyMsg: ''
 		})
-	},
-	handleFav: function (e) {
-		var art = this.data.article
-		art.stat.favs += 1
-		art.stat.myfav = true
-		art.favs = art.favs || []
-		art.favs.unshift({
-			user: app.getLoginUser()
-		})
-		this.setData({
-			article: art,
-			statusBottom: 0,
-			replyVisible: false,
-		})
-		app.http.request({
-			check: true,
-			url: 'art/do_fav',
-			param: {
-				aid: art.id,
-			},
-		})
-	},
+  },
+  handleCollect: function (e) {
+    var art = this.data.article
 
+    art.col_count += 1
+    art.inMyColList = true
+    this.setData({
+      article: art
+    })
+    app.http.request({
+      check: true,
+      url: 'essay/do_collect',
+      param: {
+        aid: art.id,
+      },
+      success: rlt => {
+
+        if (rlt.status == 1) {
+          this.myColEssayList.push(art.id)
+          wx.setStorage({
+            key: 'ifthin_col_essay_list',
+            data: this.myColEssayList,
+          })
+          art.collectors.unshift(rlt.data)
+          app.ui.success()
+        }
+        else {
+          app.ui.modal(rlt.msg)
+          art.col_count -= 1
+          art.inMyColList = false
+          this.setData({
+            article: art
+          })
+        }
+      }
+    })
+  },
+  handleFav: function (e) {
+    var art = this.data.article
+    art.fav_count += 1
+    art.inMyFavList = true
+    this.setData({
+      article: art
+    })
+    app.http.request({
+      url: 'essay/do_fav',
+      param: {
+        aid: art.id,
+      },
+      success: rlt => {
+        if (rlt.status == 1) {
+          this.myFavEssayList.push(art.id)
+          wx.setStorage({
+            key: 'ifthin_fav_essay_list',
+            data: this.myFavEssayList,
+          })
+
+          art.favoritors.unshift(rlt.data)
+          app.ui.success()
+        }
+        else {
+          app.ui.modal(rlt.msg)
+
+          art.fav_count -= 1
+          art.inMyFavList = false
+        }
+        this.setData({
+          article: art
+        })
+      }
+    })
+  },
 
 
 	/**
@@ -257,9 +345,9 @@ Page({
 	/**
 	 * 私信消息
 	 */
-	handleMsg(){
-		wx.navigateTo({
-			url: '/pages/user/chat/index?tid='+this.data.article.user.id,
-		})
-	},
+	// handleMsg(){
+	// 	wx.navigateTo({
+	// 		url: '/pages/user/chat/index?tid='+this.data.article.user.id,
+	// 	})
+	// },
 })

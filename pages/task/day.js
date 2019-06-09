@@ -25,6 +25,13 @@ Page({
 		this.setData({
 			type:options.t||'weight'
 		})
+
+		app.locate({
+			success: loc => {
+				this.adcode= loc.adcode
+				this.city= loc.isMunicipality ? loc.province : loc.city
+			}
+		})
 	},
 
 	/**
@@ -78,6 +85,8 @@ Page({
 		if(data.type=='weight'){
 			data.weight = this.data.weight
 			data.img = this.data.weightPhoto
+			data.adcode = this.adcode
+			data.city = this.city
 		}
 		app.http.request({
 			url: 'task/complete',

@@ -2,53 +2,66 @@
 
 
 <view wx:if="{{!user.id}}">
-	<image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
-	<view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>
-	<button class='mh-15 mv-30' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo" disabled='{{logining}}'>点击登录</button>
+  <image class='user-photo circle large dp-block ma-30' src='{{user.photo}}'></image>
+  <view class='hor-center' wx:if='{{user.nick}}'>{{user.nick}}</view>
+  <button class='mh-15 mv-30' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleGetUserInfo" disabled='{{logining}}'>点击登录</button>
 </view>
 <block wx:else>
-<view class='section'>
-	<view class='flex-row'>
-		<image class='user-photo circle mr-10' src='{{user.photo}}'></image>
-		<view class='flex-item'>
-			<view class='b3'>{{user.nick}}</view>
-			<view class='tip'>{{user.xuanyan||'XXXX XX XX XXX XXXX XXXXX XXXX XXXX XXXX'}}</view>
-		</view>
-	</view>
+  <view class='section'>
+    <view class='flex-row flex-line-center'>
+      <image class='user-photo circle mr-10' src='{{user.photo}}'></image>
+      <view class='flex-item'>
+        <view class='b3'>{{user.nick}}</view>
+        <view class='tip'>{{user.signature||'这个家伙有点懒……'}}</view>
+      </view>
+    </view>
 
-	<view class='total-info fs-14 mt-20 pt-10'>
-		<view class='left'>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/04d6a3073d0344b59ffa0d6d4290cb91.png'></image> 当前体重 <text class='tip-theme2'>125</text> KG</view>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/db43805ecda34f048059b5783e3a2378.png'></image> 已减重 <text class='tip-theme1'>10.5</text> KG</view>
-		</view>
-		<view class='right'>
-			<view><image class='txt-logo' src='https://res.shibu365.com/i/2019-05-31/58d210dce0f343578db04592514de7c7.png'></image> 我的目标 <text class='tip-theme2'>10.5</text> KG <text class='f-right more3-icon mini'></text></view>
-		</view>
-	</view>
-</view>
+    <view class='total-info fs-14 mt-20 pt-10'>
+      <view class='left'>
+        <view>
+          <text class='icon-weight tip-theme2 ver-2'></text> 当前体重
+          <text class='tip-theme2'>{{plan.current_weight||'--'}}</text> KG
+          </view>
+        <view>
+           <text class='icon-score tip-theme'></text> 已减重
+          <text class='tip-theme1'>{{plan.current_weight?(plan.start_weight - plan.current_weight):'--'}}</text> KG
+          </view>
+      </view>
+      <view class='right'>
+        <navigator url='pages/common/404'>
+          <text class='f-right more3-icon mini mt-5'></text>
+          <text class='icon-target tip-theme2 ver-1'></text> 我的目标 <text class='tip-theme2'>{{plan.target_weight}}</text> KG</navigator>
+        </view>
+    </view>
+  </view>
 
-<view class='section flex-row fs-14'>
-	<view class='mh-5'>
-		<text style='color:#FF9472'>IFPLAN</text> 第二阶段 <text style='color:#a2a2a4'><text class='icon-arrow-right small' style='vertical-align:-.1em;'></text> 第 <text class='tip-theme2'>6</text> 天 </text>
-	</view>
-	<progress class='mh-5 flex-item' activeColor='#FF9472' percent='30' backgroundColor='#000000' border-radius="4" ></progress>
-</view>
+  <view class='section flex-row fs-14 mh-10'>
+    <view class='mr-10' style='white-space:nowrap;'><text style='color:#FF9472'>IFPLAN</text>第{{sectionDesc[plan.section]}}阶段<text style='color:#a2a2a4'><text class='icon-arrow-right small' style='vertical-align:-.1em;'></text>第<text class='tip-theme2'>{{plan.days}}</text> 天 </text></view>
+    <progress class='flex-item' activeColor='#FF9472' percent='{{plan.days*100/plan.total_days}}' backgroundColor='#000000' border-radius="4"></progress>
+  </view>
 
 
-<view class="kar mh-15 flex-row flex-wrap flex-main-between">
+  <view class="kar mh-15 flex-row flex-wrap flex-main-between">
 
-	<navigator class='nav-button more'><text class='flag flag-theme1'></text> 我的KOL <text class='b3 tip-theme1'>20</text></navigator>
-	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/3d4d0121cf334808a60e06de78b61513.png'></image> 我的初心视频</navigator>
-	<navigator class='nav-button more'><text class='flag flag-theme2'></text> 我的藜麦 <text class='b3 tip-theme2'>5000</text> <text class='tgray'> g</text></navigator>
-	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/44cf15c1b6534677bacc0ab51c368e54.png'></image> 我的导师</navigator>
-	<navigator class='nav-button more' url='/pages/shop/index'><image src='https://res.shibu365.com/i/2019-06-03/0ab219a3609743318308581f7a39876e.png' style="height:40rpx;width:200rpx;margin:30rpx 0;"></image></navigator>
-	<navigator class='nav-button more'><image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/bee9f35875e742aabcb9c665bbf25ee4.png'></image> 卡券包 </navigator>
-</view>
+    <navigator class='nav-button more' url="/pages/common/404">
+      <text class='flag flag-theme1'></text> 我的KOL
+      <text class='b3 tip-theme1'>{{user.kol||0}}</text>
+    </navigator>
+    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-chxin ver-2 tip-theme2'></text> 我的初心视频</navigator>
+    <navigator class='nav-button more' url="/pages/common/404">
+      <text class='flag flag-theme2'></text> 我的藜麦
+      <text class='b3 tip-theme2'>{{user.quinoa||0}}</text>
+      <text class='tgray'> g</text>
+    </navigator>
+    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-dshi ver-2 tip-theme2'></text>  我的导师</navigator>
+    <navigator class='nav-button more' url='/pages/shop/index'>
+      <image src='https://res.shibu365.com/i/2019-06-03/0ab219a3609743318308581f7a39876e.png' style="height:40rpx;width:200rpx;margin:30rpx 0;"></image>
+    </navigator>
+    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-kbao ver-2 tip-theme2'></text>  卡券包 </navigator>
+  </view>
 
-	<button class='mv-10 mh-15' type='error' bindtap='exit'>退出商城</button>
+  <button class='mv-10 mh-15' type='error' bindtap='exit'>退出商城</button>
 
-	
-<tab-bar curr="3" type="buildin"  visible='{{navBarVisible}}'></tab-bar>
+
+  <tab-bar curr="3" type="buildin" visible='{{navBarVisible}}'></tab-bar>
 </block>
-
-

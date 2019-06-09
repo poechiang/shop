@@ -9,7 +9,8 @@ Page({
 		user: {
 			photo: 'https://res.shibu365.com/i/2018-12-16/88e15fd6f83e4cd3bd2c579ed37ce7ec.jpg',
 			nick:''
-		},
+    },
+    sectionDesc: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
 		userInfo:{},
 		logining: false, 
 		navBarVisible:true,
@@ -20,18 +21,30 @@ Page({
 	 */
 	onLoad: function (options) {
 		// 登录
-		var user = app.getLoginUser()
-		if(user){
-			this.setData({user:user})
-		}
-		else{
-			app.getUserInfo({
-				success: info => {
-					this.setData({ user: info })
-				}
-			})
-		}
+		// var user = app.getLoginUser()
+		// if(user){
+    //   this.setData({ user: user })
+      
+    //   app.http.loadMyPlanInfo(this)
+		// }
+		// else{
+		// 	app.getUserInfo({
+		// 		success: info => {
+    //       this.setData({ user: info })
+          app.http.loadMyPlanInfo(rlt=>{
+            this.setData({
+              user:rlt.data,
+              plan:rlt.data.ifplan
+            })
+
+          })
+		// 		}
+		// 	})
+
+		// }
 		
+
+    
 		
 	},
 

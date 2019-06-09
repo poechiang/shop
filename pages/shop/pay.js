@@ -41,45 +41,7 @@ Page({
 
 	loadData(options){
 		options = options||{}
-		
-		if (options.t == 'open') { // 开团
-			app.http.request({
-				url: 'shop/get_group',
-				param: { id: options.gid },
-				done: rlt => {
-					var good = rlt.data.meta.good
-					good.retail_price = options.price
-					good.count = 1
-					this.setData({
-						mode: 'open-group',
-						group:rlt.data,
-						goods: [rlt.data.meta.good],
-						pricerid: options.pid
-					})
-
-					options.complete && options.complete(rlt)
-				}
-			})
-		}
-		else if (options.t == 'join') { // 参团
-			app.http.request({
-				url: 'shop/get_tuan',
-				param: { id: options.gid },
-				done: rlt => {
-					var good = rlt.data.meta.good
-					good.retail_price = options.price
-					good.count = 1
-					this.setData({
-						mode: 'join-group',
-						goods: [rlt.data.meta.good],
-						groupInst: rlt.data,
-					})
-
-					options.complete && options.complete(rlt)
-				}
-			})
-		}
-		else if (options.id) { // 直接购买
+    if (options.id) { // 直接购买
 			app.http.request({
 				url: 'good/get_detail',
 				param: { id: options.id },

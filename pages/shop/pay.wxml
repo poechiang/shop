@@ -1,6 +1,6 @@
 <!--pages/shop/pay.wxml-->
 	<view class='get-addr nav-button more mh-15 mv-10 pv-20' hover-class='clickable-hover' plain bindtap='getAddr'>
-		<image class='txt-logo mt-15 mr-10 f-left' src='https://res.shibu365.com/i/2019-06-03/e4e48bda55c7416eb7fd339a8812efe0.png'></image>
+		<text class='icon-map mh-20 f-left tip-theme2' src='https://res.shibu365.com/i/2019-06-03/e4e48bda55c7416eb7fd339a8812efe0.png'></text>
 		<view style='line-height:50rpx;display:inline-block' wx:if="{{name}}">
 			<view class='b4'>{{name}} {{phone}}</view>
 			<view class='b5'>{{region[0]}}{{region[1]}}{{region[3]}}{{addr}}</view>
@@ -27,7 +27,7 @@
 
 
     <view class='nav-button more mh-15'>
-        <image class='txt-logo' src='https://res.shibu365.com/i/2019-06-03/bee9f35875e742aabcb9c665bbf25ee4.png'></image> 代金卡券
+        <text class='icon-kbao tip-theme2'></text> 代金卡券
         <text class='price pl-20' wx:if="{{karValue>0}}">{{karValue||0}}</text>
         <text class='tip-theme pl-20' wx:else>无</text>
     </view>

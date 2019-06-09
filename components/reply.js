@@ -35,6 +35,16 @@ Component({
 		addGlobalClass: true,
 	},
 	lifetimes: {
+
+		attached: function () {
+			if (this.properties.visible) {
+				setTimeout(() => {
+					this.setData({
+						focused: true
+					})
+				}, 400)
+			}
+		},
 	},
 	/**
 	 * 组件的方法列表

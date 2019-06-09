@@ -13,18 +13,21 @@ page{
 	font-size: 1em;
 }
 .attach{
-	background-color: #f6f8f9;
+	background-color: transparent;
 	padding:10rpx;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	width:690rpx;
+
+
 }
 .attach.pic-box{
 	padding:6rpx;
 
 }
 .attach.pic-box .pic{
+  border-radius: 40rpx;
 	border:6rpx solid transparent;
 	width:678rpx;
 	height:678rpx;
@@ -63,6 +66,12 @@ page{
 .attach.pic-box.items-9 .pic{
 	height:226rpx!important;
 }
+
+
+.art-body .topic{
+	color:#59CBCE;
+}
+
 .foot{
 	font-size: 14px;
 	margin:10px 0;
@@ -81,41 +90,31 @@ page{
 	padding:6px;
 }
 .msg .msg-type-list .msg-type{
-	color:#888888;
-	padding:0 5px 5px;
-	position: relative;
+	color:#616161;
+	padding:10rpx;
 	margin:0 5px;
 }
 .msg .msg-type-list .msg-type.selected{
-	color:#414141;
+	color:#9f9f9f;
 }
-.msg .msg-type-list .msg-type.selected::after{
-	content:"";
-	position: absolute;
-	width:20px;
-	height: 4px;
-	bottom:0;
-	left: 50%;
-	margin-left: -10px;
-	background-color: #FFD900;
-}
+
 .msg .msg-list .msg-item:not(:last-child)::after,
-.msg .fav-list .fav-item:not(:last-child)::after,
-.msg .share-list .share-item:not(:last-child)::after{
+.msg .col-list .col-item:not(:last-child)::after,
+.msg .fav-list .fav-item:not(:last-child)::after{
 	content:"";
 	position:absolute;
 	width:calc(100% - 50px);
 	right:0;
 	bottom:0;
 	height:0;
-	border-bottom:1px solid #efefef;
+	border-bottom:1px solid #292929;
 }
 .status{
 	width:100%;
 	bottom:0;
 	text-align: center;
-	background-color:#ffffff;
-	border-top:1px solid #C2C2C4;
+	background-color:#202022;
+  color:#989898;
 	-webkit-transition: bottom .4s ease-in-out;
 	-mos-transition: bottom .4s ease-in-out;
 	-o-transition: bottom .4s ease-in-out;
@@ -124,10 +123,13 @@ page{
 .status button{
 	border: none;
 	line-height: inherit;
+  color:#989898;
 }
-.status button .icon{
-	vertical-align: 2px;
+
+.status button[disabled]{
+  background-color: transparent!important;
+  color:#FD8F71!important;
 }
-.status button .icon-zaned{
-	color:#ff5722;
+.user-nick{
+  color:#e0e0e0;
 }

@@ -1,91 +1,111 @@
 <!--pages/circle/detail.wxml-->
 
-<!-- 文章作者及正文部分 -->
-<view class='section art mt-0' >
-	<view class='art-title pos-relative flex-row flex-line-center' >
-	
-		<navigator class='flex-item' url='/pages/user/home/index?id={{article.user.id}}'>
-			<image class="user-photo circle small f-left mr-5 mt-4" src='{{article.user.photo || defUserPhoto}}' mode='aspectFill' ></image>
-			<view style='line-height:56rpx;'>{{article.user.nick||'匿名用户'}}</view>
-			<view class='tip' style='line-height:28rpx;' wx:if="{{article.user.signature}}">{{article.user.signature}}</view>
-		</navigator>
-		<button size='mini' type='theme' class='rect' wx:if="{{article.user.relationship==0}}" bindtap='attach'><text class='icon icon-guanzhu0'></text> 加关注</button>
-		<button size='mini' type='theme' class='rect' wx:elif="{{article.user.relationship==1}}" bindtap='attach'><text class='icon icon-guanzhu1'></text> 加关注</button>
-		<block wx:else>
-			<button size='mini' type='theme' class='rect' bindtap='handleMsg'><text class='icon icon-msg'></text> 发消息</button>
-			<button size='mini' class='rect' wx:if="{{article.user.relationship==2}}" bindtap='cancelAttach'><text class='icon icon-guanzhu2'></text></button>
-			<button size='mini' class='rect' wx:if="{{article.user.relationship==3}}" bindtap='cancelAttach'><text class='icon icon-guanzhu3'></text></button>
-		</block>
-		<button size='mini' class='rect' data-uid="{{article.user.id}}" bindtap='showUserMoreActions'><text class='icon icon-more2'></text></button>
-	</view>
-	<view class='art-body mv-10'>
-	<navigator class='link' wx:if="{{article.topic}}" bindtap='handleTopicTap'>#{{article.topic}}#</navigator>
-	<view>
-    <import src="/wxParse/wxParse.wxml" />
-    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
-	</view>
-	</view>
-	<view class='attach pic-box flex-row flex-wrap {{article.pictures.length>1?("items-"+article.pictures.length):""}}' wx:if='{{article.pictures.length>0}}'>
-		<image class='pic' src='{{item}}' wx:for="{{article.pictures}}" wx:key="*this" mode='aspectFill'></image>
-	</view>
-	<view class='foot flex-row  flex-line-center' >
-		<view class='loc'><text class='icon-loc1 small mr-5'></text>{{article.city}}</view>
-		<view class='flex-item'></view>
-		<view >{{article.post_date}}</view>
-	</view>
+<view class='art mh-15 mv-10 pv-10'>
+
+  <!-- 文章作者 -->
+  <view class='art-title of-hidden'>
+    <navigator class='author flex-row flex-line-center' url='/pages/user/home/index?id={{article.author.id}}'>
+
+      <view class='gender female mr-10' style='background-color:#292929'>
+        <image class='user-photo circle small' src='{{article.author.photo||defUserPhoto}}' mode='aspectFill'></image>
+      </view>
+      <view class='flex-item'>
+        <view style='line-height:56rpx;'>{{article.author.nick||'匿名用户'}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view class='tip'> {{article.author.signature||'这个家伙有点懒……'}}</view>
+      </view>
+    </navigator>
+  </view>
+  <!-- 文章内容 -->
+  <view class='art-body pv-10'>
+    <view style='line-height:1.5'>{{article.content}}</view>
+
+    <navigator class=' topic link' catchtap='handleTopicTap' wx:if="{{article.topic}}">#{{article.topic}}#</navigator>
+  </view>
+
+  <!-- 文章附件 目前仅限文章配图 最多九张 -->
+  <view class='attach pic-box flex-row flex-wrap {{article.pictures.length>1?("items-"+article.pictures.length):""}}' wx:if='{{article.pictures.length>0}}'>
+    <image class='pic' src='{{item}}' wx:for="{{article.pictures}}" wx:key="*this" mode='aspectFill'></image>
+  </view>
+
+  <view class='flex-row'>
+    <view class='flex-item'></view>
+    <view class='tip'>{{article.stamp.insert.MdyHis}}</view>
+  </view>
+
 </view>
 
 <!-- 回复分享及收藏部分 -->
-<view class='section msg' >
-	<view class='msg-type-list flex-row'>
-	<view class='msg-type {{msgType==3?"selected":""}}' hover-class='clickable-hover' data-key='3' bindtap='handleMsgTypeToggle'>分享 {{article.stat.shares||0}}</view>
-	<view class='msg-type {{msgType==1?"selected":""}}' hover-class='clickable-hover' data-key='1' bindtap='handleMsgTypeToggle'>留言 {{article.stat.msgs||0}}</view>
-	<view class='flex-item'></view>
-	<view class='msg-type {{msgType==2?"selected":""}}' hover-class='clickable-hover' data-key='2' bindtap='handleMsgTypeToggle'>赞 {{article.stat.favs||0}}</view>
-	</view>
-	<view class='share-list fs-14 mt-10'  wx:if='{{msgType==3}}'>
-		 <view class='share-item mv-5 pv-5 of-hidden pos-relative' wx:for="{{article.shares}}" wx:key='id' >	
-			<navigator class='link f-left mr-10'><image class='user-photo circle small' src='{{item.user.photo}}'></image></navigator>
-			<navigator class='link fs-12'>{{item.user.nick}}</navigator>
-			<view class='of-hidden'>
-				<view class='content'> 分享了本文章 </view>
-				<view class='tgray fs-12'><text class='post-date'>{{item.post_date}}</text></view>
-			</view>
-		</view>
-	</view>
-	<view class='msg-list fs-14 mt-10'  wx:if='{{msgType==1}}'>
-		 <view class='msg-item mv-5 pv-5 of-hidden pos-relative' wx:for="{{article.msgs}}" wx:key='id' >	
-			<navigator class='link f-left mr-10'><image class='user-photo circle small' src='{{item.user.photo}}'></image></navigator>
-			<navigator class='link fs-12'>{{item.user.nick}}</navigator>
-			<view class='of-hidden'>
-				<view class='content'> {{item.content}} </view>
-				<view class='tgray fs-12'><text class='post-date'>{{item.post_date}}</text></view>
-			</view>
-		</view>
-	</view>
-	<view class='fav-list fs-14 mt-10'  wx:if='{{msgType==2}}'>
-		 <view class='fav-item mv-5 pv-5 of-hidden pos-relative' wx:for="{{article.favs}}" wx:key='id' >	
-			<navigator class='link f-left mr-10'><image class='user-photo circle small' src='{{item.user.photo}}'></image></navigator>
-			<navigator class='link fs-12'>{{item.user.nick}}</navigator>
-			<view class='of-hidden'>
-				<view class='content'> 收藏了本文章 </view>
-				<view class='tgray fs-12'><text class='post-date'>{{item.post_date}}</text></view>
-			</view>
-		</view>
-	</view>
+<view class='msg mh-15'>
+  <view class='msg-type-list flex-row'>
+    <view class='msg-type {{msgType==3?"selected":""}}' hover-class='clickable-hover' data-key='3' bindtap='handleMsgTypeToggle'> 赞 {{article.fav_count||0}}</view>
+    <view class='msg-type {{msgType==1?"selected":""}}' hover-class='clickable-hover' data-key='1' bindtap='handleMsgTypeToggle'> 评论 {{article.comment_count||0}}</view>
+    <view class='msg-type {{msgType==2?"selected":""}}' hover-class='clickable-hover' data-key='2' bindtap='handleMsgTypeToggle'> 收藏 {{article.col_count||0}}</view>
+  </view>
+  <view class='fav-list mt-10' wx:if='{{msgType==3}}'>
+    <navigator class='fav-item mv-5 pv-5 flex-row flex-line-center' url='/pages/user/home/index?id={{item.member.id}}' wx:for="{{article.favoritors}}" wx:key='id'>
+      <view class='gender male mr-10'>
+        <image class='user-photo circle small' src='{{item.member.photo}}'></image>
+      </view>
+      <view class='flex-item'>
+        <view>{{item.member.nick}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view class='tip'>{{item.member.signature||'这个家伙有点懒……'}}</view>
+      </view>
+      <view class='hor-center'>
+        <view class='icon-zan medium tip-theme2'></view>
+        <view class='tip'>{{item.stamp.insert.mdHi}}</view>
+      </view>
+    </navigator>
+  </view>
+  <view class='msg-list mt-10' wx:if='{{msgType==1}}'>
+    <view class='msg-item mv-5 pv-5 flex-row flex-line-start' wx:for="{{article.comments}}" wx:key='id' hover-class='clickable-hover' bindtap='handleMsg'  data-posterid="{{item.poster.id}}" data-retonick="{{item.poster.nick}}" >
+      <navigator class='gender male mr-10' url='/pages/user/home/index?id={{item.poster.id}}' catchtap="noTriggerEvent">
+        <image class='user-photo circle small' src='{{item.poster.photo}}'></image>
+      </navigator>
+      <view class='flex-item'>
+        <navigator url='/pages/user/home/index?id={{item.poster.id}}'  catchtap="noTriggerEvent">{{item.poster.nick}}  <text class='icon-decline small'> {{'0.5kg'}}</text></navigator>
+       
+        <view class='content mv-5'> <block wx:if="{{item.re_to}}">回复 <navigator class='link tip-default' url='/pages/user/home/index?id={{item.re_to.id}}' catchtap="noTriggerEvent">{{item.re_to.nick}}</navigator>：</block> {{item.content}} </view>
+        <view class='tgray fs-12'>
+          <text class='post-date'>{{item.stamp.insert.mdHi}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='col-list mt-10' wx:if='{{msgType==2}}'>
+    <navigator class='fav-item mv-5 pv-5 flex-row flex-line-center' url='/pages/user/home/index?id={{item.member.id}}' wx:for="{{article.collectors}}" wx:key='id'>
+      <view class='gender male mr-10'>
+        <image class='user-photo circle small' src='{{item.member.photo}}'></image>
+      </view>
+      <view class='flex-item'>
+        <view>{{item.member.nick}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view class='tip'>{{item.member.signature||'这个家伙有点懒……'}}</view>
+      </view>
+      <view class='hor-center'>
+        <view class='icon-fav medium tip-theme2'></view>
+        <view class='tip'>{{item.stamp.insert.mdHi}}</view>
+      </view>
+    </navigator>
+  </view>
 </view>
+
+<!-- 分布加载动画展示 开始 -->
+<view class='hor-center tip fs-14 pv-10' wx:if="{{msgType==3 && article.fav_count<=0||msgType==1 && article.comment_count<=0 ||msgType==2&& article.col_count<=0}}">-----真皮沙发只等真皮的你-----</view>
+
+<view class='hor-center tip fs-14 pv-10' wx:else>-----我们是有底线的-----</view>
+<!-- 分页加载动画展示 结束 -->
 
 <!-- 回复留言框 -->
-<reply visible='{{replyVisible}}' msg='{{replyMsg}}' bindsend='handleReplySend' bindcancel="handleReplyCancel"></reply>
+<reply visible='{{replyVisible}}' msg='{{replyMsg}}'  placeholder="{{placeholder}}" bindsend='handleReplySend' bindcancel="handleReplyCancel"></reply>
 
-<!-- <flex-block blocks="{{blocks}}" top="50%" right="5px"></flex-block> -->
 
-<view class='status pos-fixed flex-row' style='height:{{statusHeight-1}}px;line-height:{{statusHeight-1}}px;bottom:{{statusBottom}}px'>
-	<button class='flex-item' plain open-type="share"><text class='icon icon-share fs-14'></text> 分享</button>
-	<button class='flex-item' plain bindtap='handleMsg'><text class='icon icon-msg fs-14'></text> 留言</button>
-	<button class='flex-item' plain disabled='{{article.stat.myfav}}' bindtap='handleFav'><text class='icon icon-zan{{article.stat.myfav?"ed":""}}'></text> {{article.stat.myfav?"已赞":"赞"}}</button>
+
+
+<view class='status pos-fixed flex-row' style='height:{{statusHeight}}px;line-height:{{statusHeight}}px;bottom:{{statusBottom}}px'>
+  <button class='flex-item' plain bindtap='handleFav' disabled='{{article.inMyFavList|| !article.meta.allow.fav}}'>
+    <text class='icon icon-zan'></text> 点赞</button>
+  <button class='flex-item' plain bindtap='handleMsg' disabled='{{!article.meta.allow.reply}}'>
+    <text class='icon icon-msg3'></text> 留言</button>
+  <button class='flex-item' plain disabled='{{article.inMyColList|| !article.meta.allow.col}}' bindtap='handleCollect'>
+    <text class='icon icon-fav'></text> 收藏</button>
 </view>
 
-
-<!-- 浮动面板区 -->
-<flex-block blocks="{{blocks}}" top="70%" right="5px"></flex-block>

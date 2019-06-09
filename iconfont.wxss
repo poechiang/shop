@@ -1,22 +1,19 @@
 @charset 'utf-8';
-
 @font-face {
   font-family: 'iconfont';  /* project id 936976 */
-  src: url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.eot');
-  src: url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.woff') format('woff'),
-  url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_936976_z9o2y9u39pa.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_936976_qvq36yezap.eot');
+  src: url('//at.alicdn.com/t/font_936976_qvq36yezap.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_936976_qvq36yezap.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_936976_qvq36yezap.woff') format('woff'),
+  url('//at.alicdn.com/t/font_936976_qvq36yezap.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_936976_qvq36yezap.svg#iconfont') format('svg');
 }
-
 .ifont:before,.ifont:after,.iconfont{
     font-family:"iconfont" !important;
     font-size:1.33em;
     font-style:normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    vertical-align: .133em;
 }
 .ifont.large:before,.ifont.large:after,.iconfont.large:after{
     font-size:2em;
@@ -35,7 +32,6 @@
     font-style:normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    vertical-align: .133em;
     margin:0 .05rem;
 }
 
@@ -59,6 +55,45 @@
     font-size:1.67em;
     display: block;
 }
+.icon-kbao:before{
+  content:"\ea49";
+}
+.icon-chxin:before{
+  content:"\ea46";
+}
+.icon-dshi:before{
+  content:"\ea45";
+}
+
+
+.icon-rise:before{
+	content:"\ea3b";
+}
+
+.icon-decline:before{
+	content:"\ea3c";
+}
+.icon-notify:before{
+	content:"\e63c";
+}
+.icon-myhd:before{
+	content:"\ea2f";
+}
+
+.icon-weight:before{
+  content:"\ea42";
+}
+.icon-score:before{
+  content:"\ea43";
+}
+.icon-target:before{
+  content:"\ea41";
+}
+.icon-calendar:before{
+  content:"\e8e7";
+}
+
+
 
 .icon-scode::before,
 .scode-icon::after{
@@ -185,14 +220,22 @@
 .msg2-icon::after{
 	content:"\e826";
 }
+.icon-msg3::before,
+.msg3-icon::after{
+	content:"\ea3f";
+}
 
+.icon-fav::before,
+.fav-icon::after{
+	content:"\ea3e";
+}
 .icon-zan::before,
 .zan-icon::after{
-	content:"\e741";
+	content:"\ea40";
 }
 .icon-zaned::before,
 .zaned-icon::after{
-	content:"\e742";
+	content:"\ea40";
 }
 .icon-group::before,
 .group-icon::after{

@@ -201,6 +201,6 @@ margin:1em 0;
 
 }
 .kar .nav-button{
-	width:calc(50% - 15rpx);
+	width:calc(50% - 20rpx);
 	margin:10rpx 0;
 }

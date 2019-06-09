@@ -36,8 +36,8 @@ Page({
 			content:'',
 			meta:{
 				allow: {
+					col: 1,
 					fav: 1,
-					zan: 1,
 					reply: 1
 				},
 			},

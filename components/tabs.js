@@ -11,7 +11,7 @@ Component({
 		},
 		key: {
 			type: String,
-			value: ''
+			value: 'value'
 		},
 		height: {
 			type: Number,
@@ -19,7 +19,7 @@ Component({
 		},
 		currentIndex: {
 			type: Number,
-			value: -1,
+			value: 0,
 		},
 		top: {
 			type: Number,
@@ -55,7 +55,6 @@ Component({
 	 * 组件的初始数据
 	 */
 	data: {
-		currentTab: null,
 		dockTop: -40,
 		isFixed: false,
 	},
@@ -70,15 +69,14 @@ Component({
 	methods: {
 		handleTabToggle: function (e) {
 			var index = e.target.dataset.index
-			if (index == this.data.currentIndex) {
+			if (index == this.data.curr) {
 				return
 			}
 			var tab = this.data.items[index]
 			this.setData({
-				currentIndex: index,
-				currentTab: tab
+				curr: index
 			})
-			this.triggerEvent('change', { index: index, tab: tab }, {})
+			this.triggerEvent('change', { index: index,key:tab[this.properties.key], tab: tab }, {})
 		}
 	},
 
@@ -95,27 +93,27 @@ Component({
 					var fixed = this.properties.isFixed,
 						dockTop = this.data.dockTop
 					if (!fixed && e.scrollTop > winHeight) {
-						console.log(1)
+						
 						this.setData({
 							isFixed: true,
 						})
 					}
 					if (dockTop < 0 && e.scrollTop > winHeight * 2) {
-						console.log(2)
+						
 						this.setData({
 							dockTop: top
 						})
 					}
 
 					if (dockTop >= 0 && e.scrollTop < winHeight * 2) {
-						console.log(3)
+						
 						this.setData({
 							dockTop: -40
 						})
 					}
 
 					if (fixed && e.scrollTop < winHeight) {
-						console.log(4)
+						
 						this.setData({
 							isFixed: false,
 						})
@@ -127,6 +125,10 @@ Component({
 
 				}
 			}
+
+      this.setData({
+        curr:this.properties.currentIndex
+      })
 			
 		}
 	}

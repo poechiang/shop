@@ -365,6 +365,7 @@ module.exports = {
 				else if (rlt.status == 1) {
 
 					var plan = rlt.data.ifplan
+					
 					page && page.setData({
 						plan: plan,
 						deg: clacDeg(plan),
@@ -373,6 +374,14 @@ module.exports = {
 					wx.setStorage({
 						key: 'ifthin_plan',
 						data: plan,
+					})
+					wx.setStorage({
+						key: 'ifthin_fav_essay_list',
+						data: rlt.data.fav_essay_list,
+					})
+					wx.setStorage({
+						key: 'ifthin_col_essay_list',
+						data: rlt.data.col_essay_list,
 					})
 				}
 				else {
@@ -388,34 +397,28 @@ module.exports = {
 	 * 请求用户徽章列表
 	 */
 
-	loadMyHzhList(page,cb) {
+	loadHzhList(uid,cb) {
 		if (loadingState.hzh) return
 		loadingState.hzh = true
 
 		var app = getApp()
-		if (typeof page == 'function') {
-			cb = page
-			page = app.pages.current()
+		if (typeof uid == 'function') {
+			cb = uid
+			uid = null
 		}
 		this.request({
 			url: 'user/hzh_list',
+      data:{uid:uid},
 			success: rlt => {
 				if (rlt.status == 1) {
-					page && page.setData({
-						hzhList: rlt.data || []
-					})
 
-					wx.setStorage({
-						key: 'ifthin_hzhlist',
-						data: rlt.data,
-					})
+          cb && cb(rlt)
 				}
 				else {
 					app.con.error(rlt.msg)
 					//app.ui.modal(rlt.msg)
 				}
 				loadingState.hzh = false
-				cb && cb(rlt)
 			}
 		})
 	},

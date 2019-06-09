@@ -28,7 +28,16 @@ Page({
 			if (rlt.status == 1) {
 
 				//如果用户已加入则请求用户获得的徽章列表及消息活动的统计信息
-				app.http.loadMyHzhList(this)
+				app.http.loadHzhList(rlt=>{
+            this.setData({
+              hzhList: rlt.data || []
+            })
+
+            wx.setStorage({
+              key: 'ifthin_hzhlist',
+              data: rlt.data,
+            })
+        })
 				app.http.loadMyStatisInfo(this)
 
 			}
