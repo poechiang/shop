@@ -23,6 +23,13 @@ var logining = false,
 	waitings = []
 const doLogin = function (options) {
 
+  if (logining) {
+    waitings.push(options)
+    return
+  }
+
+
+
 	console.log('登录流程:开始')
 	wx.getSetting({
 		success: function (res) {
@@ -60,9 +67,11 @@ const doLogin = function (options) {
 									logining = false
 
 									options.success && options.success(rlt.data.user,rlt.data.session)
-									waitings.map(item => {
-										item()
-									})
+
+                  waitings.map(item => {
+                    requestUrl(item)
+                  })
+                  waitings = []
 								}
 								else {
 									options.fail && options.fail(resp)
@@ -215,9 +224,11 @@ var requestUrl = function (options) {
 															done && done(resp.data || {})
 
 															logining = false
-															waitings.map(item => {
-																item()
-															})
+
+                              waitings.map(item => {
+                                requestUrl(item)
+                              })
+                              waitings = []
 														}
 														else{
 															options.fail && options.fail(resp.statusCode)
@@ -231,14 +242,16 @@ var requestUrl = function (options) {
 									})
 								}
 								else{
+                  waitings.push(options)
 									wx.switchTab({
-										url: '/pages/user/index',
+										url: '/pages/user/index?check=true',
 									})
 								}
 							},
-							fail: function(res) {
+              fail: function (res) {
+                waitings.push(options)
 								wx.switchTab({
-									url: '/pages/user/index',
+									url: '/pages/user/index?check=true',
 								})
 							},
 						})
@@ -249,9 +262,11 @@ var requestUrl = function (options) {
 						done && done(resp.data||{})
 
 						logining = false
-						waitings.map(item => {
-							item()
-						})
+
+            waitings.map(item => {
+              requestUrl(item)
+            })
+            waitings = []
 						break
 					default:
 						options.fail && options.fail(resp.statusCode)
@@ -265,7 +280,6 @@ var requestUrl = function (options) {
 }
 
 var loadingState = {}
-
 const clacDeg = plan => {
 	return parseInt(plan.days * 270 / plan.total_days)
 }
@@ -274,6 +288,12 @@ const clacThumb = plan => {
 }
 
 module.exports = {
+  clearWaiting : function () {
+    waitings.map(item => {
+      requestUrl(item)
+    })
+    waitings = []
+  },
 	request:requestUrl,
     /**
      * 上传文件到服务器
@@ -345,7 +365,6 @@ module.exports = {
 	 * 请求用户计划
 	 */
 	loadMyPlanInfo(page,cb){
-		
 		if (loadingState.plan) return
 		loadingState.plan = true
 		var app = getApp()
@@ -359,7 +378,7 @@ module.exports = {
 				if (rlt.status == -10) {
 					// 新用户未加入
 					wx.redirectTo({
-						url: '/pages/index/join',
+						url: '/pages/index/join7',
 					})
 				}
 				else if (rlt.status == 1) {
@@ -388,9 +407,10 @@ module.exports = {
 					app.con.error(rlt.msg)
 					//app.ui.modal(rlt.msg)
 				}
-				loadingState.plan = false
-				cb && cb(rlt)
-			},
+
+        loadingState.plan = false
+        cb && cb(rlt)
+			}
 		})
 	},
 	/**

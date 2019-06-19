@@ -20,7 +20,7 @@ App({
 	logs: require('utils/logs'),
 	con: cons,
 	ui: require('utils/ui'),
-	env:'local',
+	env:'remote',
 	onLaunch() {
 		this.getSystemInfo()
 

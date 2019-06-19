@@ -1,0 +1,4 @@
+<!--pages/user/profile/chx.wxml-->
+<view class='hor-center fs-12 tip-theme pv-100'>
+  您没有上传初心视频
+</view>

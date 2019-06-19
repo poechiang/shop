@@ -1,0 +1,4 @@
+<!--pages/user/profile/quinoa.wxml-->
+<view class='ph-15 tip-theme pv-20'>
+  您当前拥有藜麦：0 两
+</view>

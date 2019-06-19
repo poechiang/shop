@@ -1,0 +1,4 @@
+<!--pages/index/hothd/index.wxml-->
+<view class='hor-center fs-12 tip-theme pv-100'>
+  当前没有进行中的活动
+</view>

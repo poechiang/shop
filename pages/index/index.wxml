@@ -14,7 +14,7 @@
         <view class='tgray mt-20'>已减重(KG)</view>
         <view class='curr-weight'>{{plan.score.value}}</view>
         <view class='tgray'>已完成 {{plan.score.percent}}%</view>
-        <navigator class='wlog' url='/pages/common/404'>体重记录</navigator>
+        <navigator class='wlog' url='/pages/index/wlog/index'>体重记录</navigator>
     </view>
 </view>
 
@@ -54,9 +54,9 @@
 
 <view class='sec-more mh-15 mt-20'>
     <image class='banner' src='https://res.shibu365.com/i/2019-05-28/f0b54bdd106549899206e3d0e80b9a19.png'></image>
-    <navigator class='msg nav-button more mb-10' url='/pages/common/404'>
+    <navigator class='msg nav-button more mb-10' url='/pages/index/msgs/index'>
         <text class='icon-notify tip-theme2'></text> 我的消息 <text class='bullet' wx:if="{{statis.msg>0}}"></text></navigator>
-    <navigator class='hot nav-button more' url='/pages/common/404'>
+    <navigator class='hot nav-button more' url='/pages/index/hothd/index'>
         <text class='icon-myhd tip-theme2'></text> 热门活动 <text class='bullet' wx:if="{{statis.hd>0}}"></text></navigator>
 </view>
 

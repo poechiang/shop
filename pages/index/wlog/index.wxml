@@ -1,0 +1,5 @@
+<!--pages/index/wlog/index.wxml-->
+
+<view class='hor-center fs-12 tip-theme pv-100'>
+  当前任务不支持查看体重记录
+</view>

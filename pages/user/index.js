@@ -108,6 +108,9 @@ Page({
 			param: { nick: app.data.userInfo.nick,photo:app.data.userInfo.photo },
 			success:user=>{
 				this.setData({ user: user })
+        if(this.options.check){
+          app.http.clearWaiting()
+        }
 			},
 			fail:res=>{
 				console.error(res);

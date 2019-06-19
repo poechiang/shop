@@ -1,0 +1,4 @@
+<!--pages/index/msgs/index.wxml-->
+<view class='hor-center fs-12 tip-theme pv-100'>
+  您当前没有新的消息或通知
+</view>

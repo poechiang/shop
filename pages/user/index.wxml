@@ -43,21 +43,21 @@
 
   <view class="kar mh-15 flex-row flex-wrap flex-main-between">
 
-    <navigator class='nav-button more' url="/pages/common/404">
+    <navigator class='nav-button more' url="/pages/user/profile/kol">
       <text class='flag flag-theme1'></text> 我的KOL
       <text class='b3 tip-theme1'>{{user.kol||0}}</text>
     </navigator>
-    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-chxin ver-2 tip-theme2'></text> 我的初心视频</navigator>
-    <navigator class='nav-button more' url="/pages/common/404">
+    <navigator class='nav-button more' url="/pages/user/profile/chx"><text class='icon-chxin ver-2 tip-theme2'></text> 我的初心视频</navigator>
+    <navigator class='nav-button more' url="/pages/user/profile/quinoa">
       <text class='flag flag-theme2'></text> 我的藜麦
       <text class='b3 tip-theme2'>{{user.quinoa||0}}</text>
       <text class='tgray'> g</text>
     </navigator>
-    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-dshi ver-2 tip-theme2'></text>  我的导师</navigator>
+    <navigator class='nav-button more' url="/pages/user/profile/master"><text class='icon-dshi ver-2 tip-theme2'></text>  我的导师</navigator>
     <navigator class='nav-button more' url='/pages/shop/index'>
       <image src='https://res.shibu365.com/i/2019-06-03/0ab219a3609743318308581f7a39876e.png' style="height:40rpx;width:200rpx;margin:30rpx 0;"></image>
     </navigator>
-    <navigator class='nav-button more' url="/pages/common/404"><text class='icon-kbao ver-2 tip-theme2'></text>  卡券包 </navigator>
+    <navigator class='nav-button more' url="/pages/user/coupon/list"><text class='icon-kbao ver-2 tip-theme2'></text>  卡券包 </navigator>
   </view>
 
   <button class='mv-10 mh-15' type='error' bindtap='exit'>退出商城</button>

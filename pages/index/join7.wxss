@@ -1,0 +1,49 @@
+/* pages/index/join7.wxss */
+page{
+	color:#8D8D8D;
+}
+.box{
+	background-color:#202022;
+	border-radius: 20rpx;
+	padding:20rpx 30rpx;
+}
+.voice-btn{
+	width:96rpx;
+	height:96rpx;
+	border-radius: 50%;
+	background-color:#000000;
+	line-height: 96rpx;
+	border:none;
+	padding:0;
+}
+.clickable-box,
+.preview{
+	border-radius: 20rpx;
+	width:275rpx;
+	height:275rpx;
+}
+.clickable-box.demo{
+	background-color: #000000;
+}
+.clickable-box.upload-idou{
+	background-color: #181818;
+}
+
+.i-agree{
+	line-height: 2;
+	font-size: 24rpx;
+}
+.i-agree:before{
+	content:"";
+	display: inline-block;
+	height: 1.5em;
+	width:1.5em;
+	vertical-align: -.4em;
+	background-color:#202022;
+}
+.i-agree.checked:before{
+	background-color:#FF9472;
+	border:.3em solid #202022;
+	width:.9em;
+	height:.9em;
+}

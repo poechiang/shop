@@ -1,0 +1,4 @@
+<!--pages/user/profile/kol.wxml-->
+<view class='ph-15 tip-theme2 pv-20'>
+  您当前KOL值：0
+</view>

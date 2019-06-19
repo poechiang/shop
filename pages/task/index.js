@@ -33,9 +33,10 @@ Page({
 			aniamtion: true,
 		})
 
-
+    console.log(123)
 		app.http.loadMyPlanInfo(this,rlt=>{
 			if (rlt.status == 1) {
+        console.log(123)
 				app.http.loadMonthTask(this)
 				app.http.loadTodayTask(this)
 			}

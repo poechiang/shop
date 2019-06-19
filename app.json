@@ -1,87 +1,95 @@
 {
-	"pages": [
-		"pages/index/index",
-		"pages/index/join",
-		"pages/shop/index",
-		"pages/shop/good/list",
-		"pages/shop/good/detail",
-		"pages/shop/group/list",
-		"pages/shop/group/detail",
-		"pages/shop/activity/list",
-		"pages/shop/activity/detail",
-		"pages/shop/trolley",
-		"pages/shop/pay",
-		"pages/group/index",
-		"pages/common/404",
-		"pages/logs/logs",
-		"pages/notify/index",
-		"pages/notify/comments",
-		"pages/user/index",
-		"pages/user/home/index",
-		"pages/user/order/list2",
-		"pages/user/order/list",
-		"pages/user/order/detail",
-		"pages/user/chat/index",
-		"pages/user/chat/info",
-		"pages/user/complain/index",
-		"pages/circle/index",
-		"pages/circle/detail",
-		"pages/circle/post",
-		"pages/user/vipcode",
-		"pages/user/welcome",
-		"pages/notify/room",
-		"pages/task/index",
-		"pages/task/day"
-	],
-	"permission": {
-		"scope.userLocation": {
-			"desc": "你的位置信息将用于定位您当前所在城市"
-		}
-	},
-	"window": {
-		"backgroundColor": "#292929",
-		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#000000",
-		"navigationBarTitleText": "IF PLAN",
-		"navigationBarTextStyle": "white"
-	},
-	"usingComponents": {
-		"flex-block": "/components/flex-block",
-		"cust-nav-bar": "/components/cust-nav-bar",
-		"tab-bar": "/components/tab-bar",
-		"tabs": "/components/tabs",
-		"reply": "/components/reply",
-		"rich-view": "/components/rich-view",
-		"delay-loading": "/components/delay-loading"
-	},
-	"tabBar": {
-		"selectedColor": "#F1A23B",
-		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/images/shop0.png",
-				"selectedIconPath": "static/images/shop1.png",
-				"text": "打卡"
-			},
-			{
-				"pagePath": "pages/task/index",
-				"iconPath": "static/images/shop0.png",
-				"selectedIconPath": "static/images/shop1.png",
-				"text": "任务"
-			},
-			{
-				"pagePath": "pages/circle/index",
-				"iconPath": "static/images/msg0.png",
-				"selectedIconPath": "static/images/msg1.png",
-				"text": "社区"
-			},
-			{
-				"pagePath": "pages/user/index",
-				"iconPath": "static/images/user0.png",
-				"selectedIconPath": "static/images/user1.png",
-				"text": "我的"
-			}
-		]
-	},
-	"sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/index/join",
+    "pages/index/join7",
+    "pages/shop/index",
+    "pages/shop/good/list",
+    "pages/shop/good/detail",
+    "pages/shop/group/list",
+    "pages/shop/group/detail",
+    "pages/shop/activity/list",
+    "pages/shop/activity/detail",
+    "pages/shop/trolley",
+    "pages/shop/pay",
+    "pages/group/index",
+    "pages/common/404",
+    "pages/logs/logs",
+    "pages/notify/index",
+    "pages/notify/comments",
+    "pages/user/index",
+    "pages/user/home/index",
+    "pages/user/order/list2",
+    "pages/user/order/list",
+    "pages/user/order/detail",
+    "pages/user/chat/index",
+    "pages/user/chat/info",
+    "pages/user/complain/index",
+    "pages/circle/index",
+    "pages/circle/detail",
+    "pages/circle/post",
+    "pages/user/vipcode",
+    "pages/user/welcome",
+    "pages/notify/room",
+    "pages/task/index",
+    "pages/task/day",
+    "pages/index/wlog/index",
+    "pages/index/msgs/index",
+    "pages/index/hothd/index",
+    "pages/user/profile/kol",
+    "pages/user/profile/chx",
+    "pages/user/profile/quinoa",
+    "pages/user/profile/master"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于定位您当前所在城市"
+    }
+  },
+  "window": {
+    "backgroundColor": "#292929",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "IF PLAN",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "flex-block": "/components/flex-block",
+    "cust-nav-bar": "/components/cust-nav-bar",
+    "tab-bar": "/components/tab-bar",
+    "tabs": "/components/tabs",
+    "reply": "/components/reply",
+    "rich-view": "/components/rich-view",
+    "delay-loading": "/components/delay-loading"
+  },
+  "tabBar": {
+    "selectedColor": "#F1A23B",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/shop0.png",
+        "selectedIconPath": "static/images/shop1.png",
+        "text": "打卡"
+      },
+      {
+        "pagePath": "pages/task/index",
+        "iconPath": "static/images/shop0.png",
+        "selectedIconPath": "static/images/shop1.png",
+        "text": "任务"
+      },
+      {
+        "pagePath": "pages/circle/index",
+        "iconPath": "static/images/msg0.png",
+        "selectedIconPath": "static/images/msg1.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "static/images/user0.png",
+        "selectedIconPath": "static/images/user1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
 }
