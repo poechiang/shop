@@ -350,4 +350,11 @@ Page({
 	// 		url: '/pages/user/chat/index?tid='+this.data.article.user.id,
 	// 	})
 	// },
+
+  previewImg(e){
+    wx.previewImage({
+      current:this.data.article.pictures[e.target.dataset.index],
+      urls: this.data.article.pictures
+    })
+  }
 })

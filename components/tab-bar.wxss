@@ -40,12 +40,12 @@
 }
 .tab-bar.buildin .tab.addnew{
 	position: relative;
-	top:-50%;
-	height:140rpx;
+	top:-60rpx;
+	height:120rpx;
 }
 .tab-bar.buildin .tab.addnew .tab-img{
-	width:130rpx;
-	height:130rpx;
+	width:110rpx;
+	height:110rpx;
 }
 
 

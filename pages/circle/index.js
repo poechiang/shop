@@ -475,5 +475,20 @@ Page({
 				})
 		}})
 
-	}
+	},
+
+  previewImg(e) {
+    var art
+
+    for (var x in this.data.articles) {
+      if (this.data.articles[x].id == e.target.dataset.artid) {
+        art = this.data.articles[x]
+      }
+    }
+    wx.previewImage({
+
+      current: art.pictures[e.target.dataset.index],
+      urls: art.pictures
+    })
+  }
 })

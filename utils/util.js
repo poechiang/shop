@@ -32,6 +32,15 @@ Date.time = function () {
 Date.prototype.time = function () {
 	return parseInt(this.getTime() / 1000)
 }
+Date.hour = (h=24)=>{
+  var dt = new Date
+  if(h==24){
+    return dt.getHours()
+  }
+  else{
+    return dt.getHours()%12
+  }
+}
 String.prototype.trim = function () {
 	return this.replace(/(^\s*)|(\s*$)/g, "");
 }

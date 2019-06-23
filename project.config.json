@@ -22,7 +22,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.3",
 	"appid": "wxe1576ed2c27f14c2",
-	"projectname": "cst",
+	"projectname": "ifthin",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -47,13 +47,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "带参数",
-					"pathName": "pages/user/home/index",
-					"query": "id=91",
+					"pathName": "pages/task/day",
+					"query": "t=three",
 					"scene": null
 				},
 				{

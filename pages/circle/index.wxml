@@ -18,14 +18,14 @@
         <image class='user-photo circle small' src='{{art.author.photo||defUserPhoto}}' mode='aspectFill'></image>
       </view>
       <view class='flex-item'>
-        <view style='line-height:56rpx;'>{{art.author.nick||'匿名用户'}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view style='line-height:56rpx;'>{{art.author.nick||'匿名用户'}} <text class='icon-{{art.author.ifplan.score.value>0?"decline":"rise"}} small' wx:if="{{art.author.ifplan.score.value}}"> {{art.author.ifplan.score.value}}kg</text></view>
         <view class='tip'> {{art.author.signature||'这个家伙有点懒……'}}</view>
       </view>
     </navigator>
   </view>
-  <navigator url='/pages/circle/detail?id={{art.id}}'>
+  <navigator url='/pages/circle/detail?id={{art.id}}' class="ml-50">
     <!-- 文章内容 -->
-    <view class='art-body'>
+    <view class='art-body fs-15'>
       <view hover-class='clickable-hover' data-id='{{art.id}}' style='line-height:1.5'>
         <text>{{art.brief}}</text>
       </view>
@@ -34,12 +34,12 @@
     </view>
 
     <!-- 文章附件 目前仅限文章配图 最多九张 -->
-    <view class='attach pic-box flex-row flex-wrap {{art.pictures.length>1?("items-"+art.pictures.length):""}}' wx:if='{{art.pictures.length>0}}'>
-      <image class='pic' src='{{item}}' wx:for="{{art.pictures}}" wx:key="*this" mode='aspectFill'></image>
+    <view class='attach pic-box flex-row flex-wrap {{art.pictures.length>1?("items-"+art.pictures.length):""}}' wx:if='{{art.pictures.length>0}}'> <!--{{art.pictures.length>1?("items-"+art.pictures.length):""}}-->
+      <image class='pic' src='{{item}}' wx:for="{{art.pictures}}" wx:key="*this" mode='{{art.pictures.length<=1?"widthFix":"aspectFill"}}' catchtap="previewImg" data-artid="{{art.id}}" data-index="{{index}}"></image>
     </view>
   </navigator>
   <!-- 所在位置及互动信息入口 -->
-  <view class='foot flex-row flex-line-stretch flex-main-around'>
+  <view class='foot flex-row flex-line-stretch flex-main-around ml-50'>
     <button class='op normal' plain bindtap='handleFav' data-index="{{art_index}}" disabled='{{art.inMyFavList||!art.meta.allow.fav}}'>
       <text class='icon icon-zan {{art.inMyFavList?"done":""}}'> {{art.fav_count}}</text>
     </button>
@@ -54,7 +54,7 @@
   </view>
 
   <!-- 留言精选及点赞列表 -->
-  <view class='msg-list fs-14 mt-10' style="line-height:2;border-top:2rpx solid #202022;" wx:if='{{art.comment_count>0}}'>
+  <view class='msg-list fs-14 mt-10 ml-50' style="line-height:2;border-top:2rpx solid #202022;" wx:if='{{art.comment_count>0}}'>
     <view wx:for="{{art.comments}}" wx:for-item="comm" wx:for-index="comm_index" wx:if="{{comm_index<5}}" hover-class='clickable-hover' wx:key='id' data-posterid="{{comm.poster.id}}" data-retonick="{{comm.poster.nick}}" data-index="{{art_index}}"
       bindtap='handleMsg'>
       <navigator class='link' catchtap="noTriggerEvent" url='/pages/user/home/index?id={{comm.poster.id}}'>{{comm.poster.nick}}</navigator>

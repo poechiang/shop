@@ -44,7 +44,7 @@
 <view class='hzh mh-15 mt-20'>
     <view class='sec-head'>我的徽章</view>
     <view class='hzh-bar flex-row flex-main-around mh-5 mt-15'>
-        <view class='hz-block' wx:for="{{hzhList}}" wx:for-item="hzh">
+        <view class='hz-block' wx:for="{{hzhList}}" wx:key="*this" wx:for-item="hzh">
             <image class='hz' src='{{hzh.path||hzh}}'></image>
         </view>
         <navigator class='hz-block more' url="/pages/common/404" wx:if="{{hzhList.length>5}}"></navigator>

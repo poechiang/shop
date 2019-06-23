@@ -41,21 +41,16 @@ page{
 	font-size: 1em;
 }
 .attach{
-	background-color: #f6f8f9;
-	padding:10rpx;
+	background-color: transparent;
+	/* padding:10rpx; */
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	width:690rpx;
-}
-.attach.pic-box{
-	padding:6rpx;
-
+	width:590rpx;
 }
 .attach.pic-box .pic{
 	border:6rpx solid transparent;
-	width:678rpx;
-	height:339rpx;
+	width:100%;
 	display: block;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -63,34 +58,15 @@ page{
 }
 .attach.pic-box.items-2 .pic,
 .attach.pic-box.items-4 .pic,
-.attach.pic-box.items-5 .pic:nth-child(1),
-.attach.pic-box.items-5 .pic:nth-child(2),
-.attach.pic-box.items-7 .pic,
-.attach.pic-box.items-8 .pic:nth-child(1),
-.attach.pic-box.items-8 .pic:nth-child(2){
-	width:339rpx;
-	height:339rpx;
-}
-.attach.pic-box.items-3 .pic,
 .attach.pic-box.items-5 .pic,
 .attach.pic-box.items-6 .pic,
-.attach.pic-box.items-7 .pic:nth-child(3),
-.attach.pic-box.items-7 .pic:nth-child(4),
-.attach.pic-box.items-7 .pic:nth-child(5),
+.attach.pic-box.items-7 .pic,
 .attach.pic-box.items-8 .pic,
 .attach.pic-box.items-9 .pic{
-	width:226rpx;
-	height:226rpx;
+	width:180rpx;
+	height:180rpx;
 }
 
-.attach.pic-box.items-4 .pic,
-.attach.pic-box.items-5 .pic,
-.attach.pic-box.items-6 .pic,
-.attach.pic-box.items-7 .pic,
-.attach.pic-box.items-8 .pic,
-.attach.pic-box.items-9 .pic{
-	height:226rpx!important;
-}
 .bottom-loading{
 	overflow:hidden;
 }
@@ -121,19 +97,30 @@ page{
 
 .attach{
 	background-color: transparent;
-	padding:10rpx;
+	/* padding:10rpx; */
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	width:690rpx;
-}
-.attach.pic-box{
-	padding:6rpx;
-
+	width:590rpx;
 }
 .attach.pic-box .pic{
-	border-radius: 40rpx;
-
+	/* border:6rpx solid transparent; */
+	width:100%;
+  border-radius: 20rpx;
+	display: block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.attach.pic-box.items-2 .pic,
+.attach.pic-box.items-4 .pic,
+.attach.pic-box.items-5 .pic,
+.attach.pic-box.items-6 .pic,
+.attach.pic-box.items-7 .pic,
+.attach.pic-box.items-8 .pic,
+.attach.pic-box.items-9 .pic{
+	width:180rpx;
+	height:180rpx;
 }
 .foot{
 	height:60rpx;

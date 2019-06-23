@@ -15,15 +15,30 @@ Page({
 		weightPhoto: wx.getStorageSync('ifthin_weight_photo')||null,
 		weight:null,
 		completed: false,
-		getLm: false,// 是否得到了徽章
+		getLm: false,// 是否得到了徽章,
+
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+    var kind = '',
+        hour = Date.hour()
+
+    if(hour>=7 && hour<9){
+      kind = '早餐'
+    }
+    else if(hour>=11 && hour<13){
+      kind = '午餐'
+    }
+    else {// if(hour>=18 && hour<20)
+      kind = '晚餐'
+    }
+
 		this.setData({
-			type:options.t||'weight'
+			type:options.t||'weight',
+        topic: `#IFTHIN-三餐打卡-${kind}#`,
 		})
 
 		app.locate({
@@ -81,19 +96,26 @@ Page({
 
 	},
 	uploadTaskComplete(){
-		var data = { type: this.data.type}
-		if(data.type=='weight'){
-			data.weight = this.data.weight
-			data.img = this.data.weightPhoto
-			data.adcode = this.adcode
-			data.city = this.city
-		}
+    var data = { type: this.data.type }
+    if (data.type == 'weight') {
+      data.weight = this.data.weight
+      data.img = this.data.weightPhoto
+      data.adcode = this.adcode
+      data.city = this.city
+    }
+    else if (data.type == 'three') {
+      data.img = this.data.threePhoto
+      data.topic = this.data.topic
+      data.content = this.data.threeMsg
+      data.adcode = this.adcode
+      data.city = this.city
+    }
 		app.http.request({
 			url: 'task/complete',
 			data: data,
 			success: rlt => {
 				if (rlt.status == 1) {
-					if(this.data.type=="weight"){
+          if (this.data.type == "weight" || this.data.type == "three"){
 
 						app.ui.modal('恭喜任务完成！',{
 							confirm:()=>{
@@ -116,41 +138,70 @@ Page({
 				}
 			}
 		})
-	},
-	handleChooseImg(e){
-		wx.chooseImage({
-			count: 1,
-			success: res=> {
-				var path = res.tempFilePaths[0]
+  },
+  handleChooseImg(e) {
+    wx.chooseImage({
+      count: 1,
+      success: res => {
+        var path = res.tempFilePaths[0]
 
-				app.http.uploadFile({
-					file:path,
-					name: 'img',
-					success: rlt => {
-						this.setData({
-							weightPhoto: rlt.data.url,
-						})
+        app.http.uploadFile({
+          file: path,
+          name: 'img',
+          success: rlt => {
+            this.setData({
+              weightPhoto: rlt.data.url,
+            })
 
-						wx.setStorage({
-							key: 'ifthin_weight_photo',
-							data: rlt.data.url,
-						})
-					}
+            wx.setStorage({
+              key: 'ifthin_weight_photo',
+              data: rlt.data.url,
+            })
+          }
 
-				})
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+    })
+  },
+  handleChooseThreeImg(e) {
+    wx.chooseImage({
+      count: 1,
+      success: res => {
+        var path = res.tempFilePaths[0]
 
+        app.http.uploadFile({
+          file: path,
+          name: 'img',
+          success: rlt => {
+            this.setData({
+              threePhoto: rlt.data.url,
+            })
 
+            wx.setStorage({
+              key: 'ifthin_weight_photo',
+              data: rlt.data.url,
+            })
+          }
 
-
-			},
-			fail: function(res) {
-				console.log(res)
-			},
-		})
-	},
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+    })
+  },
 	handleWeightInput(e){
 		this.setData({
 			weight:e.detail.value
 		})
-	}
+	},
+  handleThreeInput(e){
+
+    this.setData({
+      threeMsg: e.detail.value
+    })
+  }
 })

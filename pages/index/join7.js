@@ -29,7 +29,7 @@ Page({
 
         this.setData({
 
-          step: res.data.step||1,
+          step: 1,//res.data.step||1,
           voicePath: res.data.voice || null,
           videoPath: res.data.voice || null,
           weights: res.data.weights || {},

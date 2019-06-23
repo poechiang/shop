@@ -33,9 +33,9 @@
   </view>
   <view class='today mh-15 mt-20'>
     <view class='sec-head mb-10'>今日任务</view>
-    <block wx:if="{{info.ifplan.state>=0}}">
+    <block wx:if="{{plan.state>=0}}">
 
-      <navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{!today || today.video==0}}">看初心视频
+      <!-- <navigator class='nav-button undo more' url='/pages/task/day?t=video' wx:if="{{!today || today.video==0}}">看初心视频
         <text class='tip-undo'>未完成</text>
       </navigator>
       <view class='nav-button done' wx:else>看初心视频
@@ -47,7 +47,35 @@
       <view class='nav-button done' wx:else>看健身教程
         <text class='tip-done'>完成</text>
 
+      </view> -->
+      <block wx:if="{{hour>=7 && hour<9}}">
+        <navigator class='nav-button undo more' url='/pages/task/day?t=three' wx:if="{{!today || today.third<1}}">早餐打卡
+          <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>早餐打卡
+          <text class='tip-done'>完成</text>
+        </view>
+      </block>
+      <block wx:elif="{{hour>=11 && hour<13}}">
+        <navigator class='nav-button undo more' url='/pages/task/day?t=three' wx:if="{{!today || today.third<2}}">午餐打卡
+          <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>午餐打卡
+          <text class='tip-done'>完成</text>
+        </view>
+      </block>
+      <block wx:elif="{{hour>=18 && hour<20}}">
+        <navigator class='nav-button undo more' url='/pages/task/day?t=three' wx:if="{{!today || today.third<4}}">晚餐打卡
+          <text class='tip-undo'>未完成</text>
+        </navigator>
+        <view class='nav-button done' wx:else>晚餐打卡
+          <text class='tip-done'>完成</text>
+        </view>
+      </block>
+      <view class='nav-button' wx:else>
+        <text class='tip'>当前不在三餐打卡时间段{{hour}}</text>
       </view>
+
       <block wx:if="{{1}}">
         <!--plan.section>1-->
 

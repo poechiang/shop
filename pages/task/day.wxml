@@ -49,6 +49,38 @@
 		声明：此视频仅为用户本人观看的私密视频，并不对外在任何平台以任何形式展示
 	</view> -->
 </block>
+<block wx:if="{{type=='three'}}">
+	<!-- 每日任务：体重打卡 -->
+	<view class='hor-center mv-10'>
+		<image src='https://res.shibu365.com/i/2019-05-30/d2019ae58d724896892dfb12134b072b.png' style='width:278rpx;' mode='widthFix'></image>
+	</view>
+	<view class='hor-center mv-10 fs-18'>三餐打卡</view>
+<view class='box mh-15 mt-20 flex-row flex-line-center pos-relative'>
+		<textarea class='flex-item ph-5 tip-theme2'  bindinput='handleThreeInput' placeholder="你的心情……" value='{{threeMsg}}'></textarea>
+    <text class="tip-theme" style="position:absolute;left:20rpx;bottom:20rpx;">{{topic}}</text>
+	</view>
+
+	<view class='box mh-15 mt-20 hor-center'>
+		<text>请上传今日三餐照片</text>
+		<view class='flex-row flex-main-around mt-20'>
+			<image class='demo' src='{{threePhoto}}' wx:if="{{threePhoto}}"></image>
+			<view class='demo clickable-box' hover-class='clickable-hover' wx:else>
+				<image src='https://res.shibu365.com/i/2019-05-31/13cff6dac3e447e7ae64a7de250ff780.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
+				<view>示例</view>
+			</view>
+			<view class='upload clickable-box'  hover-class='clickable-hover' bindtap='handleChooseThreeImg'>
+				<image src='https://res.shibu365.com/i/2019-05-31/126eb605047048e68be2ea89d135f1de.png' style='width:80rpx;height:80rpx;margin:60rpx auto 0'></image>
+				<view>上传</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class='tip-default fs-12 mv-10 mh-15'>
+		用途：初心视频即是每天任务内容的一部分，同时在每当您内心开始动摇，产生放弃念头的时候，用心录制的内心独白更会增强您减肥的毅力和决心
+	</view>
+	<view class='tip-error fs-12 mv-10 mh-15'>
+		声明：此视频仅为用户本人观看的私密视频，并不对外在任何平台以任何形式展示
+	</view> -->
+</block>
 <block wx:if="{{type=='manual'}}">
 
 	<!-- 每日任务：观看教程 -->
@@ -85,4 +117,5 @@
 
 
 <button class='mh-15 mt-10' bindtap='uploadTaskComplete' disabled='{{!(weightPhoto && weight)}}' wx:if="{{type=='weight'}}">提交</button>
+<button class='mh-15 mt-10' bindtap='uploadTaskComplete' disabled='{{!threePhoto}}' wx:if="{{type=='three'}}">提交</button>
 <button class='mh-15 mt-10' bindtap='handleComplete' disabled='{{!completed}}' wx:else>完成</button>

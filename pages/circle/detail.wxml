@@ -10,21 +10,24 @@
         <image class='user-photo circle small' src='{{article.author.photo||defUserPhoto}}' mode='aspectFill'></image>
       </view>
       <view class='flex-item'>
-        <view style='line-height:56rpx;'>{{article.author.nick||'匿名用户'}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view style='line-height:56rpx;'>{{article.author.nick||'匿名用户'}}
+          <text class='icon-{{article.author.ifplan.score.value>0?"decline":"rise"}} small' wx:if="{{article.author.ifplan.score.value}}"> {{article.author.ifplan.score.value}}kg</text>
+        </view>
         <view class='tip'> {{article.author.signature||'这个家伙有点懒……'}}</view>
       </view>
     </navigator>
   </view>
   <!-- 文章内容 -->
-  <view class='art-body pv-10'>
+  <view class='art-body pv-10 fs-15 ml-50'>
     <view style='line-height:1.5'>{{article.content}}</view>
 
     <navigator class=' topic link' catchtap='handleTopicTap' wx:if="{{article.topic}}">#{{article.topic}}#</navigator>
   </view>
 
   <!-- 文章附件 目前仅限文章配图 最多九张 -->
-  <view class='attach pic-box flex-row flex-wrap {{article.pictures.length>1?("items-"+article.pictures.length):""}}' wx:if='{{article.pictures.length>0}}'>
-    <image class='pic' src='{{item}}' wx:for="{{article.pictures}}" wx:key="*this" mode='aspectFill'></image>
+  <view class='attach pic-box flex-row flex-wrap ml-50' wx:if='{{article.pictures.length>0}}'>
+    <!-- {{article.pictures.length>1?("items-"+article.pictures.length):""}}-->
+    <image class='pic' src='{{item}}' wx:for="{{article.pictures}}" wx:key="*this" mode='{{article.pictures.length<=1?"widthFix":"aspectFill"}}' catchtap="previewImg" data-index="{{index}}"></image>
   </view>
 
   <view class='flex-row'>
@@ -35,7 +38,7 @@
 </view>
 
 <!-- 回复分享及收藏部分 -->
-<view class='msg mh-15'>
+<view class='msg mh-15 ml-65'>
   <view class='msg-type-list flex-row'>
     <view class='msg-type {{msgType==3?"selected":""}}' hover-class='clickable-hover' data-key='3' bindtap='handleMsgTypeToggle'> 赞 {{article.fav_count||0}}</view>
     <view class='msg-type {{msgType==1?"selected":""}}' hover-class='clickable-hover' data-key='1' bindtap='handleMsgTypeToggle'> 评论 {{article.comment_count||0}}</view>
@@ -47,7 +50,9 @@
         <image class='user-photo circle small' src='{{item.member.photo}}'></image>
       </view>
       <view class='flex-item'>
-        <view>{{item.member.nick}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view>{{item.member.nick}}
+          <text class='icon-{{item.member.ifplan.score.value>0?"decline":"rise"}} small' wx:if="{{item.member.ifplan.score.value}}"> {{item.member.ifplan.score.value}}kg</text>
+        </view>
         <view class='tip'>{{item.member.signature||'这个家伙有点懒……'}}</view>
       </view>
       <view class='hor-center'>
@@ -57,14 +62,18 @@
     </navigator>
   </view>
   <view class='msg-list mt-10' wx:if='{{msgType==1}}'>
-    <view class='msg-item mv-5 pv-5 flex-row flex-line-start' wx:for="{{article.comments}}" wx:key='id' hover-class='clickable-hover' bindtap='handleMsg'  data-posterid="{{item.poster.id}}" data-retonick="{{item.poster.nick}}" >
+    <view class='msg-item mv-5 pv-5 flex-row flex-line-start' wx:for="{{article.comments}}" wx:key='id' hover-class='clickable-hover' bindtap='handleMsg' data-posterid="{{item.poster.id}}" data-retonick="{{item.poster.nick}}">
       <navigator class='gender male mr-10' url='/pages/user/home/index?id={{item.poster.id}}' catchtap="noTriggerEvent">
         <image class='user-photo circle small' src='{{item.poster.photo}}'></image>
       </navigator>
       <view class='flex-item'>
-        <navigator url='/pages/user/home/index?id={{item.poster.id}}'  catchtap="noTriggerEvent">{{item.poster.nick}}  <text class='icon-decline small'> {{'0.5kg'}}</text></navigator>
-       
-        <view class='content mv-5'> <block wx:if="{{item.re_to}}">回复 <navigator class='link tip-default' url='/pages/user/home/index?id={{item.re_to.id}}' catchtap="noTriggerEvent">{{item.re_to.nick}}</navigator>：</block> {{item.content}} </view>
+        <navigator url='/pages/user/home/index?id={{item.poster.id}}' catchtap="noTriggerEvent">{{item.poster.nick}}
+          <text class='icon-{{item.poster.ifplan.score.value>0?"decline":"rise"}} small' wx:if="{{item.poster.ifplan.score.value}}"> {{item.poster.ifplan.score.value}}kg</text>
+        </navigator>
+
+        <view class='content mv-5 fs-15'>
+          <block wx:if="{{item.re_to}}">回复
+            <navigator class='link tip-default' url='/pages/user/home/index?id={{item.re_to.id}}' catchtap="noTriggerEvent">{{item.re_to.nick}}</navigator>：</block> {{item.content}} </view>
         <view class='tgray fs-12'>
           <text class='post-date'>{{item.stamp.insert.mdHi}}</text>
         </view>
@@ -77,7 +86,9 @@
         <image class='user-photo circle small' src='{{item.member.photo}}'></image>
       </view>
       <view class='flex-item'>
-        <view>{{item.member.nick}} <text class='icon-decline small'> {{'0.5kg'}}</text></view>
+        <view>{{item.member.nick}}
+          <text class='icon-{{item.member.ifplan.score.value>0?"decline":"rise"}} small' wx:if="{{item.member.ifplan.score.value}}"> {{item.member.ifplan.score.value}}kg</text>
+        </view>
         <view class='tip'>{{item.member.signature||'这个家伙有点懒……'}}</view>
       </view>
       <view class='hor-center'>
@@ -95,7 +106,7 @@
 <!-- 分页加载动画展示 结束 -->
 
 <!-- 回复留言框 -->
-<reply visible='{{replyVisible}}' msg='{{replyMsg}}'  placeholder="{{placeholder}}" bindsend='handleReplySend' bindcancel="handleReplyCancel"></reply>
+<reply visible='{{replyVisible}}' msg='{{replyMsg}}' placeholder="{{placeholder}}" bindsend='handleReplySend' bindcancel="handleReplyCancel"></reply>
 
 
 
@@ -108,4 +119,3 @@
   <button class='flex-item' plain disabled='{{article.inMyColList|| !article.meta.allow.col}}' bindtap='handleCollect'>
     <text class='icon icon-fav'></text> 收藏</button>
 </view>
-
